@@ -1,5 +1,7 @@
 {
   "name": "pad_conductores",
-  "integrations": {},
+  "integrations": {
+    "cordova": {}
+  },
   "type": "angular"
 }
