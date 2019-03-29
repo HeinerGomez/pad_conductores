@@ -21,6 +21,12 @@
 [m-top-50] {
     margin-top: 50px;
 }
+[m-top-10-p] {
+    margin-top: 25%;
+}
+[m-top-20-p] {
+    margin-top: 25%;
+}
 /* Textos */
 [text-slider-screen] {
     font-size: 20px;
@@ -32,7 +38,27 @@
 .swiper-pagination-bullet.swiper-pagination-bullet-active {
     background-color: #000;
 }
-
+/* Container full */
+[container-full] {
+    height: 100%;
+}
+[container-padding-10-full] {
+    padding: 10px;
+}
+[container-padding-20-full] {
+    padding: 20px;
+}
+[container-padding-5-full-p] {
+    padding: 5%;
+}
+[container-padding-2-full-p] {
+    padding: 2%;
+}
+[container-center-content] {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
 /* medias querys */
 @media (max-width: 400px) and (min-width: 100px) {
     [text-slider-screen] {

@@ -1,0 +1,56 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Iniciar Sesión</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div container-full container-center-content container-padding-2-full-p>
+    <ion-grid>
+      <ion-row>
+        <ion-col>
+          <img logo src="assets/imgs/opc-2.png" />
+        </ion-col>
+      </ion-row>
+      <form>
+        <ion-row>
+          <ion-col>
+            <ion-item>
+              <ion-label position="floating">Nombre de usuario</ion-label>
+              <ion-input type="text" name="username" clearInput required></ion-input>
+            </ion-item>
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col>
+            <ion-item>
+              <ion-label position="floating">Contraseña</ion-label>
+              <ion-input type="password" name="password" required></ion-input>
+              <ion-button slot="end" fill="clear" color="medium">
+                <ion-icon slot="icon-only" name="eye"></ion-icon>
+              </ion-button>
+            </ion-item>
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col>
+            <ion-button color="secondary" expand="block" >
+              Iniciar Sesión
+            </ion-button>
+          </ion-col>
+        </ion-row>
+      </form>
+      <ion-row>
+        <ion-col>
+          <div text-center>
+            <ion-row>
+              <ion-col>
+                <p>Olvide mi contraseña</p>
+              </ion-col>
+            </ion-row>
+          </div>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </div>
+</ion-content>
