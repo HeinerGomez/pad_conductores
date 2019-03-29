@@ -7,6 +7,7 @@ const routes: Routes = [
   { path: 'home', loadChildren: './home/home.module#HomePageModule' },
   { path: 'introductory-page', loadChildren: './introductory-page/introductory-page.module#IntroductoryPagePageModule', canActivate: [ShouldShowIntroGuard] },
   { path: 'login', loadChildren: './login/login.module#LoginPageModule' },
+  { path: 'offers', loadChildren: './offers/offers.module#OffersPageModule' },
 ];
 
 @NgModule({
