@@ -1,14 +1,24 @@
-<ion-header>
-  <ion-toolbar>
-    <ion-title>
-      Ionic Blank
-    </ion-title>
-  </ion-toolbar>
-</ion-header>
-
 <ion-content>
-  <div class="ion-padding">
-    The world is your oyster.
-    <p>If you get lost, the <a target="_blank" rel="noopener" href="https://ionicframework.com/docs/">docs</a> will be your guide.</p>
-  </div>
+  <ion-grid>
+    <ion-row>
+      <ion-col>
+          <img src="assets/imgs/main-background.png" />
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col text-center>
+        <h2>Bienvenido a PAD móvil</h2>
+      </ion-col>
+    </ion-row>
+    <ion-row row-padding-main row-margin-main>
+        <ion-col size="6" text-center>
+            <!-- <button no-margin clear ion-button color="primary" full text-uppercase (tap)="onLogin()">Iniciar Sesión</button> -->
+            <ion-button main-button fill="clear">Iniciar Sesión</ion-button>
+        </ion-col>
+        <ion-col size="6" text-center>
+            <!-- <button no-margin ion-button color="secondary" full text-uppercase (tap)="onRegister()">Registrarme</button> -->
+            <ion-button main-button color="secondary">Registrarme</ion-button>
+        </ion-col>
+      </ion-row>
+  </ion-grid>
 </ion-content>
