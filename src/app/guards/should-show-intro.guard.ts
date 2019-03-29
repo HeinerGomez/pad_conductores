@@ -9,8 +9,6 @@ import { NativeStorage } from '@ionic-native/native-storage/ngx';
 })
 export class ShouldShowIntroGuard implements CanActivate {
 
-  private shouldShowIntroPage: boolean;
-
   constructor(private router: Router, private nativeStorage: NativeStorage) {}
 
   /**
@@ -19,6 +17,7 @@ export class ShouldShowIntroGuard implements CanActivate {
    * @date 2019-03-28
    * @param route 
    * @param state 
+   * @returns boolean | UrlTree | Observable<boolean | UrlTree> | Promise<boolean | UrlTree>
    */
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean | UrlTree | Observable<boolean | UrlTree> | Promise<boolean | UrlTree> {
     console.log("Funcion determina: ", this.determinesShowShouldIntroPage());
@@ -33,6 +32,12 @@ export class ShouldShowIntroGuard implements CanActivate {
     });
   }
 
+  /**
+   * @description Tiene como objetivo determinar si debe o no mostrar la pagina introductoria de la app
+   * @author Heiner Gómez <alejandro.gomez@grupooet.com>
+   * @date 2019-03-28 
+   * @returns Promise<boolean>
+   */
   private determinesShowShouldIntroPage(): Promise<boolean> {
     const showShouldIntroPage = this.hasConfigApp().then( (hasConfigApp: boolean) => {
       if (hasConfigApp) {
@@ -54,6 +59,12 @@ export class ShouldShowIntroGuard implements CanActivate {
     return showShouldIntroPage;
   }
   
+  /**
+   * @description Tiene como objetivo determinar si ya existe una configuracion en session asociada a la app
+   * @author Heiner Gómez <alejandro.gomez@grupooet.com>
+   * @date 2019-03-28 
+   * @returns Promise<boolean>
+   */
   private hasConfigApp(): Promise<boolean> {
     const hasConfigApp = this.nativeStorage.keys().then( (keys: [] | null) => {
       let _hasConfigApp = false;
@@ -67,6 +78,12 @@ export class ShouldShowIntroGuard implements CanActivate {
     return hasConfigApp;
   }
 
+  /**
+   * @description Tiene como objetivo guardar una configuracion en session para la app
+   * @author Heiner Gómez <alejandro.gomez@grupooet.com>
+   * @date 2019-03-28 
+   * @returns void
+   */
   private configureApp(): void {
     const configApp = {
       "slideShown": true
@@ -74,6 +91,13 @@ export class ShouldShowIntroGuard implements CanActivate {
     this.nativeStorage.setItem('configApp', configApp);
   }
 
+  /**
+   * @description Tiene como objetivo añadir un nuevo item a la configuracion actual de la app
+   * @author Heiner Gómez <alejandro.gomez@grupooet.com>
+   * @date 2019-03-28 
+   * @param configApp
+   * @returns void
+   */
   private setSlideShown(configApp: any): void {
     configApp.slideShown = true;
     this.nativeStorage.setItem('configApp', configApp);
