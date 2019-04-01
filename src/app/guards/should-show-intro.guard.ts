@@ -36,6 +36,7 @@ export class ShouldShowIntroGuard implements CanActivate {
    * @description Tiene como objetivo determinar si debe o no mostrar la pagina introductoria de la app
    * @author Heiner Gómez <alejandro.gomez@grupooet.com>
    * @date 2019-03-28 
+   * @param void 
    * @returns Promise<boolean>
    */
   private determinesShowShouldIntroPage(): Promise<boolean> {
@@ -63,6 +64,7 @@ export class ShouldShowIntroGuard implements CanActivate {
    * @description Tiene como objetivo determinar si ya existe una configuracion en session asociada a la app
    * @author Heiner Gómez <alejandro.gomez@grupooet.com>
    * @date 2019-03-28 
+   * @param void 
    * @returns Promise<boolean>
    */
   private hasConfigApp(): Promise<boolean> {
@@ -82,6 +84,7 @@ export class ShouldShowIntroGuard implements CanActivate {
    * @description Tiene como objetivo guardar una configuracion en session para la app
    * @author Heiner Gómez <alejandro.gomez@grupooet.com>
    * @date 2019-03-28 
+   * @param void 
    * @returns void
    */
   private configureApp(): void {

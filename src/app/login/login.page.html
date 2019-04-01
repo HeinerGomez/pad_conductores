@@ -15,29 +15,37 @@
           <img logo src="assets/imgs/opc-2.png" />
         </ion-col>
       </ion-row>
-      <form>
+      <form [formGroup]="reactiveForm">
         <ion-row>
           <ion-col>
             <ion-item>
               <ion-label position="floating">Nombre de usuario</ion-label>
-              <ion-input type="text" name="username" clearInput required></ion-input>
+              <ion-input type="text" name="username" formControlName="username" clearInput required></ion-input>
             </ion-item>
+            <small errorText *ngIf="reactiveForm.get('username').invalid && 
+                                    reactiveForm.get('username').touched">
+              * Este campo no puede estar vacio
+            </small>
           </ion-col>
         </ion-row>
         <ion-row>
           <ion-col>
             <ion-item>
               <ion-label position="floating">Contraseña</ion-label>
-              <ion-input type="password" name="password" required></ion-input>
-              <ion-button slot="end" fill="clear" color="medium">
-                <ion-icon slot="icon-only" name="eye"></ion-icon>
+              <ion-input [type]="inputTypePassword" name="password" formControlName="password" required></ion-input>
+              <ion-button slot="end" fill="clear" color="medium" (click)="handleTapIconPassword()">
+                <ion-icon slot="icon-only" [name]="iconTypePassword"></ion-icon>
               </ion-button>
             </ion-item>
+            <small errorText *ngIf="reactiveForm.get('password').invalid &&
+                                    reactiveForm.get('username').touched">
+              * Este campo no puede estar vacio
+            </small>
           </ion-col>
         </ion-row>
         <ion-row>
           <ion-col>
-            <ion-button color="secondary" expand="block" >
+            <ion-button color="secondary" expand="block"  (click)="handleTapButtonLogin()" [disabled]="reactiveForm.invalid" >
               Iniciar Sesión
             </ion-button>
           </ion-col>

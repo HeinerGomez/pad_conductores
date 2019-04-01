@@ -4,3 +4,8 @@
     margin: auto;
     border-radius: 5%;
 }
+[errorText] {
+    color: var(--ion-color-danger);
+    opacity: 0.6;
+    padding: 2px;
+}
