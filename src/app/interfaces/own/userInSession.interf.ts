@@ -5,7 +5,7 @@ export interface UserInSession {
     'secondLastName'?: string,
     'averageRating'?: number,
     'availableCapacitty'?: number,
-    'cellPhoneNumber': number,
+    'cellPhoneNumber': string,
     'whatsappNumber'?: number,
     'email'?: string
 }

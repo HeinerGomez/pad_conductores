@@ -1,6 +1,9 @@
 import { Component } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { UserInSession } from '../interfaces/own/userInSession.interf';
+import { AuthService } from '../services/auth.service';
+import { ToastController } from '@ionic/angular';
 
 @Component({
   selector: 'app-login',
@@ -13,7 +16,8 @@ export class LoginPage {
   public iconTypePassword: string;
   public reactiveForm: FormGroup;
 
-  constructor(private formBuilder: FormBuilder, private router: Router) {
+  constructor(private formBuilder: FormBuilder, private router: Router,
+              private authService: AuthService, private toastController: ToastController) {
     this.inputTypePassword = 'password';
     this.iconTypePassword = 'eye';
     this.reactiveForm = this.buildReactiveForm();
@@ -54,7 +58,27 @@ export class LoginPage {
    * @returns void
    */
   public handleTapButtonLogin(): void {
-    this.router.navigate(['/offers']);
+    // cargo de manera temporal un usuario ficticio
+    const user: UserInSession = {
+      'username': 'Ero-sennin',
+      'realName': 'Heiner',
+      'firstLastName': 'Gómez',
+      'cellPhoneNumber': '3007045868'
+    };
+    this.authService.Authenticate(user).then( () => {
+      this.router.navigate(['/offers']);
+    }).catch(error => {
+      console.error('Error en handleTapButtonLogin: ', error);
+      this.presentToast('Error al iniciar sesión');
+    });
+  }
+
+  private async presentToast(msg: string) {
+    const toast = await this.toastController.create({
+      message: msg,
+      duration: 2000
+    });
+    toast.present();
   }
 
 }

@@ -15,15 +15,10 @@ export class StorageDataService {
    * @author Heiner Gómez <alejandro.gomez@grupooet.com>
    * @date 2019-04-01
    * @param config
-   * @returns Promise<boolean>
+   * @returns Promise<any>
    */
-  public setConfigApp(config: ConfigAppStorage): Promise<boolean> {
-    return this.localStorage.setItem('config', config).then( () => {
-      return true;
-    }).catch(error => {
-      console.error('Ha ocurrido un error con el almacenamiento local al momento de establecer la configuracion de la app');
-      return false;
-    });
+  public setConfigApp(config: ConfigAppStorage): Promise<any> {
+    return this.localStorage.setItem('config', config);
   }
 
   /**
@@ -31,13 +26,10 @@ export class StorageDataService {
    * @author Heiner Gómez <alejandro.gomez@grupooet.com>
    * @date 2019-04-01
    * @param config
-   * @returns Promise<ConfigAppStorage> | Promise<boolean>
+   * @returns Promise<any>
    */
-  public getConfigApp(): Promise<ConfigAppStorage> | Promise<boolean> {
-    return this.localStorage.getItem('config').then(config => config).catch(error => {
-      console.warn('No fue posible obtener la configuracion de la app');
-      return false;
-    });
+  public getConfigApp(): Promise<any> {
+    return this.localStorage.getItem('config');
   }
 
   /**
@@ -45,15 +37,10 @@ export class StorageDataService {
    * @author Heiner Gómez <alejandro.gomez@grupooet.com>
    * @date 2019-04-01
    * @param user
-   * @returns Promise<boolean>
+   * @returns Promise<any>
    */
-  public setUserInSession(user: UserInSession): Promise<boolean> {
-    return this.localStorage.setItem('user', user).then( () => {
-      return true;
-    }).catch(error => {
-      console.error('Ha ocurrido un error con el almacenamiento local al momento de estableces el usuario en sesión');
-      return false;
-    });
+  public setUserInSession(user: UserInSession): Promise<any> {
+    return this.localStorage.setItem('user', user);
   }
 
   /**
@@ -61,13 +48,10 @@ export class StorageDataService {
    * @author Heiner Gómez <alejandro.gomez@grupooet.com>
    * @date 2019-04-01
    * @param void
-   * @returns Promise<UserInSession> | Promise<boolean>
+   * @returns Promise<any>
    */
-  public getUserInSession(): Promise<UserInSession> | Promise<boolean> {
-    return this.localStorage.getItem('user').then(user => user).catch(error => {
-      console.warn('No fue posible obtener el usuario en session');
-      return false;
-    });
+  public getUserInSession(): Promise<any> {
+    return this.localStorage.getItem('user');
   }
 
   /**
@@ -75,13 +59,10 @@ export class StorageDataService {
    * @author Heiner Gómez <alejandro.gomez@grupooet.com>
    * @date 2019-04-02
    * @param void
-   * @returns Promise<boolean>
+   * @returns Promise<any>
    */
-  public removeUserInSession(): Promise<boolean> {
-    return this.localStorage.remove('user').then( ()  => true).catch(error => {
-      console.warn('No fue posible eliminar el usuario en sesión');
-      return false;
-    });
+  public removeUserInSession(): Promise<any> {
+    return this.localStorage.remove('user');
   }
 
 }

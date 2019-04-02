@@ -14,9 +14,9 @@ export class AuthService {
    * @author Heiner Gómez <alejandro.gomez@grupooet.com>
    * @date 2019-04-01
    * @param user
-   * @returns Promise<boolean>
+   * @returns Promise<any>
    */
-  public Authenticate(user: UserInSession): Promise<boolean> {
+  public Authenticate(user: UserInSession): Promise<any> {
     return this.storageDataService.setUserInSession(user);
   }
 
@@ -25,9 +25,9 @@ export class AuthService {
    * @author Heiner Gómez <alejandro.gomez@grupooet.com>
    * @date 2019-04-02
    * @param user
-   * @returns Promise<boolean>
+   * @returns Promise<any>
    */
-  public UnAuhenticated(): Promise<boolean> {
+  public UnAuhenticated(): Promise<any> {
     return this.storageDataService.removeUserInSession();
   }
 
@@ -36,9 +36,9 @@ export class AuthService {
    * @author Heiner Gómez <alejandro.gomez@grupooet.com>
    * @date 2019-04-02
    * @param void
-   * @returns Promise<boolean>
+   * @returns Promise<any>
    */
-  public isAuthenticated(): Promise<UserInSession> | Promise<boolean> {
+  public isAuthenticated(): Promise<any> {
     return this.storageDataService.getUserInSession();
   }
 }
