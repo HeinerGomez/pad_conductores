@@ -6,12 +6,8 @@ import { AlertOptions } from '@ionic/core';
 })
 export class UtilitiesService {
 
-  private loading: Promise<HTMLIonLoadingElement>;
-
   constructor(private alertController: AlertController, private toastController: ToastController,
-              private loadingController: LoadingController) {
-    this.loading = null;
-  }
+              private loadingController: LoadingController) {}
 
   /**
    * @description Tiene como objetivo mostrar un alert avanzado
@@ -65,16 +61,27 @@ export class UtilitiesService {
   }
 
   /**
-   * @description Tiene como objetivo generar una instancia del componente loading
+   * @description Tiene como objetivo mostrar un loading
    * @author Heiner Gómez <alejandro.gomez@grupooet.com>
    * @date 2019-04-03
    * @param message: string
-   * @param shouldShow: boolean
    * @returns void
    */
-  public async shouldShow(message: string) {
-    return await this.loadingController.create({
+  public async showLoading(message: string) {
+    const loading = await this.loadingController.create({
       'message': message,
     });
+    loading.present();
+  }
+
+  /**
+   * @description Tiene como objetivo cerrar un loading
+   * @author Heiner Gómez <alejandro.gomez@grupooet.com>
+   * @date 2019-04-03
+   * @param void
+   * @returns void
+   */
+  public async closeLoading() {
+    this.loadingController.dismiss();
   }
 }

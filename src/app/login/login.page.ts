@@ -3,7 +3,7 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { UserInSession } from '../interfaces/own/userInSession.interf';
 import { AuthService } from '../services/auth.service';
-import { ToastController } from '@ionic/angular';
+import { UtilitiesService } from '../services/utilities.service';
 
 @Component({
   selector: 'app-login',
@@ -17,7 +17,7 @@ export class LoginPage {
   public reactiveForm: FormGroup;
 
   constructor(private formBuilder: FormBuilder, private router: Router,
-              private authService: AuthService, private toastController: ToastController) {
+              private authService: AuthService, private utilitiesService: UtilitiesService) {
     this.inputTypePassword = 'password';
     this.iconTypePassword = 'eye';
     this.reactiveForm = this.buildReactiveForm();
@@ -66,19 +66,14 @@ export class LoginPage {
       'cellPhoneNumber': '3007045868'
     };
     this.authService.Authenticate(user).then( () => {
-      this.router.navigate(['/offers']);
+      this.utilitiesService.showLoading('Iniciando sesión');
+      setTimeout( () => {
+        this.utilitiesService.closeLoading();
+        this.router.navigate(['/offers']);
+      }, 5000)
     }).catch(error => {
       console.error('Error en handleTapButtonLogin: ', error);
-      this.presentToast('Error al iniciar sesión');
+      this.utilitiesService.showSnackbar('Error al intentar iniciar sesión');
     });
   }
-
-  private async presentToast(msg: string) {
-    const toast = await this.toastController.create({
-      message: msg,
-      duration: 2000
-    });
-    toast.present();
-  }
-
 }
