@@ -20,9 +20,7 @@ export class ShouldShowIntroGuard implements CanActivate {
    * @returns boolean | UrlTree | Observable<boolean | UrlTree> | Promise<boolean | UrlTree>
    */
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean | UrlTree | Observable<boolean | UrlTree> | Promise<boolean | UrlTree> {
-    console.log("Funcion determina: ", this.determinesShowShouldIntroPage());
     return this.determinesShowShouldIntroPage().then( showShouldIntroPage => {
-      console.log("Debe mostrar slide: ", showShouldIntroPage);
       if (showShouldIntroPage == false) {
         this.router.navigate(['/home']);
         return false;
@@ -43,7 +41,6 @@ export class ShouldShowIntroGuard implements CanActivate {
     const showShouldIntroPage = this.hasConfigApp().then( (hasConfigApp: boolean) => {
       if (hasConfigApp) {
         return this.nativeStorage.getItem('configApp').then( (configApp: any) => {
-          console.log("config: ", configApp);
           if (configApp.hasOwnProperty('slideShown')) {
             return false;
           } else {
@@ -53,7 +50,6 @@ export class ShouldShowIntroGuard implements CanActivate {
         });
       } else {
         this.configureApp();
-        console.log("retorna un true gigante ");
         return true;
       }
     });
