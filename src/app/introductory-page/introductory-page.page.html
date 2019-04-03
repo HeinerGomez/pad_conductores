@@ -41,12 +41,17 @@
           </ion-col>
         </ion-row>
         <ion-row text-slider-screen>
-          <ion-col>
+          <ion-col size="12">
             <h1 color="primary"> Aumenta tus ingresos </h1>
             <p color="primary">
               te ayudamos a aprovechar al máximo tú vehículo de manera ágil, sencilla y segura.
               Dándole la tranquilidad de estar asegurado en tus viajes.
             </p>
+          </ion-col>
+          <ion-col size="12" [ngStyle]="{'text-align': 'right'}">
+            <ion-button fill="outline" color="primary" size="small"(click)="handleTapIGetIt()">
+              <ion-icon slot="icon-only" name="share-alt"></ion-icon>
+            </ion-button>
           </ion-col>
         </ion-row>
       </ion-grid>
