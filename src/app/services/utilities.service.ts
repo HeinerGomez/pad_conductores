@@ -55,7 +55,9 @@ export class UtilitiesService {
     const snackbar = await this.toastController.create({
       'message': message,
       'showCloseButton': true,
-      'duration': 10000
+      'closeButtonText': '👏',
+      'color': 'primary',
+      'duration': 5000
     });
     await snackbar.present();
   }
