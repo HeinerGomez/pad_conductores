@@ -5,10 +5,11 @@ import { AuthGuard } from './guards/auth.guard';
 
 const routes: Routes = [
   { path: '', redirectTo: 'introductory-page', pathMatch: 'full' },
-  { path: 'home', loadChildren: './home/home.module#HomePageModule', canActivate: [AuthGuard] },
+  { path: 'home', loadChildren: './home/home.module#HomePageModule' },
   { path: 'introductory-page', loadChildren: './introductory-page/introductory-page.module#IntroductoryPagePageModule', canActivate: [ShouldShowIntroGuard] },
   { path: 'login', loadChildren: './login/login.module#LoginPageModule', canActivate: [AuthGuard] },
   { path: 'offers', loadChildren: './offers/offers.module#OffersPageModule' },
+  { path: 'register', loadChildren: './register/register.module#RegisterPageModule' },
 ];
 
 @NgModule({

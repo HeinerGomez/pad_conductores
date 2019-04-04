@@ -15,11 +15,25 @@ export class HomePage {
   /**
    * @description Tiene como objetivo controlar el evento de hacer click o tap en el boton de login
    * @author Heiner Gómez <alejandro.gomez@grupooet.com>
+   * @param void
    * @date 2019-03-29
    * @returns void
    */
   public handleBtnLogin(): void {
     this.router.navigate(['/login']);
   }
+
+  /**
+   * @description Tiene como objetivo controlar el evento de hacer click o tap en el boton de login
+   * @author Heiner Gómez <alejandro.gomez@grupooet.com>
+   * @param void
+   * @date 2019-03-29
+   * @returns void
+   */
+  public handleBtnRegister(): void {
+    this.router.navigate(['/register']);
+  }
+
+
 
 }
