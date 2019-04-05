@@ -1,0 +1,90 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title text-center>Asociacion de vehiculo</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div container-full container-center-content container-padding-2-full-p>
+    <ion-grid>
+      <h2 text-center>Datos de tu vehículo</h2>
+      <hr />
+      <form [formGroup]="reactiveForm">
+        <ion-row>
+          <ion-col size="12">
+            <ion-item>
+              <ion-label position="floating">
+                Número de placa
+              </ion-label>
+              <ion-input type="text" name="licensePlate" formControlName="licensePlate" (ionChange)="handleChangeLicensePlate()"></ion-input>
+            </ion-item>
+            <small errorText *ngIf="reactiveForm.get('licensePlate').invalid &&
+                                    reactiveForm.get('licensePlate').hasError('required') &&
+                                    reactiveForm.get('licensePlate').touched">
+              * Este campo es obligatorio
+            </small>
+            <small errorText *ngIf="reactiveForm.get('licensePlate').invalid &&
+                                    reactiveForm.get('licensePlate').hasError('pattern') &&
+                                    reactiveForm.get('licensePlate').touched">
+              * Placa no valida
+            </small>
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col size="12">
+            <ion-item>
+              <ion-label position="floating">
+                Modelo <small>(Año)</small>
+              </ion-label>
+              <ion-input type="text" name="modelYear" formControlName="modelYear"></ion-input>
+            </ion-item>
+            <small errorText *ngIf="reactiveForm.get('modelYear').invalid &&
+                                    reactiveForm.get('modelYear').hasError('required') &&
+                                    reactiveForm.get('modelYear').touched">
+              * Este campo es obligatorio
+            </small>
+            <small errorText *ngIf="reactiveForm.get('modelYear').invalid &&
+                                    reactiveForm.get('modelYear').hasError('pattern') &&
+                                    reactiveForm.get('modelYear').touched">
+              * Año no valido
+            </small>
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col size="12">
+            <ion-item>
+              <ion-label position="floating">
+                Configuracion
+              </ion-label>
+              <ion-select name="vehicleConfiguration" formControlName="vehicleConfiguration">
+                <ion-select-option value="@">2S2</ion-select-option>
+                <ion-select-option value="1">2S3</ion-select-option>
+              </ion-select>
+            </ion-item>
+            <small errorText *ngIf="reactiveForm.get('vehicleConfiguration').invalid &&
+                                    reactiveForm.get('vehicleConfiguration').hasError('required') &&
+                                    reactiveForm.get('vehicleConfiguration').touched">
+              * Este campo es obligatorio
+            </small>
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col size="12">
+            <p style="text-align: justify;">
+              <small>
+                Al continuar, reconozco que soy mayor de edad, tengo un vehículo de carga pesada y acepto los Terminos de uso de Central PAD y reconozco haber leido la Politica de Privacidad. <br><br>
+                Acepto, ademas, que Central PAD o sus representantes pueden comunicarse conmigo por correo electrónico, teléfono o SMS
+                (incluso por medios automatizados) a la dirección de correo electrónico o al número que yo indique, aun para fines promocionales.
+              </small>
+            </p>
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col size="12">
+            <ion-button expand="block" color="secondary">Continuar</ion-button>
+          </ion-col>
+        </ion-row>
+      </form>
+    </ion-grid>
+  </div>
+</ion-content>

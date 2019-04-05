@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { FORMREGEX } from '../regex/formRegex';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-register',
@@ -11,7 +12,7 @@ export class RegisterPage {
 
   public reactiveForm: FormGroup;
 
-  constructor(private formBuilder: FormBuilder) { 
+  constructor(private formBuilder: FormBuilder, private router: Router) { 
     this.reactiveForm = this.buildReactiveForm();
   }
 
@@ -41,9 +42,9 @@ export class RegisterPage {
    * @returns void
    */
   public handleTapContinue(): void {
-    console.log("Reactive Forms: ", this.reactiveForm);
-    console.log("Identificacion: ", this.reactiveForm.get('cardDocumentId').hasError('required'));
-
+    // console.log("Reactive Forms: ", this.reactiveForm);
+    // console.log("Identificacion: ", this.reactiveForm.get('cardDocumentId').hasError('required'));
+    this.router.navigate(['/vehicle-association']);
   }
 
   /**
