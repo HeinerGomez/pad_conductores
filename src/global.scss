@@ -73,5 +73,9 @@
         margin-top: 20px;
     }
 }
-
+[errorText] {
+    color: var(--ion-color-danger);
+    opacity: 0.6;
+    padding: 2px;
+}
 
