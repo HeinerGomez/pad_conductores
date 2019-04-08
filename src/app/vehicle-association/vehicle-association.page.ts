@@ -3,6 +3,9 @@ import { FormGroup, Validators, FormBuilder } from '@angular/forms';
 import { FORMREGEX } from '../regex/formRegex';
 import { ModalController } from '@ionic/angular';
 import { GeneralModalPage } from '../general-modal/general-modal.page';
+import { ModalData } from '../interfaces/own/modalData.interface';
+import { ButtonData } from '../interfaces/own/buttonData.interface';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-vehicle-association',
@@ -13,7 +16,8 @@ export class VehicleAssociationPage {
 
   public reactiveForm: FormGroup;
 
-  constructor(private formBuilder: FormBuilder, private modalController: ModalController) {
+  constructor(private formBuilder: FormBuilder, private modalController: ModalController, 
+              private router: Router) {
     this.reactiveForm = this.buildReactiveForm();
   }
   
@@ -57,13 +61,43 @@ export class VehicleAssociationPage {
    * @returns void
    */
   public handleTapContinue(): void {
-    console.log('Working');
     this.openGeneralModal();
   }
 
+  /**
+   * @description Tiene como objetivo abrir un modal con el cartel de registro exitoso
+   * @author Heiner Gómez <alejandro.gomez@grupooet.com>
+   * @date 2019-04-08
+   * @param void
+   * @returns void
+   */
   private async openGeneralModal() {
+    const buttonOne: ButtonData = {
+      'text': 'Entendido',
+      'fill': 'outline',
+      'expand': 'block',
+      'color': 'secondary',
+      'handle': () => {
+        this.modalController.dismiss().then( () => {
+          this.router.navigate(['/home']);
+        });
+      }
+    };
+    const modalData: ModalData = {
+      'closeButton': false,
+      'pathImage': 'assets/imgs/email.svg',
+      'title': 'Registro Exítoso',
+      'textOne': `Hemos completado el registro de forma exítosa 😃, ten en cuenta que más adelante se necesitarán 
+                  tus documentos y los del vehiculo.`,
+      'textTwo': `Si has registrado un correo electrónico, revisalo!, te hemos enviado tus accesos y el listado de 
+                  documentos que debes tener en cuenta!`,
+      'buttonOne': buttonOne
+    };
     const generalModal = await this.modalController.create({
-      component: GeneralModalPage
+      'component': GeneralModalPage,
+      'componentProps': {
+        'modalData': modalData
+      }
     });
     await generalModal.present();
   }

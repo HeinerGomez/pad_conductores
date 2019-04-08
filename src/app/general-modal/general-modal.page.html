@@ -1,8 +1,8 @@
 <ion-header>
   <ion-toolbar color="translucent">
-    <ion-buttons slot="end">
-      <ion-button >
-        <ion-icon slot="icon-only" name="close"></ion-icon>
+    <ion-buttons slot="end" *ngIf="modalData.closeButton">
+      <ion-button>
+        <ion-icon slot="icon-only" name="close" (click)="handleTapCloseButton()"></ion-icon>
       </ion-button>
     </ion-buttons>
   </ion-toolbar>
@@ -14,25 +14,31 @@
       <ion-grid>
         <ion-row>
           <ion-col col-container-img>
-            <img src="assets/imgs/email.svg">
+            <img [src]="modalData.pathImage">
           </ion-col>
         </ion-row>
         <ion-row m-top-20 text-slider-screen>
           <ion-col padding>
-            <h1 color="primary"> Registro Exítoso </h1>
+            <h1 color="primary"> {{ modalData.title }} </h1>
             <p color="primary" text-justify>
-              Hemos completado el registro de forma exítosa 😃, ten en cuenta que más adelante se necesitarán 
-              tus documentos y los del vehiculo.
+              {{ modalData.textOne }}
             </p>
-            <p text-justify>
-              Si has registrado un correo electrónico, revisalo!, te hemos enviado tus accesos y el listado de 
-              documentos que debes tener en cuenta!
+            <p text-justify *ngIf="modalData.hasOwnProperty('textTwo')">
+              {{ modalData.textTwo }}
             </p>
           </ion-col>
         </ion-row>
-        <ion-row>
+        <ion-row *ngIf="!modalData.hasOwnProperty('buttonTwo')">
           <ion-col size="12">
-            <ion-button fill="outline" expand="block" color="secondary">I get it</ion-button>
+            <ion-button [fill]="modalData.buttonOne.fill" [expand]="modalData.buttonOne.expand" [color]="modalData.buttonOne.color" (click)="handleTapButtonOne()">{{ modalData.buttonOne.text }}</ion-button>
+          </ion-col>
+        </ion-row>
+        <ion-row *ngIf="modalData.hasOwnProperty('buttonTwo')">
+          <ion-col size="6">
+            <ion-button [fill]="modalData.buttonOne.fill" [expand]="modalData.buttonOne.expand" [color]="modalData.buttonOne.color" (click)="handleTapButtonOne()">{{ modalData.buttonOne.text }}</ion-button>
+          </ion-col>
+          <ion-col size="6">
+            <ion-button [fill]="modalData.buttonTwo.fill" [expand]="modalData.buttonTwo.expand" [color]="modalData.buttonTwo.color" (click)="handleTapButtonTwo()">{{ modalData.buttonTwo.text }}</ion-button>
           </ion-col>
         </ion-row>
       </ion-grid>
