@@ -9,17 +9,24 @@ import { AppRoutingModule } from './app-routing.module';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 /* Providers */
 import { NativeStorage } from '@ionic-native/native-storage/ngx';
+/* Modulos propios */
+import { GeneralModalPageModule } from './general-modal/general-modal.module';
 
+/* Pages */
+import { GeneralModalPage } from './general-modal/general-modal.page';
 
 @NgModule({
   declarations: [AppComponent],
-  entryComponents: [],
+  entryComponents: [
+    GeneralModalPage
+  ],
   imports: [
     BrowserModule, 
     IonicModule.forRoot(), 
     AppRoutingModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    GeneralModalPageModule
   ],
   providers: [
     StatusBar,

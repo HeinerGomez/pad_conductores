@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 import { FormGroup, Validators, FormBuilder } from '@angular/forms';
 import { FORMREGEX } from '../regex/formRegex';
+import { ModalController } from '@ionic/angular';
+import { GeneralModalPage } from '../general-modal/general-modal.page';
 
 @Component({
   selector: 'app-vehicle-association',
@@ -11,7 +13,7 @@ export class VehicleAssociationPage {
 
   public reactiveForm: FormGroup;
 
-  constructor(private formBuilder: FormBuilder) {
+  constructor(private formBuilder: FormBuilder, private modalController: ModalController) {
     this.reactiveForm = this.buildReactiveForm();
   }
   
@@ -56,6 +58,14 @@ export class VehicleAssociationPage {
    */
   public handleTapContinue(): void {
     console.log('Working');
+    this.openGeneralModal();
+  }
+
+  private async openGeneralModal() {
+    const generalModal = await this.modalController.create({
+      component: GeneralModalPage
+    });
+    await generalModal.present();
   }
 
 }

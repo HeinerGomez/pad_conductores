@@ -11,6 +11,7 @@ const routes: Routes = [
   { path: 'offers', loadChildren: './offers/offers.module#OffersPageModule' },
   { path: 'register', loadChildren: './register/register.module#RegisterPageModule' },
   { path: 'vehicle-association', loadChildren: './vehicle-association/vehicle-association.module#VehicleAssociationPageModule' },
+  { path: 'general-modal', loadChildren: './general-modal/general-modal.module#GeneralModalPageModule' },
 ];
 
 @NgModule({

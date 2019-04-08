@@ -1,0 +1,12 @@
+.header::after {
+    background-image: none;
+}
+[full] {
+    height: 100%;
+}
+[col-container-img] {
+    text-align: center;
+    img {
+        max-width: 200px;
+    }
+}
