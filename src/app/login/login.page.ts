@@ -69,7 +69,7 @@ export class LoginPage {
       this.utilitiesService.showLoading('Iniciando sesión');
       setTimeout( () => {
         this.utilitiesService.closeLoading();
-        this.router.navigate(['/offers']);
+        this.router.navigate(['/tab-offers']);
       }, 5000)
     }).catch(error => {
       console.error('Error en handleTapButtonLogin: ', error);

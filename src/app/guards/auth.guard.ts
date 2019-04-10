@@ -21,7 +21,7 @@ export class AuthGuard implements CanActivate {
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean | UrlTree | Observable<boolean | UrlTree> | Promise<boolean | UrlTree> {
     return this.authService.isAuthenticated().then( isAuthenticated => {
       if (isAuthenticated) {
-        this.router.navigate(['/offers', {shouldSessionMessage: true}]);
+        this.router.navigate(['/tab-offers', {shouldSessionMessage: true}]);
         return false;
       } else {
         return true;
