@@ -15,19 +15,23 @@ export class OffersPage implements OnInit {
 
   constructor(private storageDataService: StorageDataService, private activatedRoute: ActivatedRoute, 
               private utilitiesService: UtilitiesService) { 
-    console.log('Constructor de ofertas');
-    this.storageDataService.getUserInSession().then( (user: UserInSession) => {
-      this.inSession = user;
-    });
+    
   }
 
   ngOnInit() {
-    console.log('ngOnInit');
-    this.activatedRoute.params.subscribe( params => {
-      console.log(params);
-      if (params.hasOwnProperty('shouldSessionMessage')) {
-        this.utilitiesService.showSnackbar('Bienvenido de vuelta al PAD');
-      }
-    });
+    
+  }
+
+  /**
+   * @description Tiene como objetivo manejar el refresh cuando se desliza la pantalla hacia arriba
+   * @author Heiner Gómez <alejandro.gomez@grupooet.com>
+   * @date 2019-04-10
+   * @param void
+   * @returns void
+   */
+  public handleSlideDownRefresh(event): void {
+    setTimeout( () => {
+      event.target.complete();
+    }, 3000);
   }
 }

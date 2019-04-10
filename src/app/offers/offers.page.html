@@ -1,9 +1,12 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>offers</ion-title>
+    <ion-title text-center>Ofertas Disponibles</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
-  {{ inSession | json }}
+  <ion-refresher slot="fixed" (ionRefresh)="handleSlideDownRefresh($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
+  aca las ofertas
 </ion-content>
