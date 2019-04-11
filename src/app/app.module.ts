@@ -15,8 +15,13 @@ import { GeneralModalPageModule } from './general-modal/general-modal.module';
 /* Pages */
 import { GeneralModalPage } from './general-modal/general-modal.page';
 
+/* Componentes */
+// import { ItemOfferComponent } from './components/item-offer/item-offer.component';
+
 @NgModule({
-  declarations: [AppComponent],
+  declarations: [
+    AppComponent
+  ],
   entryComponents: [
     GeneralModalPage
   ],

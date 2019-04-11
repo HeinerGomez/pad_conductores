@@ -3,6 +3,7 @@ import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
 import { ShouldShowIntroGuard } from './guards/should-show-intro.guard';
 import { AuthGuard } from './guards/auth.guard';
 
+
 const routes: Routes = [
   { path: '', redirectTo: 'introductory-page', pathMatch: 'full' },
   { path: 'home', loadChildren: './home/home.module#HomePageModule', canActivate: [AuthGuard] },
@@ -18,6 +19,6 @@ const routes: Routes = [
   imports: [
     RouterModule.forRoot(routes, { preloadingStrategy: PreloadAllModules })
   ],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
 export class AppRoutingModule { }

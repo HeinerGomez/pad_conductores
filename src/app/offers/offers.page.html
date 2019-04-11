@@ -4,9 +4,16 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
-  <ion-refresher slot="fixed" (ionRefresh)="handleSlideDownRefresh($event)">
+<ion-content force-overscroll="true">
+  <ion-refresher slot="fixed" *ngIf="enabledRefresh" (ionRefresh)="handleSlideDownRefresh($event)">
     <ion-refresher-content></ion-refresher-content>
   </ion-refresher>
-  aca las ofertas
+  <div [ngStyle]="{'position': 'relative', 'border': '1px solid green', 'height': '50px'}">
+    OFG28D
+  </div>
+  <div container-scroll (scroll)="handleScroll($event)">
+    <ion-list lines="none">
+      <app-item-offer *ngFor="let item of items" [itemOffer]="item" ></app-item-offer>
+    </ion-list>
+  </div>
 </ion-content>
