@@ -1,3 +1,39 @@
 <ion-app>
-  <ion-router-outlet></ion-router-outlet>
+  <ion-menu side="start" >
+    <ion-header>
+      <ion-toolbar color="primary">
+        <ion-title>Menu</ion-title>
+      </ion-toolbar>
+    </ion-header>
+    <ion-content>
+      <ion-list m-top-40>
+        <ion-item button>
+          <ion-icon slot="start" name="contact"></ion-icon>
+          <ion-label>Profile</ion-label>
+        </ion-item>
+        <ion-item button (click)="handleTapItemMenu('/offers')">
+          <ion-icon slot="start" name="clipboard"></ion-icon>
+          <ion-label>Ofertas</ion-label>
+        </ion-item>
+        <ion-item button>
+          <ion-icon slot="start" name="star-half"></ion-icon>
+          <ion-label>Calificar Empresa</ion-label>
+        </ion-item>
+        <ion-item button>
+          <ion-icon slot="start" name="copy"></ion-icon>
+          <ion-label>Banco Documentos</ion-label>
+        </ion-item>
+      </ion-list>
+    </ion-content>
+
+    <ion-footer>
+      <ion-list>
+        <ion-item button (click)="handleTapItemMenu('/home')">
+          <ion-icon slot="start" name="exit" color="danger"></ion-icon>
+          <ion-label>Salir</ion-label>
+        </ion-item>
+      </ion-list>
+    </ion-footer>
+  </ion-menu>
+  <ion-router-outlet main></ion-router-outlet>
 </ion-app>

@@ -4,6 +4,7 @@ import { UserInSession } from '../interfaces/own/userInSession.interf';
 import { ActivatedRoute } from '@angular/router';
 import { UtilitiesService } from '../services/utilities.service';
 import { ItemOffer } from '../interfaces/own/itemOffer.interf';
+import { MenuController } from '@ionic/angular';
 
 @Component({
   selector: 'app-offers',
@@ -15,7 +16,8 @@ export class OffersPage implements OnInit {
   public items: ItemOffer[] = [];
   public enabledRefresh: boolean;
 
-  constructor() { 
+  constructor(private menuController: MenuController) { 
+    this.menuController.enable(true);
     this.enabledRefresh = true;
     this.items.push({
       'originCity': 'BOGOTA',

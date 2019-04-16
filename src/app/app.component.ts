@@ -1,8 +1,9 @@
 import { Component } from '@angular/core';
-
-import { Platform } from '@ionic/angular';
+import { Platform, MenuController } from '@ionic/angular';
 import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
+import { Router } from '@angular/router';
+import { AuthService } from './services/auth.service';
 
 @Component({
   selector: 'app-root',
@@ -12,8 +13,12 @@ export class AppComponent {
   constructor(
     private platform: Platform,
     private splashScreen: SplashScreen,
-    private statusBar: StatusBar
+    private statusBar: StatusBar,
+    private router: Router,
+    private menuController: MenuController,
+    private authService: AuthService
   ) {
+    this.menuController.enable(false);
     this.initializeApp();
   }
 
@@ -22,5 +27,25 @@ export class AppComponent {
       this.statusBar.styleDefault();
       this.splashScreen.hide();
     });
+  }
+
+  /**
+   * @description Tiene como objetivo manejar la navegacion del menu y controlando la habilitacion y des-habilitacion del menu
+   * @author Heiner Gómez <alejandro.gomez@grupooet.com>
+   * @date 2019-04-16
+   * @param event
+   * @returns void
+   */
+  public handleTapItemMenu(route: String): void {
+    this.menuController.close();
+    if (route == '/home') {
+      this.authService.UnAuhenticated().then(() => {
+        this.router.navigate([route]).then(() => {
+          this.menuController.enable(false);
+        });
+      });
+    } else {
+      this.router.navigate([route]);
+    }
   }
 }
