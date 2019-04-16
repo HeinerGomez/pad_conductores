@@ -13,6 +13,7 @@ const routes: Routes = [
   { path: 'vehicle-association', loadChildren: './vehicle-association/vehicle-association.module#VehicleAssociationPageModule' },
   { path: 'general-modal', loadChildren: './general-modal/general-modal.module#GeneralModalPageModule' },
   { path: 'tab-offers', loadChildren: './tab-offers/tab-offers.module#TabOffersPageModule' },
+  // { path: 'my-offers', outlet: 'myOffers', loadChildren: './my-offers/my-offers.module#MyOffersPageModule' },
 ];
 
 @NgModule({

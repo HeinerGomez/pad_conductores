@@ -16,6 +16,10 @@ const routes: Routes = [
         path: 'offers',
         loadChildren: '../offers/offers.module#OffersPageModule'
       },
+      {
+        path: 'my-offers',
+        loadChildren: '../my-offers/my-offers.module#MyOffersPageModule'
+      }
     ]
   },
   {

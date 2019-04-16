@@ -1,11 +1,11 @@
 <ion-tabs>
   <ion-tab-bar slot="buttom" color="primary">
-    <ion-tab-button tap="offers">
+    <ion-tab-button (click)="handleTaps('/tab-offers/tabs/offers')">
       <ion-icon name="pricetags"></ion-icon>
       <ion-label>Ofertas</ion-label>
       <ion-badge color="secondary">6</ion-badge>
     </ion-tab-button>
-    <ion-tab-button >
+    <ion-tab-button (click)="handleTaps('/tab-offers/tabs/my-offers')">
       <ion-icon name="list"></ion-icon>
       <ion-label>Mis ofertas</ion-label>
       <ion-badge color="secondary">9</ion-badge>
