@@ -38,7 +38,7 @@
 .swiper-pagination-bullet.swiper-pagination-bullet-active {
     background-color: #000;
 }
-/* Container full */
+/* Containers */
 [container-full] {
     height: 100%;
 }
@@ -59,6 +59,16 @@
     align-items: center;
     justify-content: center;
 }
+/* mensajes informativos */
+[message-info] {
+    width: 100%;
+    padding: 1px;
+    background-color: #d1ecf1;
+    color: #0c5460;
+    text-align: center;
+    margin-top: 10px;
+}
+
 /* medias querys */
 @media (max-width: 400px) and (min-width: 100px) {
     [text-slider-screen] {

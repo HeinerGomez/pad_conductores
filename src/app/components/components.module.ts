@@ -1,18 +1,21 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { ItemOfferComponent } from './item-offer/item-offer.component';
 import { IonicModule } from '@ionic/angular';
+import { ItemOfferComponent } from './item-offer/item-offer.component';
+import { CardPlateComponent } from './card-plate/card-plate.component';
 
 @NgModule({
   declarations: [
-    ItemOfferComponent
+    ItemOfferComponent,
+    CardPlateComponent
   ],
   imports: [
     CommonModule,
     IonicModule
   ],
   exports: [
-    ItemOfferComponent
+    ItemOfferComponent,
+    CardPlateComponent
   ]
 })
 export class ComponentsModule { }

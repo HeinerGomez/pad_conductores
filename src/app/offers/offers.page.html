@@ -8,10 +8,13 @@
   <ion-refresher slot="fixed" *ngIf="enabledRefresh" (ionRefresh)="handleSlideDownRefresh($event)">
     <ion-refresher-content></ion-refresher-content>
   </ion-refresher>
-  <div [ngStyle]="{'position': 'relative', 'border': '1px solid green', 'height': '50px'}">
-    OFG28D
-  </div>
+  <app-card-plate>
+    OFG286
+  </app-card-plate>
   <div container-scroll (scroll)="handleScroll($event)">
+      <div message-info *ngIf="!items.length" >
+          <p><b>No existen ofertas disponibles</b></p>
+      </div>
     <ion-list lines="none">
       <app-item-offer *ngFor="let item of items" [itemOffer]="item" ></app-item-offer>
     </ion-list>
