@@ -17,7 +17,7 @@
           <p><b>No existen ofertas disponibles</b></p>
       </div>
     <ion-list lines="none">
-      <app-item-offer *ngFor="let item of items" [itemOffer]="item" ></app-item-offer>
+      <app-item-offer *ngFor="let item of items" [itemOffer]="item" [options]="itemOptions"></app-item-offer>
     </ion-list>
   </div>
 </ion-content>

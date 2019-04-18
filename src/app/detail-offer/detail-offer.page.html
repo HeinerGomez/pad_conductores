@@ -1,0 +1,148 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title text-center>Detalle de la oferta</ion-title>
+    <ion-back-button></ion-back-button>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div [ngStyle]="{'border-bottom': '1px solid var(--ion-color-medium-tint)'}">
+    <ion-grid>
+      <ion-row>
+        <ion-col>
+          <ion-badge color="success">
+            <ion-text [ngStyle]="{'font-size': '16px'}">Calificaciones de la empresa</ion-text>
+          </ion-badge>
+        </ion-col>
+      </ion-row>
+      <ion-row m-top-20>
+        <ion-col size-sm="6" size-xs="12">
+          <ion-chip color="tertiary" >
+            <ion-label [ngStyle]="{'margin-right': '5px'}"><b>Servicio: </b></ion-label>
+            <ion-icon name="star" color="secondary"></ion-icon>
+            <ion-icon name="star" color="secondary"></ion-icon>
+            <ion-icon name="star" color="secondary"></ion-icon>
+            <ion-icon name="star" color="secondary"></ion-icon>
+            <ion-icon name="star-half" color="secondary"></ion-icon>
+            <ion-badge [ngStyle]="{'margin-left': '5px'}" color="light">
+              <ion-text color="tertiary"><b>4.5</b></ion-text>
+            </ion-badge>
+          </ion-chip>
+        </ion-col>
+        <ion-col size-sm="6" size-xs="12">
+          <ion-chip color="tertiary" >
+            <ion-label [ngStyle]="{'margin-right': '5px'}"><b>Seguridad: </b></ion-label>
+            <div icon-img><img src="assets/imgs/shield.png" /></div>
+            <div icon-img><img src="assets/imgs/shield.png" /></div>
+            <div icon-img><img src="assets/imgs/shield.png" /></div>
+            <div icon-img><img src="assets/imgs/shield.png" /></div>
+            <div icon-img><img src="assets/imgs/shield_half.png" /></div>
+            <ion-badge [ngStyle]="{'margin-left': '5px'}" color="light">
+              <ion-text color="tertiary"><b>4.5</b></ion-text>
+            </ion-badge>
+          </ion-chip>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </div>
+  <div>
+    <ion-list>
+      <ion-item>
+        <ion-icon src="assets/imgs/right-arrow.svg" size="large" slot="start"></ion-icon>
+        <ion-label text-wrap>
+          <ion-text>
+            <h3><b>ORIGEN - DESTINO</b></h3>
+          </ion-text>
+          <ion-text>
+            <ion-note>
+              BOGOTA D.C - BARRANCABERMEJA
+            </ion-note>
+          </ion-text>
+        </ion-label>
+      </ion-item>
+      <ion-item>
+        <ion-icon name="square-outline" size="large" color="tertiary" slot="start"></ion-icon>
+        <ion-label text-wrap>
+          <ion-text>
+            <h3><b>LIBRE DE CARGUE</b></h3>
+          </ion-text>
+          <ion-text>
+            <ion-note>
+              NO
+            </ion-note>
+          </ion-text>
+        </ion-label>
+      </ion-item>
+      <ion-item>
+        <ion-icon name="checkbox-outline" size="large" color="tertiary" slot="start"></ion-icon>
+        <ion-label text-wrap>
+          <ion-text>
+            <h3><b>LIBRE DE DESCARGUE</b></h3>
+          </ion-text>
+          <ion-text>
+            <ion-note>
+              SI
+            </ion-note>
+          </ion-text>
+        </ion-label>
+      </ion-item>
+      <ion-item>
+        <ion-icon src="assets/imgs/merchandise.svg" size="large" slot="start"></ion-icon>
+        <ion-label text-wrap>
+          <ion-text>
+            <h3><b>MERCANCIA</b></h3>
+          </ion-text>
+          <ion-text>
+            <ion-note>
+              ARROZ
+            </ion-note>
+          </ion-text>
+        </ion-label>
+      </ion-item>
+      <ion-item>
+        <ion-icon src="assets/imgs/weight.svg" size="large"  slot="start"></ion-icon>
+        <ion-label text-wrap>
+          <ion-text>
+            <h3><b>PESO MERCANCIA</b></h3>
+          </ion-text>
+          <ion-text>
+            <ion-note>
+              28 Tn.
+            </ion-note>
+          </ion-text>
+        </ion-label>
+      </ion-item>
+      <ion-item>
+        <ion-icon src="assets/imgs/schedule.svg" size="large"  slot="start"></ion-icon>
+        <ion-label text-wrap>
+          <ion-text>
+            <h3><b>FECHA Y HORA DE CARGUE<small> ( APROXIMADAMENTE ) </small></b></h3>
+          </ion-text>
+          <ion-text>
+            <ion-note>
+              2019-04-20 8:30 AM
+            </ion-note>
+          </ion-text>
+        </ion-label>
+      </ion-item>
+      <ion-item>
+        <ion-icon src="assets/imgs/notes.svg" size="large"  slot="start"></ion-icon>
+        <ion-label text-wrap>
+          <ion-text>
+            <h3><b>FLETE</b></h3>
+          </ion-text>
+          <ion-text>
+            <ion-note>
+              {{ '1200000' | currency:'$' }}
+            </ion-note>
+          </ion-text>
+        </ion-label>
+      </ion-item>
+    </ion-list>
+  </div>
+</ion-content>
+<ion-footer>
+  <ion-button color="success" expand="block">
+    ACEPTAR OFERTA
+  </ion-button>
+</ion-footer>

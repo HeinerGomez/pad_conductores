@@ -1,10 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { StorageDataService } from '../services/storage-data.service';
 import { UserInSession } from '../interfaces/own/userInSession.interf';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { UtilitiesService } from '../services/utilities.service';
 import { ItemOffer } from '../interfaces/own/itemOffer.interf';
 import { MenuController } from '@ionic/angular';
+import { ItemOfferOptions } from '../interfaces/own/itemOfferOptions.interface';
 
 @Component({
   selector: 'app-offers',
@@ -14,11 +15,13 @@ import { MenuController } from '@ionic/angular';
 export class OffersPage implements OnInit {
   
   public items: ItemOffer[] = [];
+  public itemOptions: ItemOfferOptions;
   public enabledRefresh: boolean;
 
-  constructor(private menuController: MenuController) { 
+  constructor(private menuController: MenuController, private router: Router) { 
     this.menuController.enable(true);
     this.enabledRefresh = true;
+    this.itemOptions = this.defineItemOptions();
     this.items.push({
       'originCity': 'BOGOTA',
       'destinationCity': 'CALI',
@@ -85,6 +88,17 @@ export class OffersPage implements OnInit {
     
   }
 
+  private defineItemOptions(): ItemOfferOptions {
+    return {
+      'handleTapItemOffer': () => {
+        this.router.navigate(['/detail-offer']);
+      },
+      'handleTapButtonArchive': () => {
+        console.log("Archivado");
+      }
+    };
+  }
+
   /**
    * @description Tiene como objetivo manejar el refresh cuando se desliza la pantalla hacia arriba
    * @author Heiner Gómez <alejandro.gomez@grupooet.com>
@@ -113,4 +127,5 @@ export class OffersPage implements OnInit {
       this.enabledRefresh = false;
     }
   }
+
 }
