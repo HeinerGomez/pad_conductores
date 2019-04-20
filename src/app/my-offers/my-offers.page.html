@@ -1,9 +1,23 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>my-offers</ion-title>
+    <ion-title text-center>Mis Ofertas</ion-title>
+    <ion-menu-button></ion-menu-button>
+    <ion-segment color="secondary" (ionChange)="handleSegmentChanges($event)">
+        <ion-segment-button value="applied">
+          <ion-text color="light">Aplicadas</ion-text>
+        </ion-segment-button>
+      <ion-segment-button value="confirmed">
+        <ion-text color="light">Confirmadas</ion-text>
+      </ion-segment-button>
+    </ion-segment>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
-
+  <ion-refresher slot="fixed" (ionRefresh)="handleSlideDownRefresh($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
+  <ion-list lines="none">
+    <!-- <app-item-offer *ngFor="let item of items" [itemOffer]="item" [options]="itemOptions"></app-item-offer> -->
+  </ion-list>
 </ion-content>
