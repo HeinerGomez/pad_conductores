@@ -1,0 +1,14 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title text-center>Ofertas archivadas</ion-title>
+    <ion-menu-button></ion-menu-button>
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+  <ion-refresher slot="fixed" (ionRefresh)="handleSlideDownRefresh($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
+  <ion-list lines="none">
+    <!-- <app-item-offer *ngFor="let item of items" [itemOffer]="item" [options]="itemOptions"></app-item-offer> -->
+  </ion-list>
+</ion-content>

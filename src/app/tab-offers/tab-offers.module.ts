@@ -19,6 +19,10 @@ const routes: Routes = [
       {
         path: 'my-offers',
         loadChildren: '../my-offers/my-offers.module#MyOffersPageModule'
+      },
+      {
+        path: 'offers-archived',
+        loadChildren: '../offers-archived/offers-archived.module#OffersArchivedPageModule'
       }
     ]
   },
