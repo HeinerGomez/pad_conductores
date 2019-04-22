@@ -13,7 +13,8 @@ const routes: Routes = [
   { path: 'vehicle-association', loadChildren: './vehicle-association/vehicle-association.module#VehicleAssociationPageModule' },
   { path: 'general-modal', loadChildren: './general-modal/general-modal.module#GeneralModalPageModule' },
   { path: 'tab-offers', loadChildren: './tab-offers/tab-offers.module#TabOffersPageModule' },
-  { path: 'detail-offer', loadChildren: './detail-offer/detail-offer.module#DetailOfferPageModule' }
+  { path: 'detail-offer', loadChildren: './detail-offer/detail-offer.module#DetailOfferPageModule' },
+  { path: 'document-bank', loadChildren: './document-bank/document-bank.module#DocumentBankPageModule' }
 ];
 
 @NgModule({

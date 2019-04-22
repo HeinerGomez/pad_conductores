@@ -1,0 +1,41 @@
+ion-card {
+    width: 350px;
+}
+
+ion-card.ribbon-pending {
+    border-top: 5px solid var(--ion-color-warning);
+}
+
+ion-card.ribbon-review {
+    border-top: 5px solid var(--ion-color-tertiary);
+}
+
+ion-card.ribbon-approved {
+    border-top: 5px solid var(--ion-color-success);
+}
+
+ion-card.ribbon-rejected {
+    border-top: 5px solid var(--ion-color-danger);
+}
+
+ion-card > ion-card-content {
+    padding: 0px;
+}
+
+ion-thumbnail {
+    --size: 108px;
+}
+
+[container-img-thumbnail] {
+    width: 110px;
+    height: 110px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid var(--ion-color-medium);
+    border-radius: 5px;
+}
+
+[img-sticker] {
+    border-radius: 5px;
+}

@@ -1,0 +1,19 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title text-center>Banco de documentos</ion-title>
+    <ion-menu-button></ion-menu-button>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <h2 text-center>Documentos Personales</h2>
+  <div scrollable-x divider>
+    <app-card-document *ngFor="let cardDocument of cardDocuments" [cardDocument]="cardDocument" [options]="options"></app-card-document>    
+  </div>
+  <h2 text-center>Documentos Vehiculo</h2>
+  <!-- <div scrollable-x>
+    <app-card-document></app-card-document>
+    <app-card-document></app-card-document>
+    <app-card-document></app-card-document>
+  </div> -->
+</ion-content>
