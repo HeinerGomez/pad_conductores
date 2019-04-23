@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { CardDocument } from 'src/app/interfaces/own/cardDocument.interface';
 import { CardDocumentOptions } from 'src/app/interfaces/own/cardDocumentOptions.interface';
 
@@ -7,12 +7,16 @@ import { CardDocumentOptions } from 'src/app/interfaces/own/cardDocumentOptions.
   templateUrl: './card-document.component.html',
   styleUrls: ['./card-document.component.scss'],
 })
-export class CardDocumentComponent {
+export class CardDocumentComponent implements OnInit {
 
   @Input('cardDocument') public cardDocument: CardDocument;
   @Input('options') private options: CardDocumentOptions; 
 
   constructor() {}
+
+  ngOnInit() {
+    this.cardDocument.pathImageSticker = this.cardDocument.pathImageSticker == '' ? 'assets/imgs/img_placeholder_110_110.png' : this.cardDocument.pathImageSticker;
+  }
 
    /**
    * @description Tiene como objetivo manejar la logica de lo que sucede al momento de hacer click en el boton de "lente - camara"

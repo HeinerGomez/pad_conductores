@@ -9,6 +9,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 /* Providers */
 import { NativeStorage } from '@ionic-native/native-storage/ngx';
+import { Camera } from '@ionic-native/camera/ngx';
 /* Modulos propios */
 import { GeneralModalPageModule } from './general-modal/general-modal.module';
 
@@ -37,7 +38,8 @@ import { GeneralModalPage } from './general-modal/general-modal.page';
     StatusBar,
     SplashScreen,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
-    NativeStorage
+    NativeStorage,
+    Camera
   ],
   bootstrap: [AppComponent]
 })

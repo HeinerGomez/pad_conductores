@@ -1,7 +1,7 @@
-import { CardDocument } from './cardDocument.interface';
+import { HandleTapCameraButtonForCardDocument } from './functions/handleTapCameraButtonForCardDocument.interface';
 
 export interface CardDocumentOptions {
-    'handleTapCameraButton': (cardDocument: CardDocument) => void | CardDocument,
+    'handleTapCameraButton': HandleTapCameraButtonForCardDocument,
     'handleTapPictureButton': () => void,
     'handleTapCommentButton': () => void
 }
