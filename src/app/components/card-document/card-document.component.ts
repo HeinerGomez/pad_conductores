@@ -1,6 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { CardDocument } from 'src/app/interfaces/own/cardDocument.interface';
-import { CardDocumentOptions } from 'src/app/interfaces/own/cardDocumentOptions.interface';
+import { BehaviorCardDocument } from 'src/app/interfaces/own/behaviorCardDocument.interface';
 
 @Component({
   selector: 'app-card-document',
@@ -10,12 +10,15 @@ import { CardDocumentOptions } from 'src/app/interfaces/own/cardDocumentOptions.
 export class CardDocumentComponent implements OnInit {
 
   @Input('cardDocument') public cardDocument: CardDocument;
-  @Input('options') private options: CardDocumentOptions; 
+  @Input('behavior') private behavior: BehaviorCardDocument;
+  private imgPlaceholder: String;
 
-  constructor() {}
+  constructor() {
+    this.imgPlaceholder = 'assets/imgs/img_placeholder_110_110.png';
+  }
 
   ngOnInit() {
-    this.cardDocument.pathImageSticker = this.cardDocument.pathImageSticker == '' ? 'assets/imgs/img_placeholder_110_110.png' : this.cardDocument.pathImageSticker;
+    this.cardDocument.pathImageSticker = this.cardDocument.pathImageSticker == '' ? this.imgPlaceholder : this.cardDocument.pathImageSticker;
   }
 
    /**
@@ -26,7 +29,7 @@ export class CardDocumentComponent implements OnInit {
    * @returns void
    */
   public handleTapCameraButton() {
-    this.options.handleTapCameraButton(this.cardDocument);
+    // this.options.handleTapCameraButton(this.cardDocument);
   }
 
   /**
@@ -37,7 +40,7 @@ export class CardDocumentComponent implements OnInit {
    * @returns void
    */
   public handleTapPictureButton() {
-    this.options.handleTapPictureButton();
+    // this.options.handleTapPictureButton();
   }
 
   /**
@@ -48,7 +51,18 @@ export class CardDocumentComponent implements OnInit {
    * @returns void
    */
   public handleTapCommentButton() {
-    this.options.handleTapCommentButton();
+    // this.options.handleTapCommentButton();
+  }
+ 
+  /**
+   * @description Tiene como objetivo manejar la logica de lo que sucede al momento de hacer click en el boton de "detalles"
+   * @author Heiner Gómez <alejandro.gomez@grupooet.com>
+   * @date 2019-04-24
+   * @param void
+   * @returns void
+   */
+  public handleTapButtonDetails() {
+    this.behavior.handleTapButtonDetails(this.cardDocument);
   }
 
   /**
@@ -59,7 +73,7 @@ export class CardDocumentComponent implements OnInit {
    * @returns void
    */
   public handleErrorLoadImage(event) {
-    this.cardDocument.pathImageSticker = 'assets/imgs/img_placeholder_110_110.png';
+    this.cardDocument.pathImageSticker = this.imgPlaceholder;
   }
 
 }

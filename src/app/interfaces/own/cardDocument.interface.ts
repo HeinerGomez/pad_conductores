@@ -1,8 +1,10 @@
+import { SideDocument } from './sideDocument.interface';
+
 export interface CardDocument {
     'pathImageSticker': String,
-    'pathImages'?: {}[],
     'documentName': String,
     'documentStatus': String,
-    'documentComment': String,
-    'ribbonStatus': String
+    'ribbonStatus': String,
+    'numberSides': number | String,
+    'sides': SideDocument[]
 }
