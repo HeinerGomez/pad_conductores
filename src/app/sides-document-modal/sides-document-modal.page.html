@@ -1,0 +1,16 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>sides-document-modal</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-slides pager="true" full>
+    <ion-slide *ngFor="let side of sides">
+      <h2>{{ side.documentName }}<small>{{ side.sideName }}</small></h2>
+      <ion-button (click)="handleTapButtonCamera()" color="primary" expand="block">
+        TOMAR FOTO
+      </ion-button>
+    </ion-slide>
+  </ion-slides>
+</ion-content>

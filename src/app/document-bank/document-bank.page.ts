@@ -2,8 +2,11 @@ import { Component, OnInit } from '@angular/core';
 import { CardDocument } from '../interfaces/own/cardDocument.interface';
 import { Camera, CameraOptions } from '@ionic-native/camera/ngx';
 import { DOCUMENT_STATUS } from '../data-simulation/data-document-status';
-import { Platform } from '@ionic/angular';
+import { Platform, ModalController } from '@ionic/angular';
 import { BehaviorCardDocument } from '../interfaces/own/behaviorCardDocument.interface';
+import { SidesDocumentModalPage } from '../sides-document-modal/sides-document-modal.page';
+import { HandleGenericTabButtonFotCardDocument } from '../interfaces/own/functions/handleGenericTapButtonForCardDocument.interface';
+import { BehaviorSideDocument } from '../interfaces/own/behaviorSideDocument.interface';
 import { HandleGenericTapButtonForSideDocument } from '../interfaces/own/functions/handleGenericTapButtonForSideDocument.interface';
 
 @Component({
@@ -16,7 +19,8 @@ export class DocumentBankPage implements OnInit {
   public cardDocuments: CardDocument[] = [];
   public behaviorCardDocument: BehaviorCardDocument;
   
-  constructor(private camera: Camera, private platform: Platform) {}
+  constructor(private camera: Camera, private platform: Platform,
+              private modalController: ModalController) {}
 
   ngOnInit() {
     this.getDocumentList();
@@ -56,20 +60,38 @@ export class DocumentBankPage implements OnInit {
    * @param void
    * @returns HandleGenericTapButtonForSideDocument
    */
-  private defineHandleTapButtonDetails(): HandleGenericTapButtonForSideDocument {
+  private defineHandleTapButtonDetails(): HandleGenericTabButtonFotCardDocument {
     return (cardDocument: CardDocument) => {
-      // const options: CameraOptions = {
-      //   'quality': 100,
-      //   'sourceType': this.camera.PictureSourceType.CAMERA,
-      //   'encodingType': this.camera.EncodingType.JPEG,
-      //   'destinationType': this.camera.DestinationType.DATA_URL,
-      //   'saveToPhotoAlbum': false,
-      //   'correctOrientation': true
-      // }
-      // this.camera.getPicture(options).then((imageData) => {
-      //   cardDocument.pathImageSticker = 'data:image/jpeg;base64,' + imageData;
-      // });
-      console.log('Working ...');
+      const behavior: BehaviorSideDocument = {
+        'handleTapButtonCamera': this.defineHandleTapButtonCamera(),
+        'handleTapButtonGalery': () => {},
+        'handleTapButtonComment': () => {}
+      };
+     
+      const sidesDocumentModal = this.modalController.create({
+        'component': SidesDocumentModalPage,
+        'componentProps': {
+          'cardDocument': cardDocument,
+          'behavior': behavior
+        }
+      });
+      return sidesDocumentModal;
+    }
+  }
+
+  private defineHandleTapButtonCamera(): HandleGenericTapButtonForSideDocument {
+    return (cardDocument: CardDocument) => {
+      const options: CameraOptions = {
+        'quality': 100,
+        'sourceType': this.camera.PictureSourceType.CAMERA,
+        'encodingType': this.camera.EncodingType.JPEG,
+        'destinationType': this.camera.DestinationType.DATA_URL,
+        'saveToPhotoAlbum': false,
+        'correctOrientation': true
+      }
+      this.camera.getPicture(options).then((imageData) => {
+        cardDocument.pathImageSticker = 'data:image/jpeg;base64,' + imageData;
+      });
     }
   }
 }

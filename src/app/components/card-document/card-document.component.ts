@@ -62,7 +62,9 @@ export class CardDocumentComponent implements OnInit {
    * @returns void
    */
   public handleTapButtonDetails() {
-    this.behavior.handleTapButtonDetails(this.cardDocument);
+    this.behavior.handleTapButtonDetails(this.cardDocument).then((modal: HTMLIonModalElement) => {
+      modal.present();
+    });
   }
 
   /**
@@ -72,7 +74,7 @@ export class CardDocumentComponent implements OnInit {
    * @param void
    * @returns void
    */
-  public handleErrorLoadImage(event) {
+  public handleErrorLoadImage(event): void {
     this.cardDocument.pathImageSticker = this.imgPlaceholder;
   }
 

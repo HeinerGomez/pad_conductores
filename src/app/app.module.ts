@@ -10,21 +10,22 @@ import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 /* Providers */
 import { NativeStorage } from '@ionic-native/native-storage/ngx';
 import { Camera } from '@ionic-native/camera/ngx';
+
 /* Modulos propios */
 import { GeneralModalPageModule } from './general-modal/general-modal.module';
 
-/* Pages */
+/* modal Pages */
 import { GeneralModalPage } from './general-modal/general-modal.page';
-
-/* Componentes */
-// import { ItemOfferComponent } from './components/item-offer/item-offer.component';
+import { SidesDocumentModalPage } from './sides-document-modal/sides-document-modal.page';
+import { SidesDocumentModalPageModule } from './sides-document-modal/sides-document-modal.module';
 
 @NgModule({
   declarations: [
     AppComponent
   ],
   entryComponents: [
-    GeneralModalPage
+    GeneralModalPage,
+    SidesDocumentModalPage
   ],
   imports: [
     BrowserModule, 
@@ -32,7 +33,8 @@ import { GeneralModalPage } from './general-modal/general-modal.page';
     AppRoutingModule,
     FormsModule,
     ReactiveFormsModule,
-    GeneralModalPageModule
+    GeneralModalPageModule,
+    SidesDocumentModalPageModule
   ],
   providers: [
     StatusBar,

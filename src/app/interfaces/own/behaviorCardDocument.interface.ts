@@ -1,5 +1,5 @@
-import { HandleGenericTapButtonForSideDocument } from './functions/handleGenericTapButtonForSideDocument.interface';
+import { HandleGenericTabButtonFotCardDocument } from './functions/handleGenericTapButtonForCardDocument.interface';
 
 export interface BehaviorCardDocument {
-    'handleTapButtonDetails': HandleGenericTapButtonForSideDocument
+    'handleTapButtonDetails': HandleGenericTabButtonFotCardDocument
 }
