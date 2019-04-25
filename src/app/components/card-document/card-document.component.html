@@ -3,8 +3,7 @@
    <ion-grid>
      <ion-row>
        <ion-col size="5">
-          <div container-img-thumbnail class="ion-activatable">
-            <ion-ripple-effect></ion-ripple-effect>
+          <div container-img-thumbnail>
             <ion-thumbnail>
               <ion-img img-sticker [src]="cardDocument.pathImageSticker" (ionError)="handleErrorLoadImage($event)"></ion-img>
             </ion-thumbnail>
@@ -33,23 +32,8 @@
              </ion-col>
            </ion-row>
            <ion-row>
-             <!-- <ion-col size="4">
-               <ion-button fill="clear" (click)="handleTapCameraButton()">
-                <ion-icon name="aperture" slot="icon-only" size="large" color="primary"></ion-icon>
-               </ion-button>
-             </ion-col>
-             <ion-col size="4">
-              <ion-button fill="clear" (click)="handleTapPictureButton()">
-                <ion-icon name="photos" slot="icon-only" size="large" color="primary"></ion-icon>
-              </ion-button>
-             </ion-col>
-             <ion-col size="4">
-              <ion-button fill="clear" (click)="handleTapCommentButton()">
-                <ion-icon name="chatboxes" slot="icon-only" size="large" color="primary"></ion-icon>
-              </ion-button>
-             </ion-col> -->
              <ion-col size="12">
-               <ion-button fill="outline" expand="block" size="small" color="secondary" (click)="handleTapButtonDetails()">
+               <ion-button fill="outline" expand="block" size="small" color="secondary" (click)="handleTapDetailsButton()">
                  DETALLES
                </ion-button>
              </ion-col>

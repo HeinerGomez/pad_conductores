@@ -8,6 +8,8 @@ import { SidesDocumentModalPage } from '../sides-document-modal/sides-document-m
 import { HandleGenericTabButtonFotCardDocument } from '../interfaces/own/functions/handleGenericTapButtonForCardDocument.interface';
 import { BehaviorSideDocument } from '../interfaces/own/behaviorSideDocument.interface';
 import { HandleGenericTapButtonForSideDocument } from '../interfaces/own/functions/handleGenericTapButtonForSideDocument.interface';
+import { SideDocument } from '../interfaces/own/sideDocument.interface';
+import { UtilitiesService } from '../services/utilities.service';
 
 @Component({
   selector: 'app-document-bank',
@@ -20,7 +22,7 @@ export class DocumentBankPage implements OnInit {
   public behaviorCardDocument: BehaviorCardDocument;
   
   constructor(private camera: Camera, private platform: Platform,
-              private modalController: ModalController) {}
+              private modalController: ModalController, private utilitiesService: UtilitiesService) {}
 
   ngOnInit() {
     this.getDocumentList();
@@ -48,7 +50,7 @@ export class DocumentBankPage implements OnInit {
    */
   private defineBehaviorForCardDocument(): BehaviorCardDocument {
     const behavior: BehaviorCardDocument = {
-      'handleTapButtonDetails': this.defineHandleTapButtonDetails()
+      'handleTapDetailsButton': this.defineHandleTapDetailsButton()
     }
     return behavior;
   }
@@ -60,12 +62,12 @@ export class DocumentBankPage implements OnInit {
    * @param void
    * @returns HandleGenericTapButtonForSideDocument
    */
-  private defineHandleTapButtonDetails(): HandleGenericTabButtonFotCardDocument {
+  private defineHandleTapDetailsButton(): HandleGenericTabButtonFotCardDocument {
     return (cardDocument: CardDocument) => {
       const behavior: BehaviorSideDocument = {
-        'handleTapButtonCamera': this.defineHandleTapButtonCamera(),
-        'handleTapButtonGalery': () => {},
-        'handleTapButtonComment': () => {}
+        'handleTapCameraButton': this.defineHandleTapButtonCamera(),
+        'handleTapGaleryButton': this.defineHandleTapButtonGalery(),
+        'handleTapCommentButton': this.defineHandleTapButtonComments()
       };
      
       const sidesDocumentModal = this.modalController.create({
@@ -79,19 +81,69 @@ export class DocumentBankPage implements OnInit {
     }
   }
 
+  /**
+   * @description Tiene como objetivo definir el manejador destinado para tomar la foto a un documento
+   * @author Heiner Gómez <alejandro.gomez@grupooet.com>
+   * @date 2019-04-23
+   * @param void
+   * @returns HandleGenericTapButtonForSideDocument
+   */
   private defineHandleTapButtonCamera(): HandleGenericTapButtonForSideDocument {
-    return (cardDocument: CardDocument) => {
+    return (side: SideDocument) => {
+      const cameraDirection = side.documentName == 'Foto Rostro' ? this.camera.Direction.FRONT : this.camera.Direction.BACK;
+      console.log('Camera Direction: ', cameraDirection);
       const options: CameraOptions = {
-        'quality': 100,
+        'quality': 40,
         'sourceType': this.camera.PictureSourceType.CAMERA,
+        'encodingType': this.camera.EncodingType.JPEG,
+        'destinationType': this.camera.DestinationType.DATA_URL,
+        'saveToPhotoAlbum': false,
+        'correctOrientation': false,
+        'cameraDirection': this.camera.Direction.BACK
+      }
+      this.camera.getPicture(options).then( imageData => {
+        side.pathImage = 'data:image/jpeg;base64,' + imageData;
+      });
+    }
+  }
+
+  /**
+   * @description Tiene como objetivo definir el manejador destinado para seleccionar una foto de la galeria
+   * @author Heiner Gómez <alejandro.gomez@grupooet.com>
+   * @date 2019-04-23
+   * @param void
+   * @returns HandleGenericTapButtonForSideDocument
+   */
+  private defineHandleTapButtonGalery(): HandleGenericTapButtonForSideDocument {
+    return (side: SideDocument) => {
+      const options: CameraOptions = {
+        'quality': 40,
+        'sourceType': this.camera.PictureSourceType.PHOTOLIBRARY,
         'encodingType': this.camera.EncodingType.JPEG,
         'destinationType': this.camera.DestinationType.DATA_URL,
         'saveToPhotoAlbum': false,
         'correctOrientation': true
       }
-      this.camera.getPicture(options).then((imageData) => {
-        cardDocument.pathImageSticker = 'data:image/jpeg;base64,' + imageData;
+      this.camera.getPicture(options).then( imageData => {
+        side.pathImage = 'data:image/jpeg;base64,' + imageData;
       });
+    }
+  }
+
+  /**
+   * @description Tiene como objetivo definir el manejador destinado para ver los comentarios asociados a una imagen
+   * @author Heiner Gómez <alejandro.gomez@grupooet.com>
+   * @date 2019-04-25
+   * @param void
+   * @returns HandleGenericTapButtonForSideDocument
+   */
+  private defineHandleTapButtonComments(): HandleGenericTapButtonForSideDocument {
+    return (side: SideDocument) => {
+      let comments = side.comments.toString();
+      if (comments == '') {
+        comments = 'No existen observaciones';
+      }
+      this.utilitiesService.showInfoAlert('Observaciones', comments);
     }
   }
 }

@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit, DoCheck } from '@angular/core';
 import { CardDocument } from 'src/app/interfaces/own/cardDocument.interface';
 import { BehaviorCardDocument } from 'src/app/interfaces/own/behaviorCardDocument.interface';
 
@@ -7,51 +7,42 @@ import { BehaviorCardDocument } from 'src/app/interfaces/own/behaviorCardDocumen
   templateUrl: './card-document.component.html',
   styleUrls: ['./card-document.component.scss'],
 })
-export class CardDocumentComponent implements OnInit {
+export class CardDocumentComponent implements OnInit, DoCheck {
 
   @Input('cardDocument') public cardDocument: CardDocument;
   @Input('behavior') private behavior: BehaviorCardDocument;
   private imgPlaceholder: String;
+  private imgPlaceholderSide: String;
 
   constructor() {
     this.imgPlaceholder = 'assets/imgs/img_placeholder_110_110.png';
+    this.imgPlaceholderSide = '../assets/imgs/img_placeholder_400_300.png';
   }
 
   ngOnInit() {
-    this.cardDocument.pathImageSticker = this.cardDocument.pathImageSticker == '' ? this.imgPlaceholder : this.cardDocument.pathImageSticker;
+    this.setImagePlaceholderIfNotImage();
   }
 
-   /**
-   * @description Tiene como objetivo manejar la logica de lo que sucede al momento de hacer click en el boton de "lente - camara"
-   * @author Heiner Gómez <alejandro.gomez@grupooet.com>
-   * @date 2019-04-22
-   * @param void
-   * @returns void
-   */
-  public handleTapCameraButton() {
-    // this.options.handleTapCameraButton(this.cardDocument);
+  ngDoCheck() {
+    this.setImagePlaceholderIfNotImage();
   }
 
   /**
-   * @description Tiene como objetivo manejar la logica de lo que sucede al momento de hacer click en el boton de "imagen - picture"
+   * @description Tiene como objetivo establecer una imagen placeholder en caso de que no se halla cargado ninguna imagen
    * @author Heiner Gómez <alejandro.gomez@grupooet.com>
-   * @date 2019-04-22
+   * @date 2019-04-25
    * @param void
    * @returns void
    */
-  public handleTapPictureButton() {
-    // this.options.handleTapPictureButton();
-  }
-
-  /**
-   * @description Tiene como objetivo manejar la logica de lo que sucede al momento de hacer click en el boton de "comentario - comment"
-   * @author Heiner Gómez <alejandro.gomez@grupooet.com>
-   * @date 2019-04-22
-   * @param void
-   * @returns void
-   */
-  public handleTapCommentButton() {
-    // this.options.handleTapCommentButton();
+  private setImagePlaceholderIfNotImage(): void {
+    for(const side of this.cardDocument.sides) {
+      if (side.pathImage != '' && side.pathImage != this.imgPlaceholderSide) {
+        this.cardDocument.pathImageSticker = side.pathImage;
+        break;
+      } else {
+        this.cardDocument.pathImageSticker = this.imgPlaceholder;
+      }
+    }
   }
  
   /**
@@ -61,8 +52,8 @@ export class CardDocumentComponent implements OnInit {
    * @param void
    * @returns void
    */
-  public handleTapButtonDetails() {
-    this.behavior.handleTapButtonDetails(this.cardDocument).then((modal: HTMLIonModalElement) => {
+  public handleTapDetailsButton() {
+    this.behavior.handleTapDetailsButton(this.cardDocument).then((modal: HTMLIonModalElement) => {
       modal.present();
     });
   }

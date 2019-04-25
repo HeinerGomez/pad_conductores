@@ -1,5 +1,5 @@
-import { CardDocument } from '../cardDocument.interface';
+import { SideDocument } from '../sideDocument.interface';
 
 export interface HandleGenericTapButtonForSideDocument {
-    (cardDocument: CardDocument): void | CardDocument
+    (side: SideDocument): void
 }
