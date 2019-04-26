@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { FORMREGEX } from '../regex/formRegex';
+import { ModalController } from '@ionic/angular';
 
 @Component({
   selector: 'app-personal-data-modal',
@@ -11,7 +12,7 @@ export class PersonalDataModalPage implements OnInit {
 
   public reactiveForm: FormGroup;
 
-  constructor(private formBuilder: FormBuilder) {
+  constructor(private formBuilder: FormBuilder, private modalController: ModalController) {
 
   }
 
@@ -49,6 +50,17 @@ export class PersonalDataModalPage implements OnInit {
         });
       } 
     }
+  }
+
+   /**
+   * @description Tiene como objetivo cerrar el modal
+   * @author Heiner Gómez <alejandro.gomez@grupooet.com>
+   * @date 2019-04-26
+   * @param void
+   * @returns void
+   */
+  public handleTapCloseButton(): void {
+    this.modalController.dismiss();
   }
 
 }

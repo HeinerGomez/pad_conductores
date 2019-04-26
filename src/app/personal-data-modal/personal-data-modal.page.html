@@ -1,8 +1,8 @@
 <ion-header>
   <ion-toolbar color="translucent">
     <ion-buttons slot="end">
-      <ion-button>
-        <ion-icon slot="icon-only" name="close" (click)="handleTapCloseButton()"></ion-icon>
+      <ion-button (click)="handleTapCloseButton()">
+        <ion-icon slot="icon-only" name="close" ></ion-icon>
       </ion-button>
     </ion-buttons>
   </ion-toolbar>
@@ -76,7 +76,7 @@
           <ion-col size="6">
             <ion-item>
               <ion-label position="floating">Nº Whatsapp</ion-label>
-              <ion-input type="number" name="whatsapp" formControlName="whatsapp"></ion-input>
+              <ion-input type="number" name="whatsapp" (ionChange)="handleChangeCellphone()" formControlName="whatsapp"></ion-input>
             </ion-item>
             <small errorText *ngIf="reactiveForm.get('whatsapp').invalid &&
                                     reactiveForm.get('whatsapp').hasError('required') &&
