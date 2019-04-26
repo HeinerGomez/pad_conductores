@@ -1,0 +1,73 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title text-center>Perfil</ion-title>
+    <ion-back-button></ion-back-button>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div border-bottom>
+    <ion-grid>
+      <ion-row>
+        <ion-col size="4">
+          <div container-content-center>
+            <img src="assets/imgs/person.png" img-profile />
+          </div>
+        </ion-col>
+        <ion-col size="8">
+          <ion-grid>
+            <ion-row>
+              <ion-col size="12">
+                Heiner Alejandro Gómez
+              </ion-col>              
+            </ion-row>
+            <ion-row>
+              <ion-col size="12">
+                <ion-badge color="success">Calificación Promedio: </ion-badge>
+              </ion-col>
+            </ion-row>
+            <ion-row>
+              <ion-col size="12">
+                <ion-icon name="star" size="large" color="secondary"></ion-icon>
+                <ion-icon name="star" size="large" color="secondary"></ion-icon>
+                <ion-icon name="star" size="large" color="secondary"></ion-icon>
+                <ion-icon name="star" size="large" color="secondary"></ion-icon>
+                <ion-icon name="star-half" size="large" color="secondary"></ion-icon>
+              </ion-col>
+            </ion-row>
+            <ion-row>
+              <ion-col size="12">
+                <ion-badge color="success">Capacidad disponible: </ion-badge>
+              </ion-col>
+            </ion-row>
+            <ion-row>
+              <ion-col size="12">
+                <ion-icon src="assets/imgs/weight.svg" icon-md></ion-icon>
+                <ion-badge color="primary" [ngStyle]="{'margin-left': '20px'}">
+                  0 (Tn)
+                </ion-badge>
+              </ion-col>
+            </ion-row>
+          </ion-grid>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </div>
+  <div>
+    <ion-list>
+      <ion-item button>
+        <ion-icon name="person" slot="start" color="tertiary"></ion-icon>
+        <ion-label>Datos personales</ion-label>
+      </ion-item>
+      <ion-item button>
+        <ion-icon name="lock" slot="start" color="secondary"></ion-icon>
+        <ion-label>Cambio de contraseña</ion-label>
+      </ion-item>
+      <ion-item button>
+        <ion-icon name="paper" slot="start" color="success"></ion-icon>
+        <ion-label>Acerca de</ion-label>
+      </ion-item>
+    </ion-list>
+  </div>
+</ion-content>
+<!-- [ngStyle]="{'border': '1px solid red'}" -->

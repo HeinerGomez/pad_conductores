@@ -1,0 +1,21 @@
+[img-profile] {
+    height: 128px;
+    width: 128px;
+    border-radius: 50%;
+}
+
+[container-content-center] {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+[icon-md] {
+    font-size: 64px;
+}
+
+[border-bottom] {
+    border-bottom: 1px solid var(--ion-color-medium-tint);
+}
