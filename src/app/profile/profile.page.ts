@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { ModalController } from '@ionic/angular';
+import { PersonalDataModalPage } from '../personal-data-modal/personal-data-modal.page';
 
 @Component({
   selector: 'app-profile',
@@ -7,9 +9,17 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ProfilePage implements OnInit {
 
-  constructor() { }
+  constructor(private modalController: ModalController) { }
 
   ngOnInit() {
+  }
+
+  public async handleTapButtonPersonalData() {
+    const modal = await this.modalController.create({
+      'component': PersonalDataModalPage,
+      'componentProps': {}
+    });
+    modal.present();
   }
 
 }

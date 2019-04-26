@@ -1,0 +1,114 @@
+<ion-header>
+  <ion-toolbar color="translucent">
+    <ion-buttons slot="end">
+      <ion-button>
+        <ion-icon slot="icon-only" name="close" (click)="handleTapCloseButton()"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content padding>
+  <div text-center>
+    <img src="assets/imgs/resume.png" width="150">
+  </div>
+  <div [ngStyle]="{'margin-top':'10%', 'text-align':'center'}">
+    <h2>Mis Datos</h2>
+    <hr>
+    <form [formGroup]="reactiveForm">
+      <ion-grid>
+        <ion-row>
+          <ion-col size="12">
+            <ion-item>
+              <ion-label position="floating">Nombres</ion-label>
+              <ion-input type="text" name="names" formControlName="names"></ion-input>
+            </ion-item>
+            <small errorText *ngIf="reactiveForm.get('names').invalid &&
+                                    reactiveForm.get('names').hasError('required') &&
+                                    reactiveForm.get('names').touched">
+              * Este campo es obligatorio
+            </small>
+            <small errorText *ngIf="reactiveForm.get('names').invalid &&
+                                    reactiveForm.get('names').hasError('pattern') &&
+                                    reactiveForm.get('names').touched">
+              * Nombres invalidos
+            </small>
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col size="12">
+            <ion-item>
+              <ion-label position="floating">Primer Apellido</ion-label>
+              <ion-input type="text" name="firstSurname" formControlName="firstSurname"></ion-input>
+            </ion-item>
+            <small errorText *ngIf="reactiveForm.get('firstSurname').invalid &&
+                                    reactiveForm.get('firstSurname').hasError('required') &&
+                                    reactiveForm.get('firstSurname').touched">
+              * Este campo es obligatorio
+            </small>
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col size="12">
+            <ion-item>
+              <ion-label position="floating">Segundo Apellido</ion-label>
+              <ion-input type="text" name="secondSurname" formControlName="secondSurname"></ion-input>
+            </ion-item>
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col size="6">
+            <ion-item>
+              <ion-label position="floating">Nº Celular</ion-label>
+              <ion-input type="number" (ionChange)="handleChangeCellphone()" name="cellphone" formControlName="cellphone"></ion-input>
+            </ion-item>
+            <small errorText *ngIf="reactiveForm.get('cellphone').invalid &&
+                                    reactiveForm.get('cellphone').hasError('required') &&
+                                    reactiveForm.get('cellphone').touched">
+              * Este campo es obligatorio
+            </small>
+            <small errorText *ngIf="reactiveForm.get('cellphone').invalid &&
+                                    reactiveForm.get('cellphone').hasError('pattern') &&
+                                    reactiveForm.get('cellphone').touched">
+              * Teléfono invalido
+            </small>
+          </ion-col>
+          <ion-col size="6">
+            <ion-item>
+              <ion-label position="floating">Nº Whatsapp</ion-label>
+              <ion-input type="number" name="whatsapp" formControlName="whatsapp"></ion-input>
+            </ion-item>
+            <small errorText *ngIf="reactiveForm.get('whatsapp').invalid &&
+                                    reactiveForm.get('whatsapp').hasError('required') &&
+                                    reactiveForm.get('whatsapp').touched">
+              * Este campo es obligatorio
+            </small>
+            <small errorText *ngIf="reactiveForm.get('whatsapp').invalid &&
+                                    reactiveForm.get('whatsapp').hasError('pattern') &&
+                                    reactiveForm.get('whatsapp').touched">
+              * Whatsapp invalido
+            </small>
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col size="12">
+            <ion-item>
+              <ion-label position="floating">Correo electrónico</ion-label>
+              <ion-input type="text" name="email" formControlName="email"></ion-input>
+            </ion-item>
+            <small errorText *ngIf="reactiveForm.get('email').invalid &&
+                                    reactiveForm.get('email').hasError('pattern') &&
+                                    reactiveForm.get('email').touched">
+              * Email invalido
+            </small>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </form>
+  </div>
+</ion-content>
+<ion-footer>
+  <ion-button color="secondary" expand="block" [disabled]="reactiveForm.invalid">
+    CAMBIAR
+  </ion-button>
+</ion-footer>

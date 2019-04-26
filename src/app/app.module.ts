@@ -18,6 +18,8 @@ import { GeneralModalPageModule } from './general-modal/general-modal.module';
 import { GeneralModalPage } from './general-modal/general-modal.page';
 import { SidesDocumentModalPage } from './sides-document-modal/sides-document-modal.page';
 import { SidesDocumentModalPageModule } from './sides-document-modal/sides-document-modal.module';
+import { PersonalDataModalPageModule } from './personal-data-modal/personal-data-modal.module';
+import { PersonalDataModalPage } from './personal-data-modal/personal-data-modal.page';
 
 @NgModule({
   declarations: [
@@ -25,7 +27,8 @@ import { SidesDocumentModalPageModule } from './sides-document-modal/sides-docum
   ],
   entryComponents: [
     GeneralModalPage,
-    SidesDocumentModalPage
+    SidesDocumentModalPage,
+    PersonalDataModalPage
   ],
   imports: [
     BrowserModule, 
@@ -34,7 +37,8 @@ import { SidesDocumentModalPageModule } from './sides-document-modal/sides-docum
     FormsModule,
     ReactiveFormsModule,
     GeneralModalPageModule,
-    SidesDocumentModalPageModule
+    SidesDocumentModalPageModule,
+    PersonalDataModalPageModule
   ],
   providers: [
     StatusBar,
