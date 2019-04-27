@@ -16,7 +16,8 @@ const routes: Routes = [
   { path: 'detail-offer', loadChildren: './detail-offer/detail-offer.module#DetailOfferPageModule' },
   { path: 'document-bank', loadChildren: './document-bank/document-bank.module#DocumentBankPageModule' },  { path: 'sides-document-modal', loadChildren: './sides-document-modal/sides-document-modal.module#SidesDocumentModalPageModule' },
   { path: 'profile', loadChildren: './profile/profile.module#ProfilePageModule' },
-  { path: 'personal-data-modal', loadChildren: './personal-data-modal/personal-data-modal.module#PersonalDataModalPageModule' }
+  { path: 'personal-data-modal', loadChildren: './personal-data-modal/personal-data-modal.module#PersonalDataModalPageModule' },
+  { path: 'about-modal', loadChildren: './about-modal/about-modal.module#AboutModalPageModule' }
 
 ];
 

@@ -1,0 +1,33 @@
+<ion-header>
+  <ion-toolbar color="translucent">
+    <ion-buttons slot="end">
+      <ion-button (click)="handleTapCloseButton()">
+        <ion-icon slot="icon-only" name="close" ></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content padding>
+  <div text-center>
+    <img src="assets/imgs/wishlist.png" width="150">
+  </div>
+  <div [ngStyle]="{'margin-top':'10%', 'text-align':'center'}">
+    <h2>Detalles de la aplicación</h2>
+    <hr>
+    <ion-list>
+      <ion-item>
+        <b>Versión:</b> <span> 1.0.0</span>
+      </ion-item>
+      <ion-item>
+        <b>Tecnologia:</b> <span> Ionic <small>( 4.0 )</small></span>
+      </ion-item>
+      <ion-item>
+        <b>Telefono Soporte:</b> <span >742 - 90 - 02</span>
+      </ion-item>
+      <ion-item>
+        <b>Correo: </b><span> mesadeapoyo@eltransporte.org</span>
+      </ion-item>
+    </ion-list>
+  </div>
+</ion-content>

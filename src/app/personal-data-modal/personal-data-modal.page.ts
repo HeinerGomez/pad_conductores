@@ -20,6 +20,13 @@ export class PersonalDataModalPage implements OnInit {
     this.reactiveForm = this.defineReactiveForm();
   }
 
+  /**
+   * @description Tiene como objetivo definir el formulario reactivo que se va a utilizar
+   * @author Heiner Gómez <alejandro.gomez@grupooet.com>
+   * @date 2019-04-26
+   * @param void
+   * @returns FormGroup
+   */
   private defineReactiveForm(): FormGroup {
     return this.formBuilder.group({
       'names': ['', [Validators.required, Validators.pattern(`${FORMREGEX.textWithSpaces}`)]],
