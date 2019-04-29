@@ -22,6 +22,8 @@ import { PersonalDataModalPageModule } from './personal-data-modal/personal-data
 import { PersonalDataModalPage } from './personal-data-modal/personal-data-modal.page';
 import { AboutModalPage } from './about-modal/about-modal.page';
 import { AboutModalPageModule } from './about-modal/about-modal.module';
+import { ChangePasswordModalPage } from './change-password-modal/change-password-modal.page';
+import { ChangePasswordModalPageModule } from './change-password-modal/change-password-modal.module';
 
 @NgModule({
   declarations: [
@@ -31,7 +33,8 @@ import { AboutModalPageModule } from './about-modal/about-modal.module';
     GeneralModalPage,
     SidesDocumentModalPage,
     PersonalDataModalPage,
-    AboutModalPage
+    AboutModalPage,
+    ChangePasswordModalPage
   ],
   imports: [
     BrowserModule, 
@@ -42,7 +45,8 @@ import { AboutModalPageModule } from './about-modal/about-modal.module';
     GeneralModalPageModule,
     SidesDocumentModalPageModule,
     PersonalDataModalPageModule,
-    AboutModalPageModule
+    AboutModalPageModule,
+    ChangePasswordModalPageModule
   ],
   providers: [
     StatusBar,

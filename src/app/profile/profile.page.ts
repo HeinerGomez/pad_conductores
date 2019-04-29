@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ModalController } from '@ionic/angular';
 import { PersonalDataModalPage } from '../personal-data-modal/personal-data-modal.page';
 import { AboutModalPage } from '../about-modal/about-modal.page';
+import { ChangePasswordModalPage } from '../change-password-modal/change-password-modal.page';
 
 @Component({
   selector: 'app-profile',
@@ -40,6 +41,21 @@ export class ProfilePage implements OnInit {
   public async handleTapButtonAbout() {
     const modal = await this.modalController.create({
       'component': AboutModalPage,
+      'componentProps': {}
+    });
+    modal.present();
+  }
+
+  /**
+   * @description Tiene como objetivo abrir el modal para el cambio de contraseña
+   * @author Heiner Gómez <alejandro.gomez@grupooet.com>
+   * @date 2019-04-27
+   * @param void
+   * @returns void
+   */
+  public async handleTapButtonChangePassword() {
+    const modal = await this.modalController.create({
+      'component': ChangePasswordModalPage,
       'componentProps': {}
     });
     modal.present();

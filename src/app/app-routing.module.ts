@@ -17,7 +17,8 @@ const routes: Routes = [
   { path: 'document-bank', loadChildren: './document-bank/document-bank.module#DocumentBankPageModule' },  { path: 'sides-document-modal', loadChildren: './sides-document-modal/sides-document-modal.module#SidesDocumentModalPageModule' },
   { path: 'profile', loadChildren: './profile/profile.module#ProfilePageModule' },
   { path: 'personal-data-modal', loadChildren: './personal-data-modal/personal-data-modal.module#PersonalDataModalPageModule' },
-  { path: 'about-modal', loadChildren: './about-modal/about-modal.module#AboutModalPageModule' }
+  { path: 'about-modal', loadChildren: './about-modal/about-modal.module#AboutModalPageModule' },
+  { path: 'change-password-modal', loadChildren: './change-password-modal/change-password-modal.module#ChangePasswordModalPageModule' }
 
 ];
 
