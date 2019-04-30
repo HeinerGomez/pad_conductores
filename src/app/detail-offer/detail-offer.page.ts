@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { UtilitiesService } from '../services/utilities.service';
 import { ParamsOfDetailOffer } from '../interfaces/own/paramsOfDetailOffer.interface';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { OFFER } from '../constants/offers.constants';
 
 @Component({
@@ -11,15 +11,13 @@ import { OFFER } from '../constants/offers.constants';
 })
 export class DetailOfferPage {
 
-  // private params: ParamsOfDetailOffer;
   public shouldShowButtonAcceptOffer: boolean;
   public shouldShowButtonCancelOffer: boolean; 
   public shouldShowButtonFulfilled: boolean;
 
-  constructor(private utilitiesService: UtilitiesService, private activatedRoute: ActivatedRoute) {
+  constructor(private utilitiesService: UtilitiesService, private activatedRoute: ActivatedRoute, 
+              private router: Router) {
     this.activatedRoute.params.subscribe( (params: ParamsOfDetailOffer) => {
-      // this.params = params;
-      console.log("Params: ", params);
       this.shouldShowButtonAcceptOffer = OFFER.ORIGIN_AVAILABLE == params.origin ? true : false;
       this.shouldShowButtonCancelOffer = OFFER.ORIGIN_APPLIED == params.origin ? true : false;
       this.shouldShowButtonFulfilled = OFFER.ORIGIN_CONFIRMED == params.origin ? true : false;
@@ -56,7 +54,7 @@ export class DetailOfferPage {
    * @returns void
    */
   public handleTapFulfilledOffer(): void {
-    this.utilitiesService.showInfoAlert('Oferta Cumplida', 'Se ha cumplido la oferta a la oferta correctamente');
+    this.router.navigate(['fulfilled-offer']);
   }
 
 }
