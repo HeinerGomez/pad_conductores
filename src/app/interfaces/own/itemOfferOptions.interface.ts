@@ -1,4 +1,4 @@
 export interface ItemOfferOptions {
     'handleTapItemOffer': () => void,
-    'handleTapButtonArchive': () => void
+    'handleTapButtonArchive'?: () => void
 }

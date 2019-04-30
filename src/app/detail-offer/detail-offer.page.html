@@ -142,7 +142,13 @@
   </div>
 </ion-content>
 <ion-footer>
-  <ion-button color="success" (click)="handleTapAcceptOffer()" expand="block">
+  <ion-button *ngIf="shouldShowButtonAcceptOffer" color="success" (click)="handleTapAcceptOffer()" expand="block">
     ACEPTAR OFERTA
+  </ion-button>
+  <ion-button *ngIf="shouldShowButtonCancelOffer" color="danger" (click)="handleTapCancelOffer()" expand="block">
+    CANCELAR OFERTA
+  </ion-button>
+  <ion-button *ngIf="shouldShowButtonFulfilled" color="success" (click)="handleTapFulfilledOffer()" expand="block">
+    CUMPLIR OFERTA
   </ion-button>
 </ion-footer>

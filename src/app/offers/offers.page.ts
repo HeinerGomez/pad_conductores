@@ -6,6 +6,8 @@ import { UtilitiesService } from '../services/utilities.service';
 import { ItemOffer } from '../interfaces/own/itemOffer.interf';
 import { MenuController } from '@ionic/angular';
 import { ItemOfferOptions } from '../interfaces/own/itemOfferOptions.interface';
+import { ParamsOfDetailOffer } from '../interfaces/own/paramsOfDetailOffer.interface';
+import { OFFER } from '../constants/offers.constants';
 
 @Component({
   selector: 'app-offers',
@@ -30,7 +32,8 @@ export class OffersPage implements OnInit {
       'loadDate': '2019-04-15',
       'loadTime': '17:45',
       'agoTime': 38,
-      'vacancy': 10
+      'vacancy': 10,
+      'fulfilled': false
     });
     this.items.push({
       'originCity': 'BOGOTA',
@@ -40,7 +43,8 @@ export class OffersPage implements OnInit {
       'loadDate': '2019-05-11',
       'loadTime': '17:15',
       'agoTime': 40,
-      'vacancy': 30
+      'vacancy': 30,
+      'fulfilled': false
     });
     this.items.push({
       'originCity': 'BARRANQUILLA',
@@ -50,7 +54,8 @@ export class OffersPage implements OnInit {
       'loadDate': '2019-04-13',
       'loadTime': '10:45',
       'agoTime': 10,
-      'vacancy': 3
+      'vacancy': 3,
+      'fulfilled': false
     });
     this.items.push({
       'originCity': 'BOGOTA',
@@ -60,7 +65,8 @@ export class OffersPage implements OnInit {
       'loadDate': '2019-04-12',
       'loadTime': '17:45',
       'agoTime': 55,
-      'vacancy': 7
+      'vacancy': 7,
+      'fulfilled': false
     });
     this.items.push({
       'originCity': 'CARTAGENA',
@@ -70,7 +76,8 @@ export class OffersPage implements OnInit {
       'loadDate': '2019-04-17',
       'loadTime': '18:45',
       'agoTime': 31,
-      'vacancy': 1
+      'vacancy': 1,
+      'fulfilled': false
     });
     this.items.push({
       'originCity': 'BARRANQUILLA',
@@ -80,7 +87,8 @@ export class OffersPage implements OnInit {
       'loadDate': '2019-04-11',
       'loadTime': '11:45',
       'agoTime': 10,
-      'vacancy': 2
+      'vacancy': 2,
+      'fulfilled': false
     });
   }
 
@@ -88,10 +96,21 @@ export class OffersPage implements OnInit {
     
   }
 
+  /**
+   * @description Tiene como objetivo definir las opciones(opciones, funciones), que tienen asociados al componente "ItemOffer"
+   * @author Heiner Gómez <alejandro.gomez@grupooet.com>
+   * @date 2019-04-29
+   * @param event
+   * @returns void
+   */
   private defineItemOptions(): ItemOfferOptions {
+    const params: ParamsOfDetailOffer = {
+      'origin': OFFER.ORIGIN_AVAILABLE,
+      'buttonArchive': true
+    };
     return {
       'handleTapItemOffer': () => {
-        this.router.navigate(['/detail-offer']);
+        this.router.navigate(['/detail-offer', params]);
       },
       'handleTapButtonArchive': () => {
         console.log("Archivado");

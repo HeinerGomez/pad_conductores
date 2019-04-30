@@ -6,5 +6,6 @@ export interface ItemOffer {
     'loadDate': String,
     'loadTime': String,
     'agoTime': number,
-    'vacancy': number | String
+    'vacancy': number | String,
+    'fulfilled': boolean
 }
