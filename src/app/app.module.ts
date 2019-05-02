@@ -24,6 +24,8 @@ import { AboutModalPage } from './about-modal/about-modal.page';
 import { AboutModalPageModule } from './about-modal/about-modal.module';
 import { ChangePasswordModalPage } from './change-password-modal/change-password-modal.page';
 import { ChangePasswordModalPageModule } from './change-password-modal/change-password-modal.module';
+import { RatingServiceCompanyModalPage } from './rating-service-company-modal/rating-service-company-modal.page';
+import { RatingServiceCompanyModalPageModule } from './rating-service-company-modal/rating-service-company-modal.module';
 
 @NgModule({
   declarations: [
@@ -34,7 +36,8 @@ import { ChangePasswordModalPageModule } from './change-password-modal/change-pa
     SidesDocumentModalPage,
     PersonalDataModalPage,
     AboutModalPage,
-    ChangePasswordModalPage
+    ChangePasswordModalPage,
+    RatingServiceCompanyModalPage
   ],
   imports: [
     BrowserModule, 
@@ -46,7 +49,8 @@ import { ChangePasswordModalPageModule } from './change-password-modal/change-pa
     SidesDocumentModalPageModule,
     PersonalDataModalPageModule,
     AboutModalPageModule,
-    ChangePasswordModalPageModule
+    ChangePasswordModalPageModule,
+    RatingServiceCompanyModalPageModule
   ],
   providers: [
     StatusBar,

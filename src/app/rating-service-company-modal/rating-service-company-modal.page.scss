@@ -1,0 +1,8 @@
+.header::after {
+    background-image: none;
+}
+
+[bottom-divider] {
+    border-bottom: 1px solid var(--ion-color-medium-tint);
+    margin-top: 5px;
+}

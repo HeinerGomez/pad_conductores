@@ -3,6 +3,8 @@ import { UtilitiesService } from '../services/utilities.service';
 import { ParamsOfDetailOffer } from '../interfaces/own/paramsOfDetailOffer.interface';
 import { ActivatedRoute, Router } from '@angular/router';
 import { OFFER } from '../constants/offers.constants';
+import { ModalController } from '@ionic/angular';
+import { RatingServiceCompanyModalPage } from '../rating-service-company-modal/rating-service-company-modal.page';
 
 @Component({
   selector: 'app-detail-offer',
@@ -17,7 +19,7 @@ export class DetailOfferPage {
   public shouldShowButtonServiceRating: boolean;
 
   constructor(private utilitiesService: UtilitiesService, private activatedRoute: ActivatedRoute, 
-              private router: Router) {
+              private router: Router, private modalController: ModalController) {
     this.activatedRoute.params.subscribe( (params: ParamsOfDetailOffer) => {
       this.shouldShowButtonAcceptOffer = OFFER.ORIGIN_AVAILABLE == params.origin ? true : false;
       this.shouldShowButtonCancelOffer = OFFER.ORIGIN_APPLIED == params.origin ? true : false;
@@ -62,12 +64,15 @@ export class DetailOfferPage {
    /**
    * @description Tiene como objetivo manejar la logica asociada a hacer click en cumplir oferta
    * @author Heiner Gómez <alejandro.gomez@grupooet.com>
-   * @date 2019-04-30
+   * @date 2019-05-02
    * @param void
    * @returns void
    */
-  public handleTapServiceRating(): void {
-    // this.router.navigate(['rating-service-company']);
+  public async handleTapServiceRating() {
+    const modal = await this.modalController.create({
+      'component': RatingServiceCompanyModalPage,
+    });
+    modal.present();
   }
 
 }
