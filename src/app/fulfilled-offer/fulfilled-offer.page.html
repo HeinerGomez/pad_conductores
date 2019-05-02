@@ -7,4 +7,44 @@
 
 <ion-content padding>
   <h3 text-center>Firma</h3>
+  <ion-grid>
+    <ion-row>
+      <ion-col size="12">
+        <div contentSignature>
+          <signature-pad [options]="signaturePadOptions" (onBeginEvent)="handleStartDraw()" (onEndEvent)="handleDrawComplete()"></signature-pad>
+        </div>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col size="12" text-right>
+       <ion-button fill="clear" (click)="handleTapClearSignature()">
+        <ion-icon color="danger" name="trash" size="large"></ion-icon>
+       </ion-button>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+  <ion-item button>
+    <ion-label position="floating">
+      Observaciones
+    </ion-label>
+    <ion-textarea name="observations" row="5" col="5"></ion-textarea>
+  </ion-item>
+  <ion-grid m-top-20>
+    <ion-row>
+      <ion-col>
+        <div container-center class="ion-activatable" (click)="handleTapCamera()">
+          <ion-ripple-effect></ion-ripple-effect>
+          <ion-thumbnail stickerMedium>
+            <img [src]="imagePlaceholder"  />
+          </ion-thumbnail>
+        </div>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
 </ion-content>
+<ion-footer>
+  <ion-button color="success" expand="block" (click)="handleTapButtonFulfilled()">
+    CUMPLIR
+  </ion-button>
+</ion-footer>
+

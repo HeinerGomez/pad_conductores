@@ -1,0 +1,14 @@
+[contentSignature] {
+    border: 1px solid var(--ion-color-medium-tint);
+    border-radius: 10px;
+}
+
+[stickerMedium] {
+    --size: 128px;
+}
+
+[container-center] {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
