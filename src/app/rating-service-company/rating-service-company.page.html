@@ -1,0 +1,12 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title text-center>Calificación del viaje</ion-title>
+    <ion-back-button></ion-back-button>    
+  </ion-toolbar>
+</ion-header>
+
+<ion-content padding>
+  <ion-list lines="none">
+    <app-item-offer *ngFor="let item of items" [itemOffer]="item" [options]="itemOptions"></app-item-offer>
+  </ion-list>
+</ion-content>

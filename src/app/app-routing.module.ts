@@ -20,7 +20,8 @@ const routes: Routes = [
   { path: 'personal-data-modal', loadChildren: './personal-data-modal/personal-data-modal.module#PersonalDataModalPageModule' },
   { path: 'about-modal', loadChildren: './about-modal/about-modal.module#AboutModalPageModule' },
   { path: 'change-password-modal', loadChildren: './change-password-modal/change-password-modal.module#ChangePasswordModalPageModule' },
-  { path: 'fulfilled-offer', loadChildren: './fulfilled-offer/fulfilled-offer.module#FulfilledOfferPageModule' }
+  { path: 'fulfilled-offer', loadChildren: './fulfilled-offer/fulfilled-offer.module#FulfilledOfferPageModule' },  { path: 'rating-service-company', loadChildren: './rating-service-company/rating-service-company.module#RatingServiceCompanyPageModule' }
+
 
 ];
 

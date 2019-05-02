@@ -14,6 +14,7 @@ export class DetailOfferPage {
   public shouldShowButtonAcceptOffer: boolean;
   public shouldShowButtonCancelOffer: boolean; 
   public shouldShowButtonFulfilled: boolean;
+  public shouldShowButtonServiceRating: boolean;
 
   constructor(private utilitiesService: UtilitiesService, private activatedRoute: ActivatedRoute, 
               private router: Router) {
@@ -21,6 +22,7 @@ export class DetailOfferPage {
       this.shouldShowButtonAcceptOffer = OFFER.ORIGIN_AVAILABLE == params.origin ? true : false;
       this.shouldShowButtonCancelOffer = OFFER.ORIGIN_APPLIED == params.origin ? true : false;
       this.shouldShowButtonFulfilled = OFFER.ORIGIN_CONFIRMED == params.origin ? true : false;
+      this.shouldShowButtonServiceRating = OFFER.ORIGIN_FULFILLED == params.origin ? true : false;
     });
   }
 
@@ -55,6 +57,17 @@ export class DetailOfferPage {
    */
   public handleTapFulfilledOffer(): void {
     this.router.navigate(['fulfilled-offer']);
+  }
+
+   /**
+   * @description Tiene como objetivo manejar la logica asociada a hacer click en cumplir oferta
+   * @author Heiner Gómez <alejandro.gomez@grupooet.com>
+   * @date 2019-04-30
+   * @param void
+   * @returns void
+   */
+  public handleTapServiceRating(): void {
+    // this.router.navigate(['rating-service-company']);
   }
 
 }
