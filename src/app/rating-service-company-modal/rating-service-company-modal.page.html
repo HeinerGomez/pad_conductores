@@ -23,7 +23,7 @@
           <div bottom-divider></div>
         </ion-col>
         <ion-col size="2" *ngFor="let star of question.stars; let i = index;">
-          <img [src]="star.path" width="45" />
+          <img [src]="star.path" width="45" (click)="handleTapStar(question, star)"/>
         </ion-col>
       </ion-row>
       <ion-row>
@@ -37,7 +37,7 @@
     </ion-grid>
   </form>
   <ion-fab vertical="bottom" horizontal="end" slot="fixed">
-    <ion-fab-button color="success">
+    <ion-fab-button color="success" [disabled]="!isValidServiceRating">
       <ion-icon name="send"></ion-icon>
     </ion-fab-button>
   </ion-fab>
