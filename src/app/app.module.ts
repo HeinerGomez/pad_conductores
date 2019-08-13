@@ -12,20 +12,20 @@ import { NativeStorage } from '@ionic-native/native-storage/ngx';
 import { Camera } from '@ionic-native/camera/ngx';
 
 /* Modulos propios */
-import { GeneralModalPageModule } from './general-modal/general-modal.module';
+import { GeneralModalPageModule } from './modals/general-modal/general-modal.module';
 
 /* modal Pages */
-import { GeneralModalPage } from './general-modal/general-modal.page';
-import { SidesDocumentModalPage } from './sides-document-modal/sides-document-modal.page';
-import { SidesDocumentModalPageModule } from './sides-document-modal/sides-document-modal.module';
-import { PersonalDataModalPageModule } from './personal-data-modal/personal-data-modal.module';
-import { PersonalDataModalPage } from './personal-data-modal/personal-data-modal.page';
-import { AboutModalPage } from './about-modal/about-modal.page';
-import { AboutModalPageModule } from './about-modal/about-modal.module';
-import { ChangePasswordModalPage } from './change-password-modal/change-password-modal.page';
-import { ChangePasswordModalPageModule } from './change-password-modal/change-password-modal.module';
-import { RatingServiceCompanyModalPage } from './rating-service-company-modal/rating-service-company-modal.page';
-import { RatingServiceCompanyModalPageModule } from './rating-service-company-modal/rating-service-company-modal.module';
+import { GeneralModalPage } from './modals/general-modal/general-modal.page';
+import { SidesDocumentModalPage } from './modals/sides-document-modal/sides-document-modal.page';
+import { SidesDocumentModalPageModule } from './modals/sides-document-modal/sides-document-modal.module';
+import { PersonalDataModalPageModule } from './modals/personal-data-modal/personal-data-modal.module';
+import { PersonalDataModalPage } from './modals/personal-data-modal/personal-data-modal.page';
+import { AboutModalPage } from './modals/about-modal/about-modal.page';
+import { AboutModalPageModule } from './modals/about-modal/about-modal.module';
+import { ChangePasswordModalPage } from './modals/change-password-modal/change-password-modal.page';
+import { ChangePasswordModalPageModule } from './modals/change-password-modal/change-password-modal.module';
+import { RatingServiceCompanyModalPage } from './modals/rating-service-company-modal/rating-service-company-modal.page';
+import { RatingServiceCompanyModalPageModule } from './modals/rating-service-company-modal/rating-service-company-modal.module';
 
 @NgModule({
   declarations: [

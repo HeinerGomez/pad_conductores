@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { Platform, MenuController } from '@ionic/angular';
+import { Platform, MenuController, NavController } from '@ionic/angular';
 import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
 import { Router } from '@angular/router';
@@ -16,7 +16,8 @@ export class AppComponent {
     private statusBar: StatusBar,
     private router: Router,
     private menuController: MenuController,
-    private authService: AuthService
+    private authService: AuthService,
+    private navController: NavController
   ) {
     this.menuController.enable(false);
     this.initializeApp();
@@ -40,12 +41,12 @@ export class AppComponent {
     this.menuController.close();
     if (route == '/home') {
       this.authService.UnAuhenticated().then(() => {
-        this.router.navigate([route]).then(() => {
+        this.navController.navigateRoot(`${route}`).then(() => {
           this.menuController.enable(false);
         });
       });
     } else {
-      this.router.navigate([route]);
+      this.navController.navigateRoot([`${route}`]);
     }
   }
 }
