@@ -102,6 +102,54 @@
           </ion-col>
         </ion-row>
         <ion-row>
+          <ion-col size="6">
+            <ion-item>
+              <ion-label position="floating">Contraseña</ion-label>
+              <ion-input type="password" name="password" formControlName="password" ></ion-input>
+            </ion-item>
+            <small errorText *ngIf="reactiveForm.get('password').invalid &&
+                                    reactiveForm.get('password').touched">
+              * Contraseña invalida
+            </small>
+          </ion-col>
+          <ion-col size="6">
+            <ion-item>
+              <ion-label position="floating">Contraseña <small>repetir</small></ion-label>
+              <ion-input type="password" name="repeatPassword" formControlName="repeatPassword" ></ion-input>
+            </ion-item>
+            <small errorText *ngIf="reactiveForm.get('repeatPassword').invalid &&
+                                    reactiveForm.get('repeatPassword').touched">
+              * Las contraseñas con coinciden
+            </small>
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col size="12">
+            <ion-item>
+              <ion-label position="floating">Pregunta de seguridad</ion-label>
+              <ion-select name="securityQuestion" formControlName="securityQuestion">
+                <ion-select-option *ngFor="let question of questions" [value]="question.id">{{ question.name }}</ion-select-option>
+              </ion-select>
+            </ion-item>
+            <small errorText *ngIf="reactiveForm.get('securityQuestion').invalid &&
+                                    reactiveForm.get('securityQuestion').touched">
+              * Debe seleccionar una pregunta de seguridad
+            </small>
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col size="12">
+            <ion-item>
+              <ion-label position="floating">Respuesta</ion-label>
+              <ion-input type="text" name="answerSecurityQuestion" formControlName="answerSecurityQuestion"></ion-input>
+            </ion-item>
+            <small errorText *ngIf="reactiveForm.get('answerSecurityQuestion').invalid &&
+                                    reactiveForm.get('answerSecurityQuestion').touched">
+              * Debe responder a la pregunta de seguridad
+            </small>
+          </ion-col>
+        </ion-row>
+        <ion-row>
           <ion-col size="12">
             <ion-item>
               <ion-label position="floating">Codigo de referido</ion-label>
@@ -111,7 +159,7 @@
         </ion-row>
         <ion-row>
           <ion-col size="12">
-            <ion-button color="secondary" (click)="handleTapContinue()" expand="block">
+            <ion-button color="secondary" [disabled]="reactiveForm.invalid" (click)="handleTapContinue()" expand="block">
               Continuar
             </ion-button>
           </ion-col>

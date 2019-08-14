@@ -1,26 +1,42 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormGroup, Validators, FormBuilder } from '@angular/forms';
 import { FORMREGEX } from '../../regex/formRegex';
 import { ModalController, NavController } from '@ionic/angular';
 import { GeneralModalPage } from '../..//modals/general-modal/general-modal.page';
 import { ModalData } from '../../interfaces/own/modalData.interface';
 import { ButtonData } from '../../interfaces/own/buttonData.interface';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
+import { RegisterApiService } from 'src/app/services/api/register-api.service';
+import { Configuration } from 'src/app/models/configuration';
+import { UtilitiesService } from 'src/app/services/utilities.service';
 
 @Component({
   selector: 'app-vehicle-association',
   templateUrl: './vehicle-association.page.html',
   styleUrls: ['./vehicle-association.page.scss'],
 })
-export class VehicleAssociationPage {
+export class VehicleAssociationPage implements OnInit {
 
   public reactiveForm: FormGroup;
+  private registerData: any;
+  public configurations: Configuration[];
 
   constructor(
     private formBuilder: FormBuilder, private modalController: ModalController, 
-    private navController: NavController
+    private navController: NavController, private route: ActivatedRoute,
+    private registerAPIService: RegisterApiService, private utilsService: UtilitiesService
   ) {
     this.reactiveForm = this.buildReactiveForm();
+  }
+
+  ngOnInit() {
+    this.registerData = this.route.snapshot.queryParams;
+    // obtengo las dependencias del formulario
+    this.getDependencies();
+  }
+
+  private getDependencies(): void {
+    this.registerAPIService.getConfigurations().subscribe((configurations: Configuration[]) => this.configurations = configurations);
   }
   
   /**
@@ -63,7 +79,18 @@ export class VehicleAssociationPage {
    * @returns void
    */
   public handleTapContinue(): void {
-    this.openGeneralModal();
+    // construyo el objeto que se va a enviar al convert
+    const data = {
+      ... this.registerData,
+      ... this.reactiveForm.value
+    };
+    this.registerAPIService.createRequestRegister(data).subscribe((response: any) => {
+      if (response.hasOwnProperty('data')) {
+        this.openGeneralModal();
+      } else {
+        this.utilsService.showSnackbar('Ha ocurrido un error desconocido', 'danger');
+      }
+    });
   }
 
   /**

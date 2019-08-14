@@ -51,12 +51,12 @@ export class UtilitiesService {
    * @param message: string
    * @returns void
    */
-  public async showSnackbar(message: string) {
+  public async showSnackbar(message: string, color: string = 'primary') {
     const snackbar = await this.toastController.create({
       'message': message,
       'showCloseButton': true,
-      'closeButtonText': '👏',
-      'color': 'primary',
+      'closeButtonText': '✖',
+      'color': color,
       'duration': 5000
     });
     await snackbar.present();

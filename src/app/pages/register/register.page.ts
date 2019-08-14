@@ -2,18 +2,35 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { FORMREGEX } from '../../regex/formRegex';
 import { NavController } from '@ionic/angular';
+import { RegisterApiService } from 'src/app/services/api/register-api.service';
+import { Question } from 'src/app/models/question';
 
 @Component({
   selector: 'app-register',
   templateUrl: './register.page.html',
   styleUrls: ['./register.page.scss'],
 })
-export class RegisterPage {
+export class RegisterPage implements OnInit {
 
   public reactiveForm: FormGroup;
+  public questions: Question[];
 
-  constructor(private formBuilder: FormBuilder, private navController: NavController) { 
+  constructor(
+    private formBuilder: FormBuilder, private navController: NavController,
+    private registerAPIService: RegisterApiService
+  ) { 
     this.reactiveForm = this.buildReactiveForm();
+  }
+
+  ngOnInit() {
+    // obtengo las dependencias
+    this.getDependencies();
+  }
+
+  private getDependencies() {
+    this.registerAPIService.getDependencies().subscribe((questions: Question[]) => {
+      this.questions = questions;
+    });
   }
 
   /**
@@ -30,6 +47,10 @@ export class RegisterPage {
       'cellphone': ['', [Validators.required, Validators.pattern(`${FORMREGEX.cellPhone}`)]],
       'whatsapp': ['', [Validators.required, Validators.pattern(`${FORMREGEX.cellPhone}`)]],
       'email': ['', Validators.pattern(`${FORMREGEX.email}`)],
+      'password': ['', [Validators.required]],
+      'repeatPassword': ['', [Validators.required]],
+      'securityQuestion': ['', [Validators.required]],
+      'answerSecurityQuestion': ['', [Validators.required]],
       'referralCode': ''
     });
   }
@@ -42,7 +63,8 @@ export class RegisterPage {
    * @returns void
    */
   public handleTapContinue(): void {
-    this.navController.navigateForward(['/vehicle-association']);
+    const data = this.reactiveForm.value;
+    this.navController.navigateForward(['/vehicle-association'], {queryParams: {... data}});
   }
 
   /**

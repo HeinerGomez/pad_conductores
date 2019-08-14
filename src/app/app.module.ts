@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { RouteReuseStrategy } from '@angular/router';
+import {HttpClientModule, HTTP_INTERCEPTORS} from '@angular/common/http';
 import { IonicModule, IonicRouteStrategy } from '@ionic/angular';
 import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
@@ -26,6 +27,7 @@ import { ChangePasswordModalPage } from './modals/change-password-modal/change-p
 import { ChangePasswordModalPageModule } from './modals/change-password-modal/change-password-modal.module';
 import { RatingServiceCompanyModalPage } from './modals/rating-service-company-modal/rating-service-company-modal.page';
 import { RatingServiceCompanyModalPageModule } from './modals/rating-service-company-modal/rating-service-company-modal.module';
+import { ErrorsService } from './services/interceptors/errors.service';
 
 @NgModule({
   declarations: [
@@ -43,6 +45,7 @@ import { RatingServiceCompanyModalPageModule } from './modals/rating-service-com
     BrowserModule, 
     IonicModule.forRoot(), 
     AppRoutingModule,
+    HttpClientModule,
     FormsModule,
     ReactiveFormsModule,
     GeneralModalPageModule,
@@ -57,7 +60,10 @@ import { RatingServiceCompanyModalPageModule } from './modals/rating-service-com
     SplashScreen,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
     NativeStorage,
-    Camera
+    Camera,
+    {
+			provide: HTTP_INTERCEPTORS, useClass: ErrorsService, multi: true,
+		},
   ],
   bootstrap: [AppComponent]
 })
