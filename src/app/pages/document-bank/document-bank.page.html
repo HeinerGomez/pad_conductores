@@ -8,12 +8,10 @@
 <ion-content>
   <h2 text-center>Documentos Personales</h2>
   <div scrollable-x divider>
-    <app-card-document *ngFor="let cardDocument of cardDocuments" [cardDocument]="cardDocument" [behavior]="behaviorCardDocument"></app-card-document>    
+    <app-card-document *ngFor="let document of documentsForDriver" [cardDocument]="document" [behavior]="behaviorCardDocument"></app-card-document>    
   </div>
   <h2 text-center>Documentos Vehiculo</h2>
-  <!-- <div scrollable-x>
-    <app-card-document></app-card-document>
-    <app-card-document></app-card-document>
-    <app-card-document></app-card-document>
-  </div> -->
+  <div scrollable-x divider>
+    <app-card-document *ngFor="let document of documentsForVehicle" [cardDocument]="document" [behavior]="behaviorCardDocument"></app-card-document>    
+  </div>
 </ion-content>

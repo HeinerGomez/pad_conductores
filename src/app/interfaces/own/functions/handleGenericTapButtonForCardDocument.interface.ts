@@ -1,5 +1,5 @@
-import { CardDocument } from '../cardDocument.interface';
+import { Document } from 'src/app/models/document';
 
 export interface HandleGenericTabButtonFotCardDocument {
-    (cardDocument: CardDocument): Promise<HTMLIonModalElement>
+    (document: Document): Promise<HTMLIonModalElement>
 }

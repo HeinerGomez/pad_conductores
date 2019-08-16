@@ -1,5 +1,5 @@
 import { Component, Input, OnInit, DoCheck } from '@angular/core';
-import { CardDocument } from 'src/app/interfaces/own/cardDocument.interface';
+import { Document } from 'src/app/models/document';
 import { BehaviorCardDocument } from 'src/app/interfaces/own/behaviorCardDocument.interface';
 
 @Component({
@@ -7,12 +7,12 @@ import { BehaviorCardDocument } from 'src/app/interfaces/own/behaviorCardDocumen
   templateUrl: './card-document.component.html',
   styleUrls: ['./card-document.component.scss'],
 })
-export class CardDocumentComponent implements OnInit, DoCheck {
+export class CardDocumentComponent implements OnInit {
 
-  @Input('cardDocument') public cardDocument: CardDocument;
+  @Input('cardDocument') public cardDocument: Document;
   @Input('behavior') private behavior: BehaviorCardDocument;
-  private imgPlaceholder: String;
-  private imgPlaceholderSide: String;
+  private imgPlaceholder: string;
+  private imgPlaceholderSide: string;
 
   constructor() {
     this.imgPlaceholder = 'assets/imgs/img_placeholder_110_110.png';
@@ -23,7 +23,7 @@ export class CardDocumentComponent implements OnInit, DoCheck {
     this.setImagePlaceholderIfNotImage();
   }
 
-  ngDoCheck() {
+  ionViewWillEnter() {
     this.setImagePlaceholderIfNotImage();
   }
 
@@ -55,6 +55,10 @@ export class CardDocumentComponent implements OnInit, DoCheck {
   public handleTapDetailsButton() {
     this.behavior.handleTapDetailsButton(this.cardDocument).then((modal: HTMLIonModalElement) => {
       modal.present();
+      // estoy atento de cuando se cierre el modal
+      modal.onDidDismiss().then(() => {
+        this.setImagePlaceholderIfNotImage();
+      });
     });
   }
 

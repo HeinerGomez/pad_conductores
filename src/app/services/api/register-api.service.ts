@@ -19,7 +19,7 @@ export class RegisterApiService {
   }
 
   public getDependencies(): Observable<any> {
-    const resourceId = 0;
+    const resourceId = 2;
     return this.http.get(`${environment.URL_API}/questions/questionsByResourceType/${resourceId}`).pipe(
       map((_questions: any) => _questions.map((_question: any) => new Question(_question))),
     );

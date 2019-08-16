@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { CardDocument } from '../../interfaces/own/cardDocument.interface';
 import { Camera, CameraOptions } from '@ionic-native/camera/ngx';
 import { DOCUMENT_STATUS } from '../../data-simulation/data-document-status';
 import { Platform, ModalController } from '@ionic/angular';
@@ -8,8 +7,10 @@ import { SidesDocumentModalPage } from '../../modals/sides-document-modal/sides-
 import { HandleGenericTabButtonFotCardDocument } from '../../interfaces/own/functions/handleGenericTapButtonForCardDocument.interface';
 import { BehaviorSideDocument } from '../../interfaces/own/behaviorSideDocument.interface';
 import { HandleGenericTapButtonForSideDocument } from '../../interfaces/own/functions/handleGenericTapButtonForSideDocument.interface';
-import { SideDocument } from '../../interfaces/own/sideDocument.interface';
 import { UtilitiesService } from '../../services/utilities.service';
+import { DocumentBankApiService } from 'src/app/services/api/document-bank-api.service';
+import { Document } from 'src/app/models/document';
+import { SideDocument } from 'src/app/models/side-document';
 
 @Component({
   selector: 'app-document-bank',
@@ -18,11 +19,15 @@ import { UtilitiesService } from '../../services/utilities.service';
 })
 export class DocumentBankPage implements OnInit {
 
-  public cardDocuments: CardDocument[] = [];
+  public documentsForDriver: Document[];
+  public documentsForVehicle: Document[];
   public behaviorCardDocument: BehaviorCardDocument;
   
-  constructor(private camera: Camera, private platform: Platform,
-              private modalController: ModalController, private utilitiesService: UtilitiesService) {}
+  constructor(
+    private camera: Camera, private platform: Platform,
+    private modalController: ModalController, private utilitiesService: UtilitiesService,
+    private documentAPIService: DocumentBankApiService
+  ) {}
 
   ngOnInit() {
     this.getDocumentList();
@@ -38,7 +43,12 @@ export class DocumentBankPage implements OnInit {
    * @returns void
    */
   private getDocumentList(): void {
-    this.cardDocuments = DOCUMENT_STATUS;
+    // id temporal 
+    const idSubscription = 1;
+    this.documentAPIService.getDocuments(idSubscription).subscribe((_documents: Document[]) => {
+      this.documentsForDriver = _documents.filter((document: Document) => document.typeResource == 1);
+      this.documentsForVehicle = _documents.filter((document: Document) => document.typeResource == 6);
+    });
   }
 
   /**
@@ -63,17 +73,16 @@ export class DocumentBankPage implements OnInit {
    * @returns HandleGenericTapButtonForSideDocument
    */
   private defineHandleTapDetailsButton(): HandleGenericTabButtonFotCardDocument {
-    return (cardDocument: CardDocument) => {
+    return (document: Document) => {
       const behavior: BehaviorSideDocument = {
         'handleTapCameraButton': this.defineHandleTapButtonCamera(),
         'handleTapGaleryButton': this.defineHandleTapButtonGalery(),
         'handleTapCommentButton': this.defineHandleTapButtonComments()
       };
-     
       const sidesDocumentModal = this.modalController.create({
         'component': SidesDocumentModalPage,
         'componentProps': {
-          'cardDocument': cardDocument,
+          'cardDocument': document,
           'behavior': behavior
         }
       });
@@ -90,16 +99,13 @@ export class DocumentBankPage implements OnInit {
    */
   private defineHandleTapButtonCamera(): HandleGenericTapButtonForSideDocument {
     return (side: SideDocument) => {
-      const cameraDirection = side.documentName == 'Foto Rostro' ? this.camera.Direction.FRONT : this.camera.Direction.BACK;
-      console.log('Camera Direction: ', cameraDirection);
       const options: CameraOptions = {
         'quality': 40,
         'sourceType': this.camera.PictureSourceType.CAMERA,
         'encodingType': this.camera.EncodingType.JPEG,
         'destinationType': this.camera.DestinationType.DATA_URL,
         'saveToPhotoAlbum': false,
-        'correctOrientation': false,
-        'cameraDirection': this.camera.Direction.BACK
+        'correctOrientation': true
       }
       this.camera.getPicture(options).then( imageData => {
         side.pathImage = 'data:image/jpeg;base64,' + imageData;
@@ -117,7 +123,7 @@ export class DocumentBankPage implements OnInit {
   private defineHandleTapButtonGalery(): HandleGenericTapButtonForSideDocument {
     return (side: SideDocument) => {
       const options: CameraOptions = {
-        'quality': 40,
+        'quality': 50,
         'sourceType': this.camera.PictureSourceType.PHOTOLIBRARY,
         'encodingType': this.camera.EncodingType.JPEG,
         'destinationType': this.camera.DestinationType.DATA_URL,
@@ -139,7 +145,7 @@ export class DocumentBankPage implements OnInit {
    */
   private defineHandleTapButtonComments(): HandleGenericTapButtonForSideDocument {
     return (side: SideDocument) => {
-      let comments = side.comments.toString();
+      let comments = side.comments;
       if (comments == '') {
         comments = 'No existen observaciones';
       }

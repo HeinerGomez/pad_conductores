@@ -1,30 +1,30 @@
-import { Component, OnInit } from '@angular/core';
-import { NavParams } from '@ionic/angular';
-import { CardDocument } from '../../interfaces/own/cardDocument.interface';
+import { Component } from '@angular/core';
+import { NavParams, ModalController } from '@ionic/angular';
 import { BehaviorSideDocument } from '../../interfaces/own/behaviorSideDocument.interface';
-import { SideDocument } from '../../interfaces/own/sideDocument.interface';
+import { SideDocument } from 'src/app/models/side-document';
+import { Document } from 'src/app/models/document';
 
 @Component({
   selector: 'app-sides-document-modal',
   templateUrl: './sides-document-modal.page.html',
   styleUrls: ['./sides-document-modal.page.scss'],
 })
-export class SidesDocumentModalPage implements OnInit {
+export class SidesDocumentModalPage {
 
-  public cardDocument: CardDocument;
+  public cardDocument: Document;
   public sides: SideDocument[];
   public behavior: BehaviorSideDocument;
-  public imagePlaceholder: String;
+  public imagePlaceholder: string;
 
 
-  constructor(private navParams: NavParams) {
+  constructor(private navParams: NavParams, private modalController: ModalController) {
     this.imagePlaceholder = '../assets/imgs/img_placeholder_400_300.png';
     this.cardDocument = this.navParams.get('cardDocument');
     this.behavior = this.navParams.get('behavior');
     this.sides = this.cardDocument.sides;
   }
 
-  ngOnInit() {
+  ionViewWillEnter() {
     this.setImagePlaceholderIfNotImage();
   }
 
@@ -75,6 +75,10 @@ export class SidesDocumentModalPage implements OnInit {
    */
   public handleTapCommentButton(side: SideDocument): void {
     this.behavior.handleTapCommentButton(side);
+  }
+
+  public handleTapCloseButton(): void {
+    this.modalController.dismiss();
   }
 
 
