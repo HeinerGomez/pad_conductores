@@ -1,9 +1,12 @@
+import { environment } from 'src/environments/environment';
+
 export class SideDocument {
 
     private _id: number;
     private _documentName: string;
     private _name: string;
-    private _state: string;
+    private _state: number;
+    private _nameState: string;
     private _pathImage: string;
     private _comments: string;
 
@@ -29,8 +32,12 @@ export class SideDocument {
         return this._name;
     }
 
-    public get state(): string {
+    public get state(): number {
         return this._state;
+    }
+
+    public get nameState(): string {
+        return this._nameState;
     }
 
     public set pathImage(pathImage: string) {
@@ -46,11 +53,12 @@ export class SideDocument {
     }
 
     private build(sideDocument: any) {
-        this._id = new Date().valueOf();// sideDocument.id; => asi debe quedar
+        this._id = sideDocument.id;
         this._documentName = ''; // se asigna despues
         this._name = sideDocument.name_side;
-        this._pathImage = (sideDocument.route == null ? '' : sideDocument.route);
-        this._state = this.buildState(sideDocument.state);
+        this._pathImage = (sideDocument.route == null ? '' : environment.URL_STORAGE + sideDocument.route);
+        this._state = sideDocument.state;
+        this._nameState = this.buildState(sideDocument.state);
         this._comments = sideDocument.observation;
     }
 

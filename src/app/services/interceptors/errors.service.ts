@@ -28,10 +28,12 @@ export class ErrorsService implements HttpInterceptor {
 
         case 400:
         case 422:
+          console.log("Error intercepter: ", error);
           this.utilsService.showSnackbar('Ha ocurrido un error interno', 'danger');
           break;
 
         case 500:
+          console.log("Error intercepter: ", error);
           this.utilsService.showSnackbar('No hemos podido establecer comunicación con nuestros servidores', 'danger');
           break;
       }

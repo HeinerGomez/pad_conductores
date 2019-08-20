@@ -48,6 +48,8 @@ export class DocumentBankPage implements OnInit {
     this.documentAPIService.getDocuments(idSubscription).subscribe((_documents: Document[]) => {
       this.documentsForDriver = _documents.filter((document: Document) => document.typeResource == 1);
       this.documentsForVehicle = _documents.filter((document: Document) => document.typeResource == 6);
+      console.log("Conductores: ", this.documentsForDriver);
+      console.log("Vehiculo: ", this.documentsForVehicle);
     });
   }
 

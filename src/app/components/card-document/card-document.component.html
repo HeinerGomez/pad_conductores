@@ -18,7 +18,7 @@
            </ion-row>
            <ion-row>
              <ion-col size="12">
-              <ion-text color="primary">{{ cardDocument.name }}</ion-text>
+              <ion-text color="primary">{{ (cardDocument.name.length > 17)? (cardDocument.name | slice:0:17)+'...':(cardDocument.name) }}</ion-text>
              </ion-col>
            </ion-row>
            <ion-row>
@@ -32,11 +32,16 @@
              </ion-col>
            </ion-row>
            <ion-row>
-             <ion-col size="12">
-               <ion-button fill="outline" expand="block" size="small" color="secondary" (click)="handleTapDetailsButton()">
-                 DETALLES
+             <ion-col size="6">
+               <ion-button fill="clear" size="small" color="secondary" (click)="handleTapDetailsButton()">
+                 <ion-icon slot="icon-only" name="filing"></ion-icon>
                </ion-button>
              </ion-col>
+             <ion-col size="6">
+              <ion-button fill="clear" size="small" color="secondary" (click)="handleTapUploadDocuments()">
+                <ion-icon slot="icon-only" name="cloud-upload"></ion-icon>
+              </ion-button>
+            </ion-col>
            </ion-row>
          </ion-grid>
        </ion-col>

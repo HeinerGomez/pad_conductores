@@ -1,6 +1,9 @@
 import { Component, Input, OnInit, DoCheck } from '@angular/core';
 import { Document } from 'src/app/models/document';
 import { BehaviorCardDocument } from 'src/app/interfaces/own/behaviorCardDocument.interface';
+import { DocumentBankOutput } from 'src/app/converts/outputs/document-bank-output.convert';
+import { DocumentBankApiService } from 'src/app/services/api/document-bank-api.service';
+import { UtilitiesService } from 'src/app/services/utilities.service';
 
 @Component({
   selector: 'app-card-document',
@@ -14,7 +17,10 @@ export class CardDocumentComponent implements OnInit {
   private imgPlaceholder: string;
   private imgPlaceholderSide: string;
 
-  constructor() {
+  constructor(
+    private documentBankAPIService: DocumentBankApiService,
+    private utilService: UtilitiesService
+    ) {
     this.imgPlaceholder = 'assets/imgs/img_placeholder_110_110.png';
     this.imgPlaceholderSide = '../assets/imgs/img_placeholder_400_300.png';
   }
@@ -52,7 +58,7 @@ export class CardDocumentComponent implements OnInit {
    * @param void
    * @returns void
    */
-  public handleTapDetailsButton() {
+  public handleTapDetailsButton(): void {
     this.behavior.handleTapDetailsButton(this.cardDocument).then((modal: HTMLIonModalElement) => {
       modal.present();
       // estoy atento de cuando se cierre el modal
@@ -60,6 +66,18 @@ export class CardDocumentComponent implements OnInit {
         this.setImagePlaceholderIfNotImage();
       });
     });
+  }
+
+  public handleTapUploadDocuments(): void {
+    // TODO ...
+    const documentBankOutput = new DocumentBankOutput(this.cardDocument);
+    const data = documentBankOutput.convertDocumentBankForRequestAPI();
+    this.utilService.showLoading('Subiendo Documentos');
+    console.log("Esta es la data que se envia al subir una imagen", data);
+    this.documentBankAPIService.uploadDocument(data).subscribe((response: any) => {
+      this.utilService.closeLoading();
+      this.utilService.showSnackbar('Documento subido con exito!', 'success');
+    }, error => this.utilService.closeLoading());
   }
 
   /**

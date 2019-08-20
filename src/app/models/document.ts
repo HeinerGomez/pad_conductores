@@ -1,4 +1,5 @@
 import { SideDocument } from './side-document';
+import { environment } from 'src/environments/environment';
 
 export class Document {
 
@@ -54,10 +55,10 @@ export class Document {
     }
 
     private build(document: any) {
-        this._id = new Date().valueOf();// document.document_id; => asi debe quedar
+        this._id = document.document_id;
         this._name = document.document_name;
         this._numberSides = document.sides.length;
-        this._pathImageSticker = document.sides[0].route == null ? '' : document.sides[0].route; // el sticker siempre será la primera imagen
+        this._pathImageSticker = document.sides[0].route == null ? '' : environment.URL_STORAGE + document.sides[0].route; // el sticker siempre será la primera imagen
         this._state = document.state_name;
         this._ribbonStatus = this.buildRibbonStatus(document.color);
         this._typeResource = document.resource_type_id; // 1 => conductores y 2 => vehiculos
