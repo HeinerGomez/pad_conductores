@@ -20,7 +20,6 @@ export class DocumentBankApiService {
   }
 
   public uploadDocument(data: any) {
-    console.warn("The fuck data: ", data);
     return this.http.post(`${environment.URL_API}/documentSubscription`, data);
   }
 

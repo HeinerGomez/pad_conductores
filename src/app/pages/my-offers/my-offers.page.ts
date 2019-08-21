@@ -5,6 +5,8 @@ import { ItemOfferOptions } from '../../interfaces/own/itemOfferOptions.interfac
 import { Router } from '@angular/router';
 import { ParamsOfDetailOffer } from '../../interfaces/own/paramsOfDetailOffer.interface';
 import { OFFER } from '../../constants/offers.constants';
+import { OffersApiService } from 'src/app/services/api/offers-api.service';
+import { Offer } from 'src/app/models/offer';
 
 @Component({
   selector: 'app-my-offers',
@@ -17,28 +19,25 @@ export class MyOffersPage implements OnInit {
 
   public shouldShowOffersApplied: boolean;
   public shouldShowOffersConfirmed: boolean;
-  public items: ItemOffer[] = [];
+  public offersApplied: Offer[]; 
+  public offersConfirmed: Offer[];
   public itemOptions: ItemOfferOptions;
 
-  constructor(private router: Router) { 
+  constructor(
+    private router: Router,
+    private offersAPIService: OffersApiService
+    ) { 
     this.shouldShowOffersApplied = true;
     this.shouldShowOffersConfirmed = false;
     this.itemOptions = this.defineItemOptions();
-    this.items.push({
-      'originCity': 'BOGOTA',
-      'destinationCity': 'CALI',
-      'freightValue': 1200000,
-      'merchandiseWeight': 35,
-      'loadDate': '2019-04-15',
-      'loadTime': '17:45',
-      'agoTime': 38,
-      'vacancy': 10,
-      'fulfilled': false
-    });
+    
   }
 
   ngOnInit() {
     this.segment.value = 'applied';
+    const driverId = 1; // temporal
+    this.offersAPIService.getOffersApplied(driverId).subscribe((offers: Offer[]) => this.offersApplied = offers);
+    this.offersAPIService.getOffersConfirmed(driverId).subscribe((offers: Offer[]) => this.offersConfirmed = offers);
   }
 
   /**

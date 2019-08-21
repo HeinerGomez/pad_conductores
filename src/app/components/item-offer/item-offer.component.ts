@@ -2,6 +2,7 @@ import { Component, OnInit, Input } from '@angular/core';
 import { ItemOffer } from '../../interfaces/own/itemOffer.interf';
 import { ItemOfferOptions } from '../../interfaces/own/itemOfferOptions.interface';
 import { Router } from '@angular/router';
+import { Offer } from 'src/app/models/offer';
 
 @Component({
   selector: 'app-item-offer',
@@ -10,7 +11,7 @@ import { Router } from '@angular/router';
 })
 export class ItemOfferComponent implements OnInit {
 
-  @Input('itemOffer') public itemOffer: ItemOffer;
+  @Input('itemOffer') public itemOffer: Offer;
   @Input('options') private options: ItemOfferOptions;
 
   constructor(private router: Router) { }

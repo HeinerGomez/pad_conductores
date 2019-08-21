@@ -20,13 +20,13 @@
   <div *ngIf="shouldShowOffersApplied" m-top-20>
     Ofertas aplicadas ...
     <ion-list lines="none">
-      <app-item-offer *ngFor="let item of items" [itemOffer]="item" [options]="itemOptions"></app-item-offer>
+      <app-item-offer *ngFor="let offer of offersApplied" [itemOffer]="offer" [options]="itemOptions"></app-item-offer>
     </ion-list>
   </div>
   <div *ngIf="shouldShowOffersConfirmed" m-top-20>
     Ofertas confirmadas ...
     <ion-list lines="none">
-      <app-item-offer *ngFor="let item of items" [itemOffer]="item" [options]="itemOptions"></app-item-offer>
+      <app-item-offer *ngFor="let offer of offersConfirmed" [itemOffer]="offer" [options]="itemOptions"></app-item-offer>
     </ion-list>
   </div>
 </ion-content>
