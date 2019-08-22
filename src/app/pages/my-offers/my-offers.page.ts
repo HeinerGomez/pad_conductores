@@ -1,5 +1,5 @@
 import { Component, ViewChild, OnInit } from '@angular/core';
-import { IonSegment } from '@ionic/angular';
+import { IonSegment, NavController } from '@ionic/angular';
 import { ItemOffer } from '../../interfaces/own/itemOffer.interf';
 import { ItemOfferOptions } from '../../interfaces/own/itemOfferOptions.interface';
 import { Router } from '@angular/router';
@@ -7,6 +7,7 @@ import { ParamsOfDetailOffer } from '../../interfaces/own/paramsOfDetailOffer.in
 import { OFFER } from '../../constants/offers.constants';
 import { OffersApiService } from 'src/app/services/api/offers-api.service';
 import { Offer } from 'src/app/models/offer';
+import { DynamicBadgeService } from 'src/app/services/dynamic-badge.service';
 
 @Component({
   selector: 'app-my-offers',
@@ -19,13 +20,13 @@ export class MyOffersPage implements OnInit {
 
   public shouldShowOffersApplied: boolean;
   public shouldShowOffersConfirmed: boolean;
-  public offersApplied: Offer[]; 
-  public offersConfirmed: Offer[];
+  public offersApplied: Offer[] = []; 
+  public offersConfirmed: Offer[] = [];
   public itemOptions: ItemOfferOptions;
 
   constructor(
-    private router: Router,
-    private offersAPIService: OffersApiService
+    private router: Router, private offersAPIService: OffersApiService,
+    private navController: NavController, private dynamicBadgesService: DynamicBadgeService 
     ) { 
     this.shouldShowOffersApplied = true;
     this.shouldShowOffersConfirmed = false;
@@ -35,8 +36,23 @@ export class MyOffersPage implements OnInit {
 
   ngOnInit() {
     this.segment.value = 'applied';
+  }
+
+  ionViewDidEnter() {
+    this.getOffersApplied();
+    this.getOffersConfirmed();
+  }
+
+  private getOffersApplied(): void {
     const driverId = 1; // temporal
-    this.offersAPIService.getOffersApplied(driverId).subscribe((offers: Offer[]) => this.offersApplied = offers);
+    this.offersAPIService.getOffersApplied(driverId).subscribe((offers: Offer[]) => { 
+      this.offersApplied = offers
+      this.dynamicBadgesService.badgeMyOffers = offers.length;
+    });
+  }
+
+  private getOffersConfirmed(): void {
+    const driverId = 1; // temporal
     this.offersAPIService.getOffersConfirmed(driverId).subscribe((offers: Offer[]) => this.offersConfirmed = offers);
   }
 
@@ -53,9 +69,11 @@ export class MyOffersPage implements OnInit {
     if (segmentValue == 'applied') {
       this.shouldShowOffersApplied = true;
       this.shouldShowOffersConfirmed = false;
+      this.getOffersApplied();
     } else {
       this.shouldShowOffersApplied = false;
       this.shouldShowOffersConfirmed = true;
+      this.getOffersConfirmed();
     }
     this.itemOptions = this.defineItemOptions();
   }
@@ -69,8 +87,10 @@ export class MyOffersPage implements OnInit {
    */
   public handleSlideDownRefresh(event): void {
     setTimeout( () => {
+      this.getOffersApplied();
+      this.getOffersConfirmed();
       event.target.complete();
-    }, 3000);
+    }, 1500);
   }
 
   /**
@@ -83,12 +103,15 @@ export class MyOffersPage implements OnInit {
   private defineItemOptions(): ItemOfferOptions {
     const params: ParamsOfDetailOffer = {
       'origin': this.shouldShowOffersApplied === true ? OFFER.ORIGIN_APPLIED : OFFER.ORIGIN_CONFIRMED,
-      'buttonArchive': false
+      'buttonArchive': false,
     };
     return {
-      'handleTapItemOffer': () => {
-        this.router.navigate(['/detail-offer', params]);
-      }
+      'handleTapItemOffer': (offer: Offer) => {
+        const _params = { options: params, offer }
+        this.navController.navigateForward('/detail-offer', { queryParams: _params})
+      },
+      'buttonArchive': false,
+      'hasChip': false
     };
   }
 

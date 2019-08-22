@@ -1,7 +1,9 @@
 <ion-header>
   <ion-toolbar>
     <ion-title text-center>Mis Ofertas</ion-title>
-    <ion-menu-button></ion-menu-button>
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
     <ion-segment color="secondary" (ionChange)="handleSegmentChanges($event)">
         <ion-segment-button value="applied">
           <ion-text color="light">Aplicadas</ion-text>
@@ -18,13 +20,11 @@
     <ion-refresher-content></ion-refresher-content>
   </ion-refresher>
   <div *ngIf="shouldShowOffersApplied" m-top-20>
-    Ofertas aplicadas ...
     <ion-list lines="none">
       <app-item-offer *ngFor="let offer of offersApplied" [itemOffer]="offer" [options]="itemOptions"></app-item-offer>
     </ion-list>
   </div>
   <div *ngIf="shouldShowOffersConfirmed" m-top-20>
-    Ofertas confirmadas ...
     <ion-list lines="none">
       <app-item-offer *ngFor="let offer of offersConfirmed" [itemOffer]="offer" [options]="itemOptions"></app-item-offer>
     </ion-list>

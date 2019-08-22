@@ -1,10 +1,12 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { UtilitiesService } from '../../services/utilities.service';
 import { ParamsOfDetailOffer } from '../../interfaces/own/paramsOfDetailOffer.interface';
 import { ActivatedRoute, Router } from '@angular/router';
 import { OFFER } from '../../constants/offers.constants';
-import { ModalController } from '@ionic/angular';
+import { ModalController, NavController } from '@ionic/angular';
 import { RatingServiceCompanyModalPage } from '../../modals/rating-service-company-modal/rating-service-company-modal.page';
+import { Offer } from 'src/app/models/offer';
+import { OffersApiService } from 'src/app/services/api/offers-api.service';
 
 @Component({
   selector: 'app-detail-offer',
@@ -17,15 +19,19 @@ export class DetailOfferPage {
   public shouldShowButtonCancelOffer: boolean; 
   public shouldShowButtonFulfilled: boolean;
   public shouldShowButtonServiceRating: boolean;
+  public offer: Offer;
 
-  constructor(private utilitiesService: UtilitiesService, private activatedRoute: ActivatedRoute, 
-              private router: Router, private modalController: ModalController) {
-    this.activatedRoute.params.subscribe( (params: ParamsOfDetailOffer) => {
-      this.shouldShowButtonAcceptOffer = OFFER.ORIGIN_AVAILABLE == params.origin ? true : false;
-      this.shouldShowButtonCancelOffer = OFFER.ORIGIN_APPLIED == params.origin ? true : false;
-      this.shouldShowButtonFulfilled = OFFER.ORIGIN_CONFIRMED == params.origin ? true : false;
-      this.shouldShowButtonServiceRating = OFFER.ORIGIN_FULFILLED == params.origin ? true : false;
-    });
+  constructor(
+    private utilitiesService: UtilitiesService, private activatedRoute: ActivatedRoute, 
+    private router: Router, private modalController: ModalController,
+    private offerAPIService: OffersApiService, private navController: NavController
+  ) {
+    const params = this.activatedRoute.snapshot.queryParams;
+    this.shouldShowButtonAcceptOffer = OFFER.ORIGIN_AVAILABLE == params.options.origin ? true : false;
+    this.shouldShowButtonCancelOffer = OFFER.ORIGIN_APPLIED == params.options.origin ? true : false;
+    this.shouldShowButtonFulfilled = OFFER.ORIGIN_FULFILLED == params.options.origin ? true : false;
+    this.shouldShowButtonServiceRating = OFFER.ORIGIN_CONFIRMED == params.options.origin ? true : false;
+    this.offer = params.offer;
   }
 
   /**
@@ -36,7 +42,23 @@ export class DetailOfferPage {
    * @returns void
    */
   public handleTapAcceptOffer(): void {
-    this.utilitiesService.showInfoAlert('Oferta Aplicada', 'Se ha aplicado a la oferta correctamente');
+    const data = {
+      "driver_id": "1", // temporal
+      "offer_id": this.offer.id,
+      "vehicle_id": "1", // temporal
+      "offer_state_id": "2", // aplicado,
+      "latitude":"23234234234", // temporal
+      "longitude":"-2131243223" // temporal
+    };
+    this.utilitiesService.showLoading('Aplicando A Oferta');
+    this.offerAPIService.cancelOrAppliedOffer(data).subscribe(() => {
+      this.utilitiesService.closeLoading();
+    this.utilitiesService.showInfoAlert('Oferta Aplicada', 'Se ha aplicado a la oferta correctamente').then(() => {
+        this.navController.navigateBack('/tab-offers/tabs/my-offers');
+      });
+    }, error => {
+      this.utilitiesService.closeLoading();
+    });
   }
 
   /**
@@ -47,7 +69,23 @@ export class DetailOfferPage {
    * @returns void
    */
   public handleTapCancelOffer(): void {
-    this.utilitiesService.showInfoAlert('Oferta Cancelada', 'Se ha cancelado a la oferta correctamente');
+    const data = {
+      "driver_id": "1", // temporal
+      "offer_id": this.offer.id,
+      "vehicle_id": "1", // temporal
+      "offer_state_id": "3", // rechazar,
+      "latitude":"23234234234", // temporal
+      "longitude":"-2131243223" // temporal
+    };
+    this.utilitiesService.showLoading('Cancelando Oferta');
+    this.offerAPIService.cancelOrAppliedOffer(data).subscribe(() => {
+      this.utilitiesService.closeLoading();
+      this.utilitiesService.showInfoAlert('Oferta Cancelada', 'Se ha cancelado la oferta correctamente').then(() => {
+        this.navController.navigateBack('/tab-offers');
+      });
+    }, error => {
+      this.utilitiesService.closeLoading();
+    });
   }
 
   /**

@@ -1,7 +1,9 @@
 <ion-header>
   <ion-toolbar>
     <ion-title text-center>Ofertas Disponibles</ion-title>
-    <ion-menu-button></ion-menu-button>
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
@@ -13,11 +15,11 @@
     OFG286
   </app-card-plate>
   <div container-scroll (scroll)="handleScroll($event)">
-      <div message-info *ngIf="!items.length" >
+      <div message-info *ngIf="!offers.length" >
           <p><b>No existen ofertas disponibles</b></p>
       </div>
     <ion-list lines="none">
-      <app-item-offer *ngFor="let item of items" [itemOffer]="item" [options]="itemOptions"></app-item-offer>
+      <app-item-offer *ngFor="let offer of offers" [itemOffer]="offer" [options]="itemOptions"></app-item-offer>
     </ion-list>
   </div>
 </ion-content>

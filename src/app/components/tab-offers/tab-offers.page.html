@@ -3,17 +3,17 @@
     <ion-tab-button (click)="handleTaps('/tab-offers/tabs/offers')">
       <ion-icon name="pricetags"></ion-icon>
       <ion-label>Ofertas</ion-label>
-      <ion-badge color="secondary">6</ion-badge>
+      <ion-badge color="secondary">{{ badgeOffers }}</ion-badge>
     </ion-tab-button>
     <ion-tab-button (click)="handleTaps('/tab-offers/tabs/my-offers')">
       <ion-icon name="list"></ion-icon>
       <ion-label>Mis ofertas</ion-label>
-      <ion-badge color="secondary">9</ion-badge>
+      <ion-badge color="secondary">{{ badgeMyOffers }}</ion-badge>
     </ion-tab-button>
     <ion-tab-button (click)="handleTaps('/tab-offers/tabs/offers-archived')">
       <ion-icon name="archive"></ion-icon>
       <ion-label>Archivadas</ion-label>
-      <ion-badge color="secondary">2</ion-badge>
+      <ion-badge color="secondary">{{ badgeOffersArchivated }}</ion-badge>
     </ion-tab-button>
   </ion-tab-bar>
 </ion-tabs>

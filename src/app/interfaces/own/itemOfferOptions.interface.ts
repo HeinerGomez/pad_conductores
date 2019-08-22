@@ -1,4 +1,8 @@
+import { Offer } from 'src/app/models/offer';
+
 export interface ItemOfferOptions {
-    'handleTapItemOffer': () => void,
-    'handleTapButtonArchive'?: () => void
+    'handleTapItemOffer': (offer: Offer) => void,
+    'handleTapButtonArchive'?: () => void,
+    'buttonArchive'?: boolean,
+    'hasChip'?: boolean
 }

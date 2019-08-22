@@ -12,7 +12,7 @@ import { Offer } from 'src/app/models/offer';
 export class ItemOfferComponent implements OnInit {
 
   @Input('itemOffer') public itemOffer: Offer;
-  @Input('options') private options: ItemOfferOptions;
+  @Input('options') public options: ItemOfferOptions;
 
   constructor(private router: Router) { }
 
@@ -26,7 +26,7 @@ export class ItemOfferComponent implements OnInit {
    * @returns void
    */
   public handleTapItemOffer(): void {
-    this.options.handleTapItemOffer();
+    this.options.handleTapItemOffer(this.itemOffer);
   }
 
   /**

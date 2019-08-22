@@ -12,17 +12,42 @@ export class OffersApiService {
 
   constructor(private http: HttpClient) { }
 
+  public getOffersAvailable(): Observable<Offer[]> {
+    return this.http.get(`${environment.URL_API}/offers/getOffersAvailable`).pipe(
+      map((offers: any) => {
+        console.log("My offers: ", offers);
+        if (offers.length) {
+          return offers.map((offer: any) => new Offer(offer[0]));
+        }
+        return [];
+      })
+    );
+  }
 
   public getOffersApplied(driverId: number): Observable<Offer[]> {
     return this.http.get(`${environment.URL_API}/offers/getMyOffer/${driverId}`).pipe(
-      map((offers: any) => offers.map((offer: any) => new Offer(offer[0])))
+      map((offers: any) => {
+        if (offers.length) {
+          return offers.map((offer: any) => new Offer(offer[0]));
+        }
+        return [];
+      })
     );
   }
 
   public getOffersConfirmed(driverId: number): Observable<Offer[]> {
     return this.http.get(`${environment.URL_API}/offers/getMyOffer/${driverId}?ind_confirm=1`).pipe(
-      map((offers: any) => offers.map((offer: any) => new Offer(offer[0])))
+      map((offers: any) => {
+        if (offers.length) {
+          return offers.map((offer: any) => new Offer(offer[0]));
+        }
+        return [];
+      })
     );
+  }
+
+  public cancelOrAppliedOffer(data: any): Observable<any> {
+    return this.http.post(`${environment.URL_API}/offers/driver`, data);
   }
 
 }

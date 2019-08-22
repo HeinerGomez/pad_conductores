@@ -1,7 +1,9 @@
 <ion-header>
   <ion-toolbar>
     <ion-title text-center>Detalle de la oferta</ion-title>
-    <ion-back-button></ion-back-button>
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
@@ -11,7 +13,7 @@
       <ion-row>
         <ion-col>
           <ion-badge color="success">
-            <ion-text [ngStyle]="{'font-size': '16px'}">Calificaciones de la empresa</ion-text>
+            <ion-text [ngStyle]="{'font-size': '16px'}">Calificación de la empresa</ion-text>
           </ion-badge>
         </ion-col>
       </ion-row>
@@ -23,13 +25,13 @@
             <ion-icon name="star" color="secondary"></ion-icon>
             <ion-icon name="star" color="secondary"></ion-icon>
             <ion-icon name="star" color="secondary"></ion-icon>
-            <ion-icon name="star-half" color="secondary"></ion-icon>
+            <ion-icon name="star-outline" color="secondary"></ion-icon>
             <ion-badge [ngStyle]="{'margin-left': '5px'}" color="light">
-              <ion-text color="tertiary"><b>4.5</b></ion-text>
+              <ion-text color="tertiary"><b>{{ offer.serviceRating }}</b></ion-text>
             </ion-badge>
           </ion-chip>
         </ion-col>
-        <ion-col size-sm="6" size-xs="12">
+        <!-- <ion-col size-sm="6" size-xs="12">
           <ion-chip color="tertiary" >
             <ion-label [ngStyle]="{'margin-right': '5px'}"><b>Seguridad: </b></ion-label>
             <div icon-img><img src="assets/imgs/shield.png" /></div>
@@ -41,7 +43,7 @@
               <ion-text color="tertiary"><b>4.5</b></ion-text>
             </ion-badge>
           </ion-chip>
-        </ion-col>
+        </ion-col> -->
       </ion-row>
     </ion-grid>
   </div>
@@ -55,33 +57,33 @@
           </ion-text>
           <ion-text>
             <ion-note>
-              BOGOTA D.C - BARRANCABERMEJA
+              {{ offer.nameOriginCity }} - {{ offer.nameDestinationCity }}
             </ion-note>
           </ion-text>
         </ion-label>
       </ion-item>
       <ion-item>
-        <ion-icon name="square-outline" size="large" color="tertiary" slot="start"></ion-icon>
+        <ion-icon [name]="offer.loadFree ? 'checkbox-outline' : 'square-outline'" size="large" color="tertiary" slot="start"></ion-icon>
         <ion-label text-wrap>
           <ion-text>
             <h3><b>LIBRE DE CARGUE</b></h3>
           </ion-text>
           <ion-text>
             <ion-note>
-              NO
+             {{ offer.loadFree == true ? 'SI' : 'NO' }} 
             </ion-note>
           </ion-text>
         </ion-label>
       </ion-item>
       <ion-item>
-        <ion-icon name="checkbox-outline" size="large" color="tertiary" slot="start"></ion-icon>
+        <ion-icon [name]="offer.downloadFree ? 'checkbox-outline' : 'square-outline'" size="large" color="tertiary" slot="start"></ion-icon>
         <ion-label text-wrap>
           <ion-text>
             <h3><b>LIBRE DE DESCARGUE</b></h3>
           </ion-text>
           <ion-text>
             <ion-note>
-              SI
+              {{ offer.downloadFree == true ? 'SI' : 'NO' }}
             </ion-note>
           </ion-text>
         </ion-label>
@@ -94,7 +96,7 @@
           </ion-text>
           <ion-text>
             <ion-note>
-              ARROZ
+              {{ offer.merchandise }}
             </ion-note>
           </ion-text>
         </ion-label>
@@ -107,7 +109,7 @@
           </ion-text>
           <ion-text>
             <ion-note>
-              28 Tn.
+              {{ offer.weight }} Tn.
             </ion-note>
           </ion-text>
         </ion-label>
@@ -120,7 +122,7 @@
           </ion-text>
           <ion-text>
             <ion-note>
-              2019-04-20 8:30 AM
+              {{ offer.loadDate + ' ' + offer.loadTime }}
             </ion-note>
           </ion-text>
         </ion-label>
@@ -133,7 +135,7 @@
           </ion-text>
           <ion-text>
             <ion-note>
-              {{ '1200000' | currency:'$' }}
+              {{ offer.freight | currency:'$' }}
             </ion-note>
           </ion-text>
         </ion-label>
