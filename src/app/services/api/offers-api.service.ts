@@ -3,7 +3,7 @@ import { Offer } from 'src/app/models/offer';
 import { HttpClient } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
 import { map } from 'rxjs/operators';
-import { Observable } from 'rxjs';
+import { Observable, Observer } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -47,6 +47,10 @@ export class OffersApiService {
 
   public cancelOrAppliedOffer(data: any): Observable<any> {
     return this.http.post(`${environment.URL_API}/offers/driver`, data);
+  }
+
+  public fullfilledOffer(data: any): Observable<any> {
+    return this.http.post(`${environment.URL_API}/offers/confirmDriverCompliment`, data);
   }
 
 }

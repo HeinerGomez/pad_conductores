@@ -3,7 +3,10 @@ import { SignaturePad } from 'angular2-signaturepad/signature-pad';
 import { MenuController } from '@ionic/angular';
 import { Camera, CameraOptions } from '@ionic-native/camera/ngx';
 import { UtilitiesService } from '../../services/utilities.service';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { Offer } from 'src/app/models/offer';
+import { OffersApiService } from 'src/app/services/api/offers-api.service';
 
 @Component({
   selector: 'app-fulfilled-offer',
@@ -12,6 +15,7 @@ import { Router } from '@angular/router';
 })
 export class FulfilledOfferPage implements OnInit, AfterViewInit {
 
+  public reactiveForm: FormGroup;
   @ViewChild(SignaturePad) signaturePad: SignaturePad;
 
   public signaturePadOptions: Object = {
@@ -20,11 +24,21 @@ export class FulfilledOfferPage implements OnInit, AfterViewInit {
     'canvasHeight': 250
   };
   public imagePlaceholder: String;
+  private offer: Offer;
 
-  constructor(private menuController: MenuController, private camera: Camera, 
-              private utilitiesServices: UtilitiesService, private router: Router) {
+  constructor(
+    private menuController: MenuController, private camera: Camera, 
+    private utilitiesServices: UtilitiesService, private router: Router, 
+    private formBuilder: FormBuilder, public activatedRoute: ActivatedRoute, 
+    private offersAPIService: OffersApiService
+  ) {
     this.menuController.enable(false);
     this.imagePlaceholder = 'assets/imgs/img_placeholder_110_110.png';
+    this.reactiveForm = this.formBuilder.group({
+      'observations': ['', [Validators.required]]
+    });
+    const offer = this.activatedRoute.snapshot.queryParams as Offer;
+    this.offer = Object.assign(new Offer(), offer);
   }
 
   ngOnInit() {
@@ -94,10 +108,26 @@ export class FulfilledOfferPage implements OnInit, AfterViewInit {
    * @returns void
    */
   public handleTapButtonFulfilled(): void {
-    this.utilitiesServices.showInfoAlert('Cumplido', 'Se ha realizado el cumplido exitosamente').then(() => {
-      this.router.navigate(['/tab-offers/tabs/my-offers']).then(() => {
-        this.menuController.enable(true);
+    const data = {
+      'data': [
+        {
+          "route": this.imagePlaceholder,
+          "observation": this.reactiveForm.get('observations').value,
+          "offer_id": this.offer.id,
+          "signature": this.signaturePad.toDataURL()
+        }
+      ]
+    };
+    this.utilitiesServices.showLoading('Realizando el cumplido');
+    this.offersAPIService.fullfilledOffer(data).subscribe(response => {
+      this.utilitiesServices.closeLoading();
+      this.utilitiesServices.showInfoAlert('Cumplido', 'Se ha realizado el cumplido exitosamente').then(() => {
+        this.router.navigate(['/tab-offers/tabs/my-offers']).then(() => {
+          this.menuController.enable(true);
+        });
       });
+    }, error => {
+      this.utilitiesServices.closeLoading();
     });
   }
 

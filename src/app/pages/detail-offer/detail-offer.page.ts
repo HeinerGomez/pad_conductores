@@ -97,6 +97,7 @@ export class DetailOfferPage {
    */
   public handleTapFulfilledOffer(): void {
     this.router.navigate(['fulfilled-offer']);
+    this.navController.navigateForward('/fulfilled-offer', {queryParams: this.offer})
   }
 
    /**

@@ -1,11 +1,13 @@
 <ion-header>
   <ion-toolbar>
     <ion-title text-center>Cumplido</ion-title>
-    <ion-back-button></ion-back-button>
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
-<ion-content padding>
+<ion-content padding [formGroup]="reactiveForm">
   <h3 text-center>Firma</h3>
   <ion-grid>
     <ion-row>
@@ -27,7 +29,7 @@
     <ion-label position="floating">
       Observaciones
     </ion-label>
-    <ion-textarea name="observations" row="5" col="5"></ion-textarea>
+    <ion-textarea name="observations" row="5" col="5" formControlName="observations"></ion-textarea>
   </ion-item>
   <ion-grid m-top-20>
     <ion-row>
@@ -43,7 +45,7 @@
   </ion-grid>
 </ion-content>
 <ion-footer>
-  <ion-button color="success" expand="block" (click)="handleTapButtonFulfilled()">
+  <ion-button color="success" expand="block" [disabled]="reactiveForm.invalid" (click)="handleTapButtonFulfilled()">
     CUMPLIR
   </ion-button>
 </ion-footer>

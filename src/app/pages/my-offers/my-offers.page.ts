@@ -96,13 +96,12 @@ export class MyOffersPage implements OnInit {
   /**
    * @description Tiene como objetivo definir las opciones(opciones, funciones), que tienen asociados al componente "ItemOffer"
    * @author Heiner Gómez <alejandro.gomez@grupooet.com>
-   * @date 2019-04-29
    * @param event
    * @returns void
    */
   private defineItemOptions(): ItemOfferOptions {
     const params: ParamsOfDetailOffer = {
-      'origin': this.shouldShowOffersApplied === true ? OFFER.ORIGIN_APPLIED : OFFER.ORIGIN_CONFIRMED,
+      'origin': this.shouldShowOffersApplied === true ? OFFER.ORIGIN_APPLIED : OFFER.ORIGIN_FULFILLED,
       'buttonArchive': false,
     };
     return {
