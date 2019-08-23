@@ -37,7 +37,7 @@ export class ItemOfferComponent implements OnInit {
    * @returns void
    */
   public handleTapButtonArchive(): void {
-    this.options.handleTapButtonArchive();
+    this.options.handleTapButtonArchive(this.itemOffer);
   }
 
 }

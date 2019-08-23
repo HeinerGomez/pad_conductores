@@ -4,8 +4,10 @@
 
 export const environment = {
   production: false,
-  URL_API: 'https://dev.intrared.net:9443/pad_backend/api',
-  URL_STORAGE: 'https://dev.intrared.net:9443/pad_backend/storage/'
+  // URL_API: 'https://dev.intrared.net:9443/pad_backend/api',
+  // URL_STORAGE: 'https://dev.intrared.net:9443/pad_backend/storage/'
+  URL_STORAGE: 'https://logitech.intrared.net/ap/pad/v2/backend/storage/',
+  URL_API: 'https://logitech.intrared.net/ap/pad/v2/backend/api',
 };
 
 /*

@@ -79,7 +79,7 @@ export class Offer {
 
 
     private build(offer: any) {
-        this._id = offer.id;
+        this._id = offer.offer_id;
         this._nameOriginCity = offer.data_offer[0].origin_town.name;
         this._nameDestinationCity = offer.data_offer[0].destination_town.name;
         this._weight = offer.data_offer[0].departure_weight;

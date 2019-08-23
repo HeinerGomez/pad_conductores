@@ -11,6 +11,11 @@
     <ion-refresher-content></ion-refresher-content>
   </ion-refresher>
   <ion-list lines="none">
-    <!-- <app-item-offer *ngFor="let item of items" [itemOffer]="item" [options]="itemOptions"></app-item-offer> -->
+    <app-item-offer *ngFor="let offer of offers" [itemOffer]="offer" [options]="itemOptions"></app-item-offer>
   </ion-list>
+  <ion-fab vertical="bottom" horizontal="end" slot="fixed">
+    <ion-fab-button color="danger" (click)="handleClickTrashButton()">
+      <ion-icon name="trash"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
 </ion-content>

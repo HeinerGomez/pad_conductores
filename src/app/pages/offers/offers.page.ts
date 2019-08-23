@@ -26,7 +26,8 @@ export class OffersPage {
   constructor(
     private menuController: MenuController, private router: Router,
     private offerAPIService: OffersApiService, private navController: NavController, 
-    private dynamicBadgesService: DynamicBadgeService
+    private dynamicBadgesService: DynamicBadgeService, private storageDataService: StorageDataService,
+    private utilsService: UtilitiesService
   ) { 
     this.menuController.enable(true);
     this.enabledRefresh = true;
@@ -41,7 +42,11 @@ export class OffersPage {
   private getOffersAvailable(): void {
     this.offerAPIService.getOffersAvailable().subscribe((offers: Offer[]) => {
       this.offers = offers;
-      this.dynamicBadgesService.offersAvailable = this.offers.length;
+      this.offers = this.storageDataService.filterOffers(this.offers);
+      setTimeout(() => {
+        this.dynamicBadgesService.offersAvailable = this.offers.length;
+      }, 1500)
+      
     });
   }
 
@@ -65,8 +70,13 @@ export class OffersPage {
         };
         this.navController.navigateForward('/detail-offer', {queryParams: _params});
       },
-      'handleTapButtonArchive': () => {
-        console.log("Archivado");
+      'handleTapButtonArchive': (offer: Offer) => {
+        this.storageDataService.setOffer(offer).then(() => {
+          this.getOffersAvailable();
+          this.utilsService.showSnackbar('Se ha archivado la oferta', 'success');
+        }).catch(error => {
+          this.utilsService.showSnackbar('No fue posible arhivar la oferta', 'danger');
+        });
       }, 
       'buttonArchive': true,
       'hasChip': true

@@ -15,9 +15,8 @@ export class OffersApiService {
   public getOffersAvailable(): Observable<Offer[]> {
     return this.http.get(`${environment.URL_API}/offers/getOffersAvailable`).pipe(
       map((offers: any) => {
-        console.log("My offers: ", offers);
         if (offers.length) {
-          return offers.map((offer: any) => new Offer(offer[0]));
+          return offers[0].map((offer: any) => new Offer(offer));
         }
         return [];
       })

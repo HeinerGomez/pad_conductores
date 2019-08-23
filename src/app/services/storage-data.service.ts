@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { NativeStorage } from '@ionic-native/native-storage/ngx';
 import { ConfigAppStorage } from '../interfaces/own/configAppStorage.interf';
 import { UserInSession } from '../interfaces/own/userInSession.interf';
+import { Offer } from '../models/offer';
 
 @Injectable({
   providedIn: 'root'
@@ -63,6 +64,82 @@ export class StorageDataService {
    */
   public removeUserInSession(): Promise<any> {
     return this.localStorage.remove('user');
+  }
+
+  /**
+   * @description Tiene como objetivo validar si una oferta existe y si no agregarla al almacenamiento
+   * @author Heiner Gómez <alejandro.gomez@grupooet.com>
+   * @param void
+   * @returns Promise<any>
+   */
+  public setOffer(offer: Offer): Promise<any> {
+    // valido si la oferta ya esta almacenada
+    return this.getOffers().then((offers: Offer[]) => {
+      return this.storageOffer(offer, false);
+    }).catch(error => {
+      // si hay un error, se asume que no hay ofertas almacenadas
+      return this.storageOffer(offer, true);
+    })
+  }
+
+  /**
+   * @description Tiene como objetivo filtrar las ofertas y dejar solo las que no estan almacenadas
+   * @author Heiner Gómez <alejandro.gomez@grupooet.com>
+   * @param void
+   * @returns Promise<any>
+   */
+  public filterOffers(offers: Offer[]): any {
+    this.getOffers().then((storageOffers) => {
+      let _storageOffers: Offer[] = (storageOffers as Offer[]).map((storageOffer: Offer) => Object.assign(new Offer(), storageOffer));
+      for (let _storageOffer of _storageOffers) {
+        let counter = 0;
+        for (let offer of offers) {
+          if (offer.id == _storageOffer.id) {
+            offers.splice(counter, 1);
+          }
+          counter ++;
+        }
+      }
+    });
+    return offers;
+  }
+
+   /**
+   * @description Tiene como objetivo obtener todas las ofertas almacenadas
+   * @author Heiner Gómez <alejandro.gomez@grupooet.com>
+   * @param void
+   * @returns Promise<any>
+   */
+  public getOffers(): Promise<any> {
+    return this.localStorage.getItem('offers');
+  }
+
+  /**
+   * @description Tiene como objetivo almacenar una oferta
+   * @author Heiner Gómez <alejandro.gomez@grupooet.com>
+   * @param offer: Offer - La oferta a almacenar
+   * @param initialOffer: boolean
+   * @returns Promise<any>
+   */
+  private storageOffer(offer: Offer, initialOffer: boolean = false): Promise<any> {
+    let offers: Offer[] = [];
+    offers.push(offer);
+    if (!initialOffer) {
+      this.getOffers().then((_offers: Offer[]) => {
+        offers.push(... _offers);
+        return this.localStorage.setItem('offers', offers);
+      });
+    } else {
+      return this.localStorage.setItem('offers', offers);
+    }
+    
+  }
+
+  /**
+   * 
+   */
+  public cleanOffers(): Promise<any> {
+    return this.localStorage.remove('offers');
   }
 
 }
