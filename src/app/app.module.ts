@@ -11,6 +11,7 @@ import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 /* Providers */
 import { NativeStorage } from '@ionic-native/native-storage/ngx';
 import { Camera } from '@ionic-native/camera/ngx';
+import { OneSignal } from '@ionic-native/onesignal/ngx';
 
 /* Modulos propios */
 import { GeneralModalPageModule } from './modals/general-modal/general-modal.module';
@@ -63,7 +64,8 @@ import { ErrorsService } from './services/interceptors/errors.service';
     Camera,
     {
 			provide: HTTP_INTERCEPTORS, useClass: ErrorsService, multi: true,
-		},
+    },
+    OneSignal
   ],
   bootstrap: [AppComponent]
 })

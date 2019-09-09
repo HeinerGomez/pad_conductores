@@ -78,13 +78,15 @@ export class VehicleAssociationPage implements OnInit {
    * @param void
    * @returns void
    */
-  public handleTapContinue(): void {
+  public async handleTapContinue() {
     // construyo el objeto que se va a enviar al convert
     const data = {
       ... this.registerData,
       ... this.reactiveForm.value
     };
-    this.registerAPIService.createRequestRegister(data).subscribe((response: any) => {
+    const registerObserver = await this.registerAPIService.createRequestRegister(data);
+    registerObserver.subscribe((response: any) => {
+      console.log("The response: ", response);
       if (response.hasOwnProperty('data')) {
         this.openGeneralModal();
       } else {
