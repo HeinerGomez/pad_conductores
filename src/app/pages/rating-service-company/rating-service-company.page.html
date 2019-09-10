@@ -8,7 +8,13 @@
 </ion-header>
 
 <ion-content padding>
+  <ion-refresher slot="fixed" (ionRefresh)="handleSlideDownRefresh($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
+  <div message-info *ngIf="!offersPerQualification.length" >
+      <p><b>No existen ofertas disponibles</b></p>
+  </div>
   <ion-list lines="none">
-    <app-item-offer *ngFor="let item of items" [itemOffer]="item" [options]="itemOptions"></app-item-offer>
+    <app-item-offer *ngFor="let offer of offersPerQualification" [itemOffer]="offer" [options]="itemOptions"></app-item-offer>
   </ion-list>
 </ion-content>

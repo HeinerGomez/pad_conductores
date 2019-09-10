@@ -87,7 +87,7 @@ export class VehicleAssociationPage implements OnInit {
     const registerObserver = await this.registerAPIService.createRequestRegister(data);
     registerObserver.subscribe((response: any) => {
       console.log("The response: ", response);
-      if (response.hasOwnProperty('data')) {
+      if (response == null || response.hasOwnProperty('data')) {
         this.openGeneralModal();
       } else {
         this.utilsService.showSnackbar('Ha ocurrido un error desconocido', 'danger');

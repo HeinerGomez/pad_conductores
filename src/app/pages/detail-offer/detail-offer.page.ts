@@ -47,8 +47,8 @@ export class DetailOfferPage {
       "offer_id": this.offer.id,
       "vehicle_id": "1", // temporal
       "offer_state_id": "2", // aplicado,
-      "latitude":"23234234234", // temporal
-      "longitude":"-2131243223" // temporal
+      "latitude":"4.662078", // temporal
+      "longitude":"-74.057851" // temporal
     };
     this.utilitiesService.showLoading('Aplicando A Oferta');
     this.offerAPIService.cancelOrAppliedOffer(data).subscribe(() => {

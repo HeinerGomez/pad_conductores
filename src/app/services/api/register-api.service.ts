@@ -33,7 +33,7 @@ export class RegisterApiService {
   }
 
   public getConfigurations(): Observable<any> {
-    return this.http.get(`${environment.URL_API}/configurations`).pipe(
+    return this.http.get(`${environment.URL_API}/combinationConfigurations`).pipe(
       map((_configurations: any) => _configurations.data.map((_configuration: any) => new Configuration(_configuration)))
     );
   }

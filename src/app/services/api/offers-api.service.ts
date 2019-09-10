@@ -45,6 +45,17 @@ export class OffersApiService {
     );
   }
 
+  public getOffersPerQualification(driverId: number): Observable<Offer[]> {
+    return this.http.get(`${environment.URL_API}/offers/getMyOffer/${driverId}?ind_confirm=2`).pipe(
+      map((offers: any) => {
+        if (offers.length) {
+          return offers.map((offer: any) => new Offer(offer[0]));
+        }
+        return [];
+      })
+    );
+  }
+
   public cancelOrAppliedOffer(data: any): Observable<any> {
     return this.http.post(`${environment.URL_API}/offers/driver`, data);
   }

@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { QuestionServiceRating } from '../../interfaces/own/questionServiceRating.interface';
 import { StarRating } from '../../interfaces/own/starRating.interfaces';
-import { ModalController } from '@ionic/angular';
+import { ModalController, NavController } from '@ionic/angular';
+import { UtilitiesService } from 'src/app/services/utilities.service';
 
 @Component({
   selector: 'app-rating-service-company-modal',
@@ -14,7 +15,10 @@ export class RatingServiceCompanyModalPage implements OnInit {
   public questions: QuestionServiceRating[] = [];
   public isValidServiceRating: boolean;
 
-  constructor(private modalController: ModalController) {
+  constructor(
+    private modalController: ModalController, private utilsService: UtilitiesService,
+    private navController: NavController
+  ) {
     this.isValidServiceRating = false;
     let stars: StarRating[] = [];
     stars.push({
@@ -130,6 +134,13 @@ export class RatingServiceCompanyModalPage implements OnInit {
    */
   public handleTapCloseButton(): void {
     this.modalController.dismiss();
+  }
+
+  public handleTapSendButtom(): void {
+    this.utilsService.showSnackbar('Calificación Realizada Con Exíto', 'success');
+    this.modalController.dismiss().then(() => {
+      this.navController.navigateRoot('/tab-offers/tabs/offers');
+    });
   }
 
 }

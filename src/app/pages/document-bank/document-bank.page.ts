@@ -44,7 +44,7 @@ export class DocumentBankPage implements OnInit {
    */
   private getDocumentList(): void {
     // id temporal 
-    const idSubscription = 1;
+    const idSubscription = 3;
     this.documentAPIService.getDocuments(idSubscription).subscribe((_documents: Document[]) => {
       this.documentsForDriver = _documents.filter((document: Document) => document.typeResource == 1);
       this.documentsForVehicle = _documents.filter((document: Document) => document.typeResource == 6);

@@ -38,11 +38,12 @@ export class Configuration {
     }
 
     private build(configuration: any) {
+        console.log("The configurations: ", configuration);
         this._id = configuration.id;
-        this._configurationTypeId = configuration.configuration_type_id;
-        this._name = configuration.name;
-        this._description = configuration.description;
-        this._createdAt = configuration.date_entry;
+        this._configurationTypeId = 1;
+        this._name = configuration.configuration_name;
+        this._description = configuration.trailer_description;
+        this._createdAt = configuration.created_at;
         this._isEnabled = configuration.is_enabled == 1 ? true : false;
     }
 }

@@ -37,7 +37,7 @@
     </ion-grid>
   </form>
   <ion-fab vertical="bottom" horizontal="end" slot="fixed">
-    <ion-fab-button color="success" [disabled]="!isValidServiceRating">
+    <ion-fab-button color="success" [disabled]="!isValidServiceRating" (click)="handleTapSendButtom()">
       <ion-icon name="send"></ion-icon>
     </ion-fab-button>
   </ion-fab>
