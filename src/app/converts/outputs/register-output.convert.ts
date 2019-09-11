@@ -10,7 +10,7 @@ export class RegisterOutput {
                     "email": this.data.email,
                     "password": this.data.password,
                     "password_confirmation": this.data.repeatPassword,
-                    "role_id": 37, // va quemado
+                    "role_id": 51, // va quemado
                     "device": device
                 },
                 "subscriptions":{

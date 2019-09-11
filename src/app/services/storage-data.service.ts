@@ -100,6 +100,8 @@ export class StorageDataService {
           counter ++;
         }
       }
+    }).catch(error => {
+      console.log("El error: ", error);
     });
     return offers;
   }

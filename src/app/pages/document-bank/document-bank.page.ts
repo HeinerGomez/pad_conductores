@@ -11,6 +11,7 @@ import { UtilitiesService } from '../../services/utilities.service';
 import { DocumentBankApiService } from 'src/app/services/api/document-bank-api.service';
 import { Document } from 'src/app/models/document';
 import { SideDocument } from 'src/app/models/side-document';
+import { UserService } from 'src/app/services/api/user.service';
 
 @Component({
   selector: 'app-document-bank',
@@ -22,16 +23,27 @@ export class DocumentBankPage implements OnInit {
   public documentsForDriver: Document[];
   public documentsForVehicle: Document[];
   public behaviorCardDocument: BehaviorCardDocument;
+  private subscriptionId: number;
   
   constructor(
     private camera: Camera, private platform: Platform,
     private modalController: ModalController, private utilitiesService: UtilitiesService,
-    private documentAPIService: DocumentBankApiService
-  ) {}
+    private documentAPIService: DocumentBankApiService,
+    private userService: UserService
+  ) {
+    this.subscriptionId = 0;
+  }
 
   ngOnInit() {
-    this.getDocumentList();
     this.behaviorCardDocument = this.defineBehaviorForCardDocument();
+    const user: any = localStorage.getItem('user');
+      let _user = JSON.parse(user);
+      this.userService.getSubscribe(_user.id).subscribe((response: any) => {
+        if (response != null) {
+          this.subscriptionId = response;
+        }
+        this.getDocumentList();
+      });
   }
 
   /**
@@ -42,15 +54,19 @@ export class DocumentBankPage implements OnInit {
    * @param void
    * @returns void
    */
-  private getDocumentList(): void {
-    // id temporal 
-    const idSubscription = 3;
-    this.documentAPIService.getDocuments(idSubscription).subscribe((_documents: Document[]) => {
-      this.documentsForDriver = _documents.filter((document: Document) => document.typeResource == 1);
-      this.documentsForVehicle = _documents.filter((document: Document) => document.typeResource == 6);
-      console.log("Conductores: ", this.documentsForDriver);
-      console.log("Vehiculo: ", this.documentsForVehicle);
-    });
+  private getDocumentList(): void { 
+    const idSubscription = this.subscriptionId;
+    if (idSubscription !== 0) {
+      this.documentAPIService.getDocuments(idSubscription).subscribe((_documents: Document[]) => {
+        this.documentsForDriver = _documents.filter((document: Document) => document.typeResource == 1);
+        this.documentsForVehicle = _documents.filter((document: Document) => document.typeResource == 6);
+        console.log("Conductores: ", this.documentsForDriver);
+        console.log("Vehiculo: ", this.documentsForVehicle);
+      });
+    } else {
+      this.utilitiesService.showSnackbar('Usted no cuenta con una suscripción activa, por favor comuniquese con el administrador', 'warning');
+    }
+    
   }
 
   /**

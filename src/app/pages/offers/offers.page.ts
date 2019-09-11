@@ -45,8 +45,7 @@ export class OffersPage {
       this.offers = this.storageDataService.filterOffers(this.offers);
       setTimeout(() => {
         this.dynamicBadgesService.offersAvailable = this.offers.length;
-      }, 1500)
-      
+      }, 1500);
     });
   }
 

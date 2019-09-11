@@ -47,7 +47,7 @@ export class RegisterApiService {
   }
 
   private async returnResponse(convertedData: any) {
-    return await this.http.post(`${environment.URL_API}/users/`, convertedData);
+    return await this.http.post(`${environment.URL_API}/subscriptions/store`, convertedData);
   }
 
   private async getDeviceId() {

@@ -29,6 +29,7 @@ import { ChangePasswordModalPageModule } from './modals/change-password-modal/ch
 import { RatingServiceCompanyModalPage } from './modals/rating-service-company-modal/rating-service-company-modal.page';
 import { RatingServiceCompanyModalPageModule } from './modals/rating-service-company-modal/rating-service-company-modal.module';
 import { ErrorsService } from './services/interceptors/errors.service';
+import { JwtService } from './services/interceptors/jwt.service';
 
 @NgModule({
   declarations: [
@@ -65,6 +66,9 @@ import { ErrorsService } from './services/interceptors/errors.service';
     {
 			provide: HTTP_INTERCEPTORS, useClass: ErrorsService, multi: true,
     },
+    {
+			provide: HTTP_INTERCEPTORS, useClass: JwtService, multi: true,
+		},
     OneSignal
   ],
   bootstrap: [AppComponent]

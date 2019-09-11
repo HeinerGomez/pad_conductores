@@ -28,12 +28,10 @@ export class TabOffersPage implements OnInit, OnDestroy, DoCheck {
   }
 
   ngDoCheck() {
-    console.warn("Pasa!!!!!");
     this.observableDataDependency = this.dataDependencyObservable.watch().subscribe((shouldGet: boolean) => {
       if (shouldGet) {
         this.badgeOffers = this.dynamicBadgeService.offersAvailable;
         this.badgeMyOffers = this.dynamicBadgeService.badgeMyOffers;
-        console.warn("This is my offers: ", this.badgeMyOffers);
         this.badgeOffersArchivated = this.dynamicBadgeService.badgeOffersArchivated;
       }
     });
