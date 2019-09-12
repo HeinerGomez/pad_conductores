@@ -14,6 +14,7 @@ export class CardDocumentComponent implements OnInit {
 
   @Input('cardDocument') public cardDocument: Document;
   @Input('behavior') private behavior: BehaviorCardDocument;
+  @Input('idSubscription') private idSubscription: number;
   private imgPlaceholder: string;
   private imgPlaceholderSide: string;
 
@@ -70,7 +71,7 @@ export class CardDocumentComponent implements OnInit {
 
   public handleTapUploadDocuments(): void {
     // TODO ...
-    const documentBankOutput = new DocumentBankOutput(this.cardDocument);
+    const documentBankOutput = new DocumentBankOutput(this.cardDocument, this.idSubscription);
     const data = documentBankOutput.convertDocumentBankForRequestAPI();
     this.utilService.showLoading('Subiendo Documentos');
     console.log("Esta es la data que se envia al subir una imagen", data);

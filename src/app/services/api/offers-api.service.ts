@@ -4,6 +4,7 @@ import { HttpClient } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
 import { map } from 'rxjs/operators';
 import { Observable, Observer } from 'rxjs';
+import { Question } from 'src/app/models/question';
 
 @Injectable({
   providedIn: 'root'
@@ -62,6 +63,13 @@ export class OffersApiService {
 
   public fullfilledOffer(data: any): Observable<any> {
     return this.http.post(`${environment.URL_API}/offers/confirmDriverCompliment`, data);
+  }
+
+  public getDependencies(): Observable<any> {
+    const resourceId = 0; // preguntas de calificacion de la oferta
+    return this.http.get(`${environment.URL_API}/questions/questionsByResourceType/${resourceId}`).pipe(
+      map((_questions: any) => _questions.map((_question: any) => new Question(_question))),
+    );
   }
 
 }

@@ -3,6 +3,8 @@ export class Question {
     private _id: number;
     private _name: string;
     private _createdAt: string;
+    private _indicatorQuestion: number;
+    private 
 
     constructor(questionsAPI: any = false) {
         if (questionsAPI) {
@@ -22,10 +24,15 @@ export class Question {
         return this._createdAt;
     }
 
+    public get indicatorQuestion(): number {
+        return this._indicatorQuestion;
+    }
+
     private build(questionsAPI: any) {
         this._id = questionsAPI.id;
         this._name = questionsAPI.name;
         this._createdAt = questionsAPI.created_at;
+        this._indicatorQuestion = questionsAPI.ind_question;
     }
 
 }

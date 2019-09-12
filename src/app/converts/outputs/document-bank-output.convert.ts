@@ -3,7 +3,7 @@ import { SideDocument } from '../../models/side-document';
 
 export class DocumentBankOutput {
 
-    constructor(private document: CardDocument) {}
+    constructor(private document: CardDocument, private idSubscription: number) {}
 
     public convertDocumentBankForRequestAPI(): any {
         let documentBankForRequest = [];
@@ -14,7 +14,7 @@ export class DocumentBankOutput {
                 'route': side.pathImage.startsWith('../assets') ? '' : side.pathImage,
                 'document_resource_type_id': this.document.typeResource,
                 'side_number': sideNumber,
-                'subscription_id': 1, // temporal
+                'subscription_id': this.idSubscription,
                 'observation': '',
                 'state': side.state
             });

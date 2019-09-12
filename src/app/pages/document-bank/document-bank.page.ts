@@ -23,7 +23,7 @@ export class DocumentBankPage implements OnInit {
   public documentsForDriver: Document[];
   public documentsForVehicle: Document[];
   public behaviorCardDocument: BehaviorCardDocument;
-  private subscriptionId: number;
+  public subscriptionId: number;
   
   constructor(
     private camera: Camera, private platform: Platform,

@@ -110,6 +110,9 @@ export class DetailOfferPage {
   public async handleTapServiceRating() {
     const modal = await this.modalController.create({
       'component': RatingServiceCompanyModalPage,
+      'componentProps': {
+        'offerId': this.offer.id
+      }
     });
     modal.present();
   }

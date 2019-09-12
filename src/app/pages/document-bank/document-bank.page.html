@@ -10,7 +10,7 @@
 <ion-content>
   <h2 text-center>Documentos Personales</h2>
   <div scrollable-x divider>
-    <app-card-document *ngFor="let document of documentsForDriver" [cardDocument]="document" [behavior]="behaviorCardDocument"></app-card-document>    
+    <app-card-document *ngFor="let document of documentsForDriver" [cardDocument]="document" [behavior]="behaviorCardDocument" [idSubscription]="subscriptionId"></app-card-document>    
   </div>
   <h2 text-center>Documentos Vehiculo</h2>
   <div scrollable-x divider>

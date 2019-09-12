@@ -1,8 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { QuestionServiceRating } from '../../interfaces/own/questionServiceRating.interface';
 import { StarRating } from '../../interfaces/own/starRating.interfaces';
-import { ModalController, NavController } from '@ionic/angular';
+import { ModalController, NavController, NavParams } from '@ionic/angular';
 import { UtilitiesService } from 'src/app/services/utilities.service';
+import { Question } from 'src/app/models/question';
+import { OffersApiService } from 'src/app/services/api/offers-api.service';
+import { RatingServiceCompanyOutput } from '../../converts/outputs/rating-service-company-output.convert';
 
 @Component({
   selector: 'app-rating-service-company-modal',
@@ -10,76 +13,57 @@ import { UtilitiesService } from 'src/app/services/utilities.service';
   styleUrls: ['./rating-service-company-modal.page.scss'],
 })
 export class RatingServiceCompanyModalPage implements OnInit {
-
+ 
   public stateStar: boolean = false;
   public questions: QuestionServiceRating[] = [];
   public isValidServiceRating: boolean;
+  private offerId: number;
 
   constructor(
     private modalController: ModalController, private utilsService: UtilitiesService,
-    private navController: NavController
+    private navController: NavController, private offersAPIService: OffersApiService,
+    private navParams: NavParams
   ) {
     this.isValidServiceRating = false;
-    let stars: StarRating[] = [];
-    stars.push({
-      'id': 1,
-      'isMarked': false,
-      'path': 'assets/imgs/star-outline.png'
-    });
-    stars.push({
-      'id': 2,
-      'isMarked': false,
-      'path': 'assets/imgs/star-outline.png'
-    });
-    stars.push({
-      'id': 3,
-      'isMarked': false,
-      'path': 'assets/imgs/star-outline.png'
-    });
-    stars.push({
-      'id': 4,
-      'isMarked': false,
-      'path': 'assets/imgs/star-outline.png'
-    });
-    stars.push({
-      'id': 5,
-      'isMarked': false,
-      'path': 'assets/imgs/star-outline.png'
-    });
-    this.questions.push({
-      'id': 1, 
-      'name': 'Rapidez en la entrega de documentos',
-      'comments': '',
-      'stars': stars
-    });
-    this.questions.push({
-      'id': 2, 
-      'name': 'Rapidez en el pago del anticipo',
-      'comments': '',
-      'stars': stars
-    });
-    this.questions.push({
-      'id': 3, 
-      'name': 'Cobros no definidos en la oferta',
-      'comments': '',
-      'stars': stars
-    });
-    this.questions.push({
-      'id': 4, 
-      'name': 'Facilidad en la entrega de cumplidos',
-      'comments': '',
-      'stars': stars
-    });
-    this.questions.push({
-      'id': 5, 
-      'name': 'Rapidez en el pago del excedente',
-      'comments': '',
-      'stars': stars
-    });
+    this.offerId = this.navParams.get('offerId');
   }
 
   ngOnInit() {
+    this.getQuestions();
   }
+
+  private getQuestions(): void {
+    let stars: StarRating[] = this.buildStarsRating();
+    this.offersAPIService.getDependencies().subscribe((questions: Question[]) => {
+      this.questions = this.buildQuestionsService(questions, stars);
+    });
+  }
+
+  private buildStarsRating(): StarRating[] {
+    const stars = 5; // este es el numero de estrellas que se van a pintar por modulo
+    let starsRating: StarRating[] = [];
+    for (let i = 0; i < stars; i ++) {
+      starsRating.push({
+        'id': (i + 1),
+        'isMarked': false,
+        'path': 'assets/imgs/star-outline.png'
+      });
+    }
+    return starsRating;
+  }
+
+  private buildQuestionsService(questions: Question[], stars: StarRating[]): QuestionServiceRating[] {
+    let _questions: QuestionServiceRating[] = [];
+    _questions = questions.map((question: Question) => {
+      return <QuestionServiceRating> {
+        'id': question.id,
+        'name': question.name,
+        'comments': '',
+        'stars': stars
+      };
+    });
+    return _questions;
+  } 
 
   /**
    * @description Tiene como objetivo marcar/des-marcar las estrellas seleccionadas
@@ -137,10 +121,14 @@ export class RatingServiceCompanyModalPage implements OnInit {
   }
 
   public handleTapSendButtom(): void {
-    this.utilsService.showSnackbar('Calificación Realizada Con Exíto', 'success');
-    this.modalController.dismiss().then(() => {
-      this.navController.navigateRoot('/tab-offers/tabs/offers');
-    });
+
+    let ratingServiceCompanyOutput = new RatingServiceCompanyOutput(this.questions);
+    let dataForRequest = ratingServiceCompanyOutput.convertRatingServiceForRequestAPI(this.offerId);
+    console.log("Data For Request: ", dataForRequest);
+    // this.utilsService.showSnackbar('Calificación Realizada Con Exíto', 'success');
+    // this.modalController.dismiss().then(() => {
+    //   this.navController.navigateRoot('/tab-offers/tabs/offers');
+    // });
   }
 
 }
