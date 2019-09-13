@@ -37,7 +37,7 @@ export class FulfilledOfferPage implements OnInit, AfterViewInit {
     this.reactiveForm = this.formBuilder.group({
       'observations': ['', [Validators.required]]
     });
-    const offer = this.activatedRoute.snapshot.queryParams as Offer;
+    const offer = this.offersAPIService.getData() as Offer;
     this.offer = Object.assign(new Offer(), offer);
   }
 
@@ -57,7 +57,7 @@ export class FulfilledOfferPage implements OnInit, AfterViewInit {
    * @returns void
    */
   public handleDrawComplete(): void {
-    console.log(this.signaturePad.toDataURL());
+    // TODO
   }
   
    /**

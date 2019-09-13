@@ -11,7 +11,17 @@ import { Question } from 'src/app/models/question';
 })
 export class OffersApiService {
 
+  private data: any;
+
   constructor(private http: HttpClient) { }
+
+  public getData(): any {
+    return this.data;
+  }
+
+  public setData(data: any): any {
+    this.data = data;
+  }
 
   public getOffersAvailable(): Observable<Offer[]> {
     return this.http.get(`${environment.URL_API}/offers/getOffersAvailable`).pipe(
@@ -63,6 +73,10 @@ export class OffersApiService {
 
   public fullfilledOffer(data: any): Observable<any> {
     return this.http.post(`${environment.URL_API}/offers/confirmDriverCompliment`, data);
+  }
+
+  public qualificationOffer(data: any): Observable<any> {
+    return this.http.post(`${environment.URL_API}/offers/rating`, data);
   }
 
   public getDependencies(): Observable<any> {

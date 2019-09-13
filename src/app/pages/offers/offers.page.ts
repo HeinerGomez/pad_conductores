@@ -67,6 +67,7 @@ export class OffersPage {
           options: params,
           offer
         };
+        this.offerAPIService.setData(_params);
         this.navController.navigateForward('/detail-offer', {queryParams: _params});
       },
       'handleTapButtonArchive': (offer: Offer) => {

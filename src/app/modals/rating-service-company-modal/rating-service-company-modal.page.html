@@ -9,7 +9,7 @@
 </ion-header>
 
 <ion-content padding>
-  <form>
+  <form [formGroup]="reactiveForm">
     <ion-grid>
       <ion-row>
         <ion-col size="12">
@@ -30,7 +30,7 @@
         <ion-col>
           <ion-item button>
             <ion-label position="floating">Observaciones</ion-label>
-            <ion-textarea></ion-textarea>
+            <ion-textarea formControlName="observations"></ion-textarea>
           </ion-item>
         </ion-col>
       </ion-row>

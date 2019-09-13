@@ -13,7 +13,7 @@ const routes: Routes = [
   { path: 'vehicle-association', loadChildren: './pages/vehicle-association/vehicle-association.module#VehicleAssociationPageModule'},
   { path: 'general-modal', loadChildren: './modals/general-modal/general-modal.module#GeneralModalPageModule', canActivate: [AuthGuardService] },
   { path: 'tab-offers', loadChildren: './components/tab-offers/tab-offers.module#TabOffersPageModule', canActivate: [AuthGuardService] },
-  { path: 'detail-offer', loadChildren: './pages/detail-offer/detail-offer.module#DetailOfferPageModule', canActivate: [] },
+  { path: 'detail-offer', loadChildren: './pages/detail-offer/detail-offer.module#DetailOfferPageModule', canActivate: [AuthGuardService] },
   { path: 'document-bank', loadChildren: './pages/document-bank/document-bank.module#DocumentBankPageModule', canActivate: [AuthGuardService] },
   { path: 'sides-document-modal', loadChildren: './modals/sides-document-modal/sides-document-modal.module#SidesDocumentModalPageModule', canActivate: [AuthGuardService] },
   { path: 'profile', loadChildren: './pages/profile/profile.module#ProfilePageModule', canActivate: [AuthGuardService] },

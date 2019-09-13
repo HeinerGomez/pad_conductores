@@ -6,6 +6,7 @@ import { UtilitiesService } from 'src/app/services/utilities.service';
 import { Question } from 'src/app/models/question';
 import { OffersApiService } from 'src/app/services/api/offers-api.service';
 import { RatingServiceCompanyOutput } from '../../converts/outputs/rating-service-company-output.convert';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-rating-service-company-modal',
@@ -18,18 +19,26 @@ export class RatingServiceCompanyModalPage implements OnInit {
   public questions: QuestionServiceRating[] = [];
   public isValidServiceRating: boolean;
   private offerId: number;
+  public reactiveForm: FormGroup;
 
   constructor(
     private modalController: ModalController, private utilsService: UtilitiesService,
     private navController: NavController, private offersAPIService: OffersApiService,
-    private navParams: NavParams
+    private navParams: NavParams, private formBuilder: FormBuilder
   ) {
     this.isValidServiceRating = false;
     this.offerId = this.navParams.get('offerId');
+    this.reactiveForm = this.defineReactiveForm();
   }
 
   ngOnInit() {
     this.getQuestions();
+  }
+
+  private defineReactiveForm(): FormGroup {
+    return this.formBuilder.group({
+      'observations': ['', Validators.required]
+    });
   }
 
   private getQuestions(): void {
@@ -123,12 +132,16 @@ export class RatingServiceCompanyModalPage implements OnInit {
   public handleTapSendButtom(): void {
 
     let ratingServiceCompanyOutput = new RatingServiceCompanyOutput(this.questions);
-    let dataForRequest = ratingServiceCompanyOutput.convertRatingServiceForRequestAPI(this.offerId);
-    console.log("Data For Request: ", dataForRequest);
-    // this.utilsService.showSnackbar('Calificación Realizada Con Exíto', 'success');
-    // this.modalController.dismiss().then(() => {
-    //   this.navController.navigateRoot('/tab-offers/tabs/offers');
-    // });
+    const { observations } = this.reactiveForm.value;
+    let dataForRequest = ratingServiceCompanyOutput.convertRatingServiceForRequestAPI(this.offerId, observations);
+    this.offersAPIService.qualificationOffer(dataForRequest).subscribe(response => {
+      this.modalController.dismiss().then(() => {
+        this.navController.navigateRoot('/tab-offers/tabs/offers');
+        this.utilsService.showSnackbar('Oferta Calificada con exíto', 'success');
+      });
+    }, error => {
+      this.utilsService.showSnackbar('No fue posible realizar la calificación', 'warning');
+    });
   }
 
 }

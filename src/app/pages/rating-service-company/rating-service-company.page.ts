@@ -54,7 +54,8 @@ export class RatingServiceCompanyPage implements OnInit {
     return {
       'handleTapItemOffer': (offer: Offer) => {
         const _params = { options: params, offer }
-        this.navController.navigateForward('/detail-offer', { queryParams: _params})
+        this.offersAPIService.setData(_params);
+        this.navController.navigateForward('/detail-offer');
       },
       'buttonArchive': false,
       'hasChip': false

@@ -6,15 +6,16 @@ export class RatingServiceCompanyOutput {
         
     }
 
-    public convertRatingServiceForRequestAPI(offerId: number) {
+    public convertRatingServiceForRequestAPI(offerId: number, observation) {
         let dataForRequest = {
             'offer_id': offerId,
-            'questions': []
+            'questions': [],
+            'observation': observation
         };
         dataForRequest.questions = this.questions.map((question: QuestionServiceRating) => {
             return {
                 'question_id': question.id,
-                'ranking': question.stars
+                'ranking': question.stars.filter((star => star.isMarked)).length
             };
         });
         return dataForRequest;

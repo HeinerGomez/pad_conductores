@@ -26,7 +26,8 @@ export class DetailOfferPage {
     private router: Router, private modalController: ModalController,
     private offerAPIService: OffersApiService, private navController: NavController
   ) {
-    const params = this.activatedRoute.snapshot.queryParams;
+    const params = this.offerAPIService.getData();
+    console.log("Los params: ", params);
     this.shouldShowButtonAcceptOffer = OFFER.ORIGIN_AVAILABLE == params.options.origin ? true : false;
     this.shouldShowButtonCancelOffer = OFFER.ORIGIN_APPLIED == params.options.origin ? true : false;
     this.shouldShowButtonFulfilled = OFFER.ORIGIN_FULFILLED == params.options.origin ? true : false;
@@ -96,8 +97,8 @@ export class DetailOfferPage {
    * @returns void
    */
   public handleTapFulfilledOffer(): void {
-    this.router.navigate(['fulfilled-offer']);
-    this.navController.navigateForward('/fulfilled-offer', {queryParams: this.offer})
+    this.offerAPIService.setData(this.offer);
+    this.navController.navigateForward('/fulfilled-offer');
   }
 
    /**
