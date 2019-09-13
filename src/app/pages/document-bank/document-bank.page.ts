@@ -56,15 +56,18 @@ export class DocumentBankPage implements OnInit {
    */
   private getDocumentList(): void { 
     const idSubscription = this.subscriptionId;
+    this.utilitiesService.showLoading('Cargando');
     if (idSubscription !== 0) {
       this.documentAPIService.getDocuments(idSubscription).subscribe((_documents: Document[]) => {
         this.documentsForDriver = _documents.filter((document: Document) => document.typeResource == 1);
         this.documentsForVehicle = _documents.filter((document: Document) => document.typeResource == 6);
         console.log("Conductores: ", this.documentsForDriver);
         console.log("Vehiculo: ", this.documentsForVehicle);
+        this.utilitiesService.closeLoading();
       });
     } else {
       this.utilitiesService.showSnackbar('Usted no cuenta con una suscripción activa, por favor comuniquese con el administrador', 'warning');
+      this.utilitiesService.closeLoading();
     }
     
   }
