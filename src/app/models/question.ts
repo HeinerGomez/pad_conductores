@@ -4,7 +4,6 @@ export class Question {
     private _name: string;
     private _createdAt: string;
     private _indicatorQuestion: number;
-    private 
 
     constructor(questionsAPI: any = false) {
         if (questionsAPI) {

@@ -33,7 +33,7 @@ export class AuthService {
 
   login = (email: string, password: string) => {
     // El parámetro ‘app’ hace referencia al código único específico de la aplicación, la cual debe estar registrada previamente en el SCA
-    return this.http.post(`${environment.SCA_URL}/auth/login`, { email: email, password: password, app: '	central-pad-movil' }).pipe(map((response: any) => {
+    return this.http.post(`${environment.SCA_URL}/auth/login`, { email: email, password: password, app: 'central-pad-movil' }).pipe(map((response: any) => {
       if (response && response.token) {
         localStorage.setItem('token', response.token);
         localStorage.setItem('user', JSON.stringify(response.data));

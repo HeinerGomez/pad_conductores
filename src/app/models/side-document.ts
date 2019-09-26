@@ -56,7 +56,7 @@ export class SideDocument {
         this._id = sideDocument.id;
         this._documentName = ''; // se asigna despues
         this._name = sideDocument.name_side;
-        this._pathImage = (sideDocument.route == null ? '' : environment.URL_STORAGE + sideDocument.route);
+        this._pathImage = (sideDocument.route == null ? '' : sideDocument.route);
         this._state = sideDocument.state;
         this._nameState = this.buildState(sideDocument.state);
         this._comments = sideDocument.observation;

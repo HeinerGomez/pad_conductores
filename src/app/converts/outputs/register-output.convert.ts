@@ -11,7 +11,10 @@ export class RegisterOutput {
                     "password": this.data.password,
                     "password_confirmation": this.data.repeatPassword,
                     "role_id": 51, // va quemado
-                    "device": device
+                    "device": device,
+                    "question_id": this.data.securityQuestion,
+                    "answer": this.data.answerSecurityQuestion,
+                    "sponsor": ""
                 },
                 "subscriptions":{
                     "user_id": "",

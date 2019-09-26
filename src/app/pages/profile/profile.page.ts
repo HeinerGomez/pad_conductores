@@ -3,18 +3,46 @@ import { ModalController } from '@ionic/angular';
 import { PersonalDataModalPage } from '../../modals/personal-data-modal/personal-data-modal.page';
 import { AboutModalPage } from '../../modals/about-modal/about-modal.page';
 import { ChangePasswordModalPage } from '../../modals/change-password-modal/change-password-modal.page';
+import { UserService } from 'src/app/services/api/user.service';
+import { User } from '../../models/user';
 
 @Component({
   selector: 'app-profile',
   templateUrl: './profile.page.html',
   styleUrls: ['./profile.page.scss'],
 })
-export class ProfilePage implements OnInit {
+export class ProfilePage {
 
-  constructor(private modalController: ModalController) { }
+  private userBackendId: any;
+  private user: User;
 
-  ngOnInit() {
+  constructor(
+    private modalController: ModalController, private userService: UserService
+  ) {
+    this.userBackendId = 0;
   }
+
+  async ionViewDidEnter() {
+    this.userBackendId = await this.getIdUserSca();
+    // extraigo todos los datos del usuario
+    this.userService.getUserData(this.userBackendId).subscribe((user: User) => {
+      this.user = user;
+    });
+  }
+
+  /**
+   * @description Tiene como objetivo obtener el id del usuario del backend pad, en base al
+   * id del usuario creado en el sca
+   * @author Heiner Gómez <alejandro.gomez@grupooet.com>
+   * @param void
+   * @returns id: Number
+   */
+  private async getIdUserSca() {
+    const user: any = localStorage.getItem('user');
+    let _user = JSON.parse(user);
+    return await this.userService.getSubscribe(_user.id).toPromise();
+  }
+
 
    /**
    * @description Tiene como objetivo abrir el modal de los datos personales del conductor
@@ -26,7 +54,10 @@ export class ProfilePage implements OnInit {
   public async handleTapButtonPersonalData() {
     const modal = await this.modalController.create({
       'component': PersonalDataModalPage,
-      'componentProps': {}
+      'componentProps': {
+        'user': this.user,
+        'userBackendId': this.userBackendId
+      }
     });
     modal.present();
   }
@@ -56,7 +87,10 @@ export class ProfilePage implements OnInit {
   public async handleTapButtonChangePassword() {
     const modal = await this.modalController.create({
       'component': ChangePasswordModalPage,
-      'componentProps': {}
+      'componentProps': {
+        'user': this.user,
+        'userBackendId': this.userBackendId
+      }
     });
     modal.present();
   }

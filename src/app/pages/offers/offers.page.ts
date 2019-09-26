@@ -11,6 +11,8 @@ import { OFFER } from '../../constants/offers.constants';
 import { Offer } from 'src/app/models/offer';
 import { OffersApiService } from 'src/app/services/api/offers-api.service';
 import { DynamicBadgeService } from 'src/app/services/dynamic-badge.service';
+import { UserService } from '../../services/api/user.service';
+import { User } from 'src/app/models/user';
 
 @Component({
   selector: 'app-offers',
@@ -27,7 +29,7 @@ export class OffersPage {
     private menuController: MenuController, private router: Router,
     private offerAPIService: OffersApiService, private navController: NavController, 
     private dynamicBadgesService: DynamicBadgeService, private storageDataService: StorageDataService,
-    private utilsService: UtilitiesService
+    private utilsService: UtilitiesService, private userService: UserService
   ) { 
     this.menuController.enable(true);
     this.enabledRefresh = true;
@@ -59,7 +61,7 @@ export class OffersPage {
   private defineItemOptions(): ItemOfferOptions {
     const params: ParamsOfDetailOffer = {
       'origin': OFFER.ORIGIN_AVAILABLE,
-      'buttonArchive': true
+      'buttonArchive': true,
     };
     return {
       'handleTapItemOffer': (offer: Offer) => {
@@ -68,14 +70,14 @@ export class OffersPage {
           offer
         };
         this.offerAPIService.setData(_params);
-        this.navController.navigateForward('/detail-offer', {queryParams: _params});
+        this.navController.navigateForward('/detail-offer');
       },
       'handleTapButtonArchive': (offer: Offer) => {
         this.storageDataService.setOffer(offer).then(() => {
           this.getOffersAvailable();
           this.utilsService.showSnackbar('Se ha archivado la oferta', 'success');
         }).catch(error => {
-          this.utilsService.showSnackbar('No fue posible arhivar la oferta', 'danger');
+          this.utilsService.showSnackbar('No fue posible archivar la oferta', 'danger');
         });
       }, 
       'buttonArchive': true,

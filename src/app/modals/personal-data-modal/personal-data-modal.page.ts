@@ -1,7 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { FORMREGEX } from '../../regex/formRegex';
-import { ModalController } from '@ionic/angular';
+import { ModalController, NavParams, NavController } from '@ionic/angular';
+import { User } from '../../models/user';
+import { UserService } from '../../services/api/user.service';
+import { UtilitiesService } from '../../services/utilities.service';
 
 @Component({
   selector: 'app-personal-data-modal',
@@ -11,9 +14,17 @@ import { ModalController } from '@ionic/angular';
 export class PersonalDataModalPage implements OnInit {
 
   public reactiveForm: FormGroup;
+  private user: User;
+  private userBackendId: any;
 
-  constructor(private formBuilder: FormBuilder, private modalController: ModalController) {
-
+  constructor(
+    private formBuilder: FormBuilder, private modalController: ModalController,
+    private navParams: NavParams, private userService: UserService, 
+    private utilsService: UtilitiesService
+  ) {
+    this.user = this.navParams.get('user');
+    this.userBackendId = this.navParams.get('userBackendId');
+    console.log("Esta es el usuario en mención: ", this.user, this.userBackendId);
   }
 
   ngOnInit() {
@@ -29,12 +40,10 @@ export class PersonalDataModalPage implements OnInit {
    */
   private defineReactiveForm(): FormGroup {
     return this.formBuilder.group({
-      'names': ['', [Validators.required, Validators.pattern(`${FORMREGEX.textWithSpaces}`)]],
-      'firstSurname': ['', [Validators.required]],
-      'secondSurname': '',
-      'cellphone': ['', [Validators.required, Validators.pattern(`${FORMREGEX.cellPhone}`)]],
-      'whatsapp': ['', [Validators.required, Validators.pattern(`${FORMREGEX.cellPhone}`)]],
-      'email': ['', Validators.pattern(`${FORMREGEX.email}`)]
+      'names': [this.user.name, [Validators.required, Validators.pattern(`${FORMREGEX.textWithSpaces}`)]],
+      'cellphone': [this.user.cellphone, [Validators.required, Validators.pattern(`${FORMREGEX.cellPhone}`)]],
+      'whatsapp': [this.user.whatsapp, [Validators.required, Validators.pattern(`${FORMREGEX.cellPhone}`)]],
+      'email': [this.user.email, Validators.pattern(`${FORMREGEX.email}`)]
     });
   }
 
@@ -68,6 +77,21 @@ export class PersonalDataModalPage implements OnInit {
    */
   public handleTapCloseButton(): void {
     this.modalController.dismiss();
+  }
+
+  /**
+   * @description Tiene como objetivo enviar la peticion al backend para cambiar la info
+   * @author Heiner Gómez <alejandro.gomez@grupooet.com>
+   * @param void
+   * @returns void
+   */
+  public handleClickChangePersonalData(): void {
+    const data = this.reactiveForm.value;
+    this.userService.updatePersonalData(data, this.user, this.userBackendId).subscribe((response: any) => {
+      // si llega hasta este punto, se asume que se actualizo exitosamente
+      this.utilsService.showSnackbar('La información se ha actualizado exitosamente', 'success');
+      this.modalController.dismiss();
+    }, error => console.error(error));
   }
 
 }

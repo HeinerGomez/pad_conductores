@@ -1,5 +1,7 @@
 import { SideDocument } from './side-document';
 import { environment } from 'src/environments/environment';
+import { from } from 'rxjs';
+import { take, map } from 'rxjs/operators';
 
 export class Document {
 
@@ -58,13 +60,17 @@ export class Document {
         this._id = document.document_id;
         this._name = document.document_name;
         this._numberSides = document.sides.length;
-        this._pathImageSticker = document.sides[0].route == null ? '' : environment.URL_STORAGE + document.sides[0].route; // el sticker siempre será la primera imagen
         this._state = document.state_name;
         this._ribbonStatus = this.buildRibbonStatus(document.color);
         this._typeResource = document.resource_type_id; // 1 => conductores y 2 => vehiculos
+        let flag = 0;
         this._sides = document.sides.map((side: any) => {
             const sideDocument = new SideDocument(side);
             sideDocument.documentName = this._name;
+            if (flag === 0) {
+                this._pathImageSticker = sideDocument.pathImage; // el sticker siempre será la primera imagen
+                flag = 1;
+            }
             return sideDocument;
         });
     }
@@ -81,7 +87,7 @@ export class Document {
             case 'orange': 
                 ribbonStatus = 'ribbon-pending';
                 break;
-            case 'ribbon-rejected': 
+            case 'red': 
                 ribbonStatus = 'ribbon-rejected';
                 break;
             default: ribbonStatus = 'unknow'; 
