@@ -10,6 +10,11 @@ export class User {
     private _question: number;
     private _documentNumber: string;
     private _subscriptionStatus: boolean;
+    private _licensePlate: string;
+    private _vehicleId: number;
+    private _driverId: number;
+    private _configurationId: number;
+    private _model: string;
 
     constructor(user: any = false) {
         if (user) {
@@ -97,6 +102,46 @@ export class User {
         this._subscriptionStatus = value;
     }
 
+    public get licensePlate(): string {
+        return this._licensePlate;
+    }
+
+    public set licensePlate(value: string) {
+        this._licensePlate = value;
+    }
+
+    public get vehicleId(): number {
+        return this._vehicleId;
+    }
+
+    public set vehicleId(value: number) {
+        this._vehicleId = value;
+    }
+
+    public get driverId(): number {
+        return this._driverId;
+    }
+
+    public set driverId(value: number) {
+        this._driverId = value;
+    }
+
+    public get configurationId(): number {
+        return this._configurationId;
+    }
+
+    public set configurationId(value: number) {
+        this._configurationId = value;
+    }
+
+    public get model(): string {
+        return this._model;
+    }
+
+    public set model(value: string) {
+        this._model = value;
+    }
+    
     private build(user: any): void {
         this._cellphone = user.celular;
         this._email = user.email;
@@ -107,6 +152,11 @@ export class User {
         this._answer = user.answer;
         this._question = user.question_id;
         this._subscriptionStatus = user.stateSubscription;
+        this._driverId = user.driver_id;
+        this._vehicleId = user.vehicle_id;
+        this._model = user.model;
+        this._configurationId = user.combination_configuration_id;
+        this._licensePlate = user.license_plate;
     }
 
 }

@@ -70,9 +70,9 @@ export class DetailOfferPage {
   public handleTapAcceptOffer(): void {
     if (this.canContinue()) {
       const data = {
-        "driver_id": "1", // temporal
+        "driver_id": this.user.driverId, // temporal
         "offer_id": this.offer.id,
-        "vehicle_id": "1", // temporal
+        "vehicle_id": this.user.vehicleId, // temporal
         "offer_state_id": "2", // aplicado,
         "latitude":"4.662078", // temporal
         "longitude":"-74.057851" // temporal
@@ -101,12 +101,12 @@ export class DetailOfferPage {
   public handleTapCancelOffer(): void {
     if (this.canContinue()) {
       const data = {
-        "driver_id": "1", // temporal
+        "driver_id": this.user.driverId, // temporal
         "offer_id": this.offer.id,
-        "vehicle_id": "1", // temporal
+        "vehicle_id": this.user.vehicleId, // temporal
         "offer_state_id": "3", // rechazar,
-        "latitude":"23234234234", // temporal
-        "longitude":"-2131243223" // temporal
+        "latitude": "23234234234", // temporal
+        "longitude": "-2131243223" // temporal
       };
       this.utilitiesService.showLoading('Cancelando Oferta');
       this.offerAPIService.cancelOrAppliedOffer(data).subscribe(() => {
