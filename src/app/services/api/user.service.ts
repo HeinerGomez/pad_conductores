@@ -59,4 +59,8 @@ export class UserService {
     );
   }
 
+  public sendUnknownPlate(data: any): Observable<any> {
+    return this.http.get(`${environment.URL_API}/drivers/sendEmailLicensePlate`, {params: data});
+  }
+
 }

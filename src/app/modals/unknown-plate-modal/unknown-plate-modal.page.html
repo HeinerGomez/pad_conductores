@@ -1,0 +1,34 @@
+<ion-header>
+  <ion-toolbar color="translucent">
+    <ion-buttons slot="end">
+      <ion-button (click)="handleTapCloseButton()">
+        <ion-icon slot="icon-only" name="close"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content padding>
+  <div class="full-center-container">
+    <div>
+      <ion-img src="assets/imgs/question.png" class="width-img-265"></ion-img>
+    </div>
+    <h1 text-center> ¿ Esta no es tú placa ? </h1>
+    <p>
+      Si crees que esta no es la placa que deberias tener asignada,
+      por favor da click en el botón "esta no es mi placa".
+
+      De lo contrario da click en el botón "todo esta bien"
+    </p>
+    <ion-grid>
+      <ion-row>
+        <ion-col size="12">
+          <ion-button color="secondary" expand="block" (click)="handleTapUnknownPlate()">Esta no es mi placa</ion-button>
+        </ion-col>
+        <ion-col size="12">
+          <ion-button color="primary" expand="block" (click)="handleTapCloseButton()">Todo esta bien</ion-button>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </div>
+</ion-content>

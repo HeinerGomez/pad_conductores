@@ -157,6 +157,7 @@ export class User {
         this._model = user.model;
         this._configurationId = user.combination_configuration_id;
         this._licensePlate = user.license_plate;
+        this._documentNumber = user.document_number;
     }
 
 }

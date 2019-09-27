@@ -31,6 +31,8 @@ import { RatingServiceCompanyModalPageModule } from './modals/rating-service-com
 import { ErrorsService } from './services/interceptors/errors.service';
 import { JwtService } from './services/interceptors/jwt.service';
 import { Geolocation } from '@ionic-native/geolocation/ngx';
+import { UnknownPlateModalPage } from './modals/unknown-plate-modal/unknown-plate-modal.page';
+import { UnknownPlateModalPageModule } from './modals/unknown-plate-modal/unknown-plate-modal.module';
 
 @NgModule({
   declarations: [
@@ -42,7 +44,8 @@ import { Geolocation } from '@ionic-native/geolocation/ngx';
     PersonalDataModalPage,
     AboutModalPage,
     ChangePasswordModalPage,
-    RatingServiceCompanyModalPage
+    RatingServiceCompanyModalPage,
+    UnknownPlateModalPage
   ],
   imports: [
     BrowserModule, 
@@ -56,7 +59,8 @@ import { Geolocation } from '@ionic-native/geolocation/ngx';
     PersonalDataModalPageModule,
     AboutModalPageModule,
     ChangePasswordModalPageModule,
-    RatingServiceCompanyModalPageModule
+    RatingServiceCompanyModalPageModule,
+    UnknownPlateModalPageModule
   ],
   providers: [
     StatusBar,

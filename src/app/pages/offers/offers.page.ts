@@ -4,7 +4,7 @@ import { UserInSession } from '../../interfaces/own/userInSession.interf';
 import { ActivatedRoute, Router } from '@angular/router';
 import { UtilitiesService } from '../../services/utilities.service';
 import { ItemOffer } from '../../interfaces/own/itemOffer.interf';
-import { MenuController, NavController } from '@ionic/angular';
+import { MenuController, NavController, ModalController } from '@ionic/angular';
 import { ItemOfferOptions } from '../../interfaces/own/itemOfferOptions.interface';
 import { ParamsOfDetailOffer } from '../../interfaces/own/paramsOfDetailOffer.interface';
 import { OFFER } from '../../constants/offers.constants';
@@ -13,6 +13,7 @@ import { OffersApiService } from 'src/app/services/api/offers-api.service';
 import { DynamicBadgeService } from 'src/app/services/dynamic-badge.service';
 import { UserService } from '../../services/api/user.service';
 import { User } from 'src/app/models/user';
+import { UnknownPlateModalPage } from '../../modals/unknown-plate-modal/unknown-plate-modal.page';
 
 @Component({
   selector: 'app-offers',
@@ -24,12 +25,14 @@ export class OffersPage {
   public offers: Offer[];
   public itemOptions: ItemOfferOptions;
   public enabledRefresh: boolean;
+  private userBackendId: any;
+  public user: User;
 
   constructor(
     private menuController: MenuController, private router: Router,
     private offerAPIService: OffersApiService, private navController: NavController, 
     private dynamicBadgesService: DynamicBadgeService, private storageDataService: StorageDataService,
-    private utilsService: UtilitiesService, private userService: UserService
+    private utilsService: UtilitiesService, private userService: UserService, private modalController: ModalController
   ) { 
     this.menuController.enable(true);
     this.enabledRefresh = true;
@@ -37,8 +40,35 @@ export class OffersPage {
     this.offers = [];
   }
 
-  ionViewDidEnter() {
+  async ionViewDidEnter() {
     this.getOffersAvailable();
+    this.userBackendId = await this.getIdUserBackendId();
+    this.userService.getUserData(this.userBackendId).subscribe((user: User) => {
+      this.user = user;
+    });
+  }
+
+   /**
+   * @description Tiene como objetivo obtener el id del usuario del backend pad, en base al
+   * id del usuario creado en el sca
+   * @author Heiner Gómez <alejandro.gomez@grupooet.com>
+   * @param void
+   * @returns id: Number
+   */
+  private async getIdUserBackendId() {
+    const user: any = localStorage.getItem('user');
+    let _user = JSON.parse(user);
+    return await this.userService.getSubscribe(_user.id).toPromise();
+  }
+
+  public async handleClickLicensePlate() {
+    const modal = await this.modalController.create({
+      'component': UnknownPlateModalPage,
+      'componentProps': {
+        'user': this.user,
+      }
+    });
+    modal.present();
   }
 
   private getOffersAvailable(): void {

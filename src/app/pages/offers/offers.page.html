@@ -11,8 +11,8 @@
   <ion-refresher slot="fixed" *ngIf="enabledRefresh" (ionRefresh)="handleSlideDownRefresh($event)">
     <ion-refresher-content></ion-refresher-content>
   </ion-refresher>
-  <app-card-plate>
-    OFG286
+  <app-card-plate (click)="handleClickLicensePlate()">
+    {{ user?.licensePlate | uppercase }}
   </app-card-plate>
   <div container-scroll (scroll)="handleScroll($event)">
       <div message-info *ngIf="!offers.length" >
