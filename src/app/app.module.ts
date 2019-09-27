@@ -30,6 +30,7 @@ import { RatingServiceCompanyModalPage } from './modals/rating-service-company-m
 import { RatingServiceCompanyModalPageModule } from './modals/rating-service-company-modal/rating-service-company-modal.module';
 import { ErrorsService } from './services/interceptors/errors.service';
 import { JwtService } from './services/interceptors/jwt.service';
+import { Geolocation } from '@ionic-native/geolocation/ngx';
 
 @NgModule({
   declarations: [
@@ -69,7 +70,8 @@ import { JwtService } from './services/interceptors/jwt.service';
     {
 			provide: HTTP_INTERCEPTORS, useClass: JwtService, multi: true,
 		},
-    OneSignal
+    OneSignal,
+    Geolocation
   ],
   bootstrap: [AppComponent]
 })
