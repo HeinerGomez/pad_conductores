@@ -20,19 +20,20 @@ export class ErrorsService implements HttpInterceptor {
 
   intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
     return next.handle(request).pipe(catchError(error => {
+      let messageError = 'Ha ocurrido un error interno';
       switch (error.status) {
         case 401:
           this._authService.logout();
-          const messageError = error.error.error;
+          messageError = error.error.error;
           this.utilsService.showSnackbar(messageError, 'danger');
           break;
 
         case 400:
         case 422:
           console.log("Error intercepter: ", error);
-          this.utilsService.showSnackbar('Ha ocurrido un error interno', 'danger');
+          messageError = error.error.error.message;
+          this.utilsService.showSnackbar(messageError, 'danger');
           break;
-
         case 500:
           console.log("Error intercepter: ", error);
           this.utilsService.showSnackbar('No hemos podido establecer comunicación con nuestros servidores', 'danger');

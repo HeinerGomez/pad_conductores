@@ -10,7 +10,8 @@ export class RatingServiceCompanyOutput {
         let dataForRequest = {
             'offer_id': offerId,
             'questions': [],
-            'observation': observation
+            'observation': observation,
+            'ind_envio': '1'
         };
         dataForRequest.questions = this.questions.map((question: QuestionServiceRating) => {
             return {
