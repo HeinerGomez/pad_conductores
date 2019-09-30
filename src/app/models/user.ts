@@ -15,6 +15,7 @@ export class User {
     private _driverId: number;
     private _configurationId: number;
     private _model: string;
+    private _subscriptionId: number;
 
     constructor(user: any = false) {
         if (user) {
@@ -141,6 +142,14 @@ export class User {
     public set model(value: string) {
         this._model = value;
     }
+
+    public get subscriptionId(): number {
+        return this._subscriptionId;
+    }
+
+    public set subscriptionId(value: number) {
+        this._subscriptionId = value;
+    }
     
     private build(user: any): void {
         this._cellphone = user.celular;
@@ -158,6 +167,7 @@ export class User {
         this._configurationId = user.combination_configuration_id;
         this._licensePlate = user.license_plate;
         this._documentNumber = user.document_number;
+        this._subscriptionId = user.subscription_id;
     }
 
 }

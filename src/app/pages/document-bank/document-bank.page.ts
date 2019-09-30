@@ -12,6 +12,7 @@ import { DocumentBankApiService } from 'src/app/services/api/document-bank-api.s
 import { Document } from 'src/app/models/document';
 import { SideDocument } from 'src/app/models/side-document';
 import { UserService } from 'src/app/services/api/user.service';
+import { User } from '../../models/user';
 
 @Component({
   selector: 'app-document-bank',
@@ -24,6 +25,8 @@ export class DocumentBankPage implements OnInit {
   public documentsForVehicle: Document[];
   public behaviorCardDocument: BehaviorCardDocument;
   public subscriptionId: number;
+  private userBackendId: any;
+  private user: User;
   
   constructor(
     private camera: Camera, private platform: Platform,
@@ -38,15 +41,32 @@ export class DocumentBankPage implements OnInit {
     this.behaviorCardDocument = this.defineBehaviorForCardDocument();
     const user: any = localStorage.getItem('user');
       let _user = JSON.parse(user);
-      this.userService.getSubscribe(_user.id).subscribe((response: any) => {
+      this.userService.getSubscribe(_user.id).subscribe(async (response: any) => {
         if (response != null) {
           this.subscriptionId = response;
         }
-        this.getDocumentList();
+        this.userBackendId = await this.getIdUserBackendId();
+        this.userService.getUserData(this.userBackendId).subscribe((user: User) => {
+          this.user = user;
+          this.getDocumentList();
+        });
       });
   }
 
-  /**
+   /**
+   * @description Tiene como objetivo obtener el id del usuario del backend pad, en base al
+   * id del usuario creado en el sca
+   * @author Heiner Gómez <alejandro.gomez@grupooet.com>
+   * @param void
+   * @returns id: Number
+   */
+  private async getIdUserBackendId() {
+    const user: any = localStorage.getItem('user');
+    let _user = JSON.parse(user);
+    return await this.userService.getSubscribe(_user.id).toPromise();
+  }
+
+ /**
    * @description Tiene como objetivo obtener la información relacionada al estado de documentos
    *              del banco de documentos
    * @author Heiner Gómez <alejandro.gomez@grupooet.com>
@@ -55,10 +75,9 @@ export class DocumentBankPage implements OnInit {
    * @returns void
    */
   private getDocumentList(): void { 
-    const idSubscription = this.subscriptionId;
     this.utilitiesService.showLoading('Cargando');
-    if (idSubscription !== 0) {
-      this.documentAPIService.getDocuments(idSubscription).subscribe((_documents: Document[]) => {
+    if (this.user.subscriptionId !== 0 || this.user.subscriptionId != null) {
+      this.documentAPIService.getDocuments(this.user.subscriptionId).subscribe((_documents: Document[]) => {
         this.documentsForDriver = _documents.filter((document: Document) => document.typeResource == 1);
         this.documentsForVehicle = _documents.filter((document: Document) => document.typeResource == 6);
         console.log("Conductores: ", this.documentsForDriver);
