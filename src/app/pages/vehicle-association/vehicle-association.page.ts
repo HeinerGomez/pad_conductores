@@ -109,7 +109,12 @@ export class VehicleAssociationPage implements OnInit {
       'color': 'secondary',
       'handle': () => {
         this.modalController.dismiss().then( () => {
-          this.navController.navigateRoot('/home');
+          const userAndPwd = {
+            'user': this.registerData.email,
+            'pwd': this.registerData.password
+          };
+          localStorage.setItem('userAndPwd', JSON.stringify(userAndPwd));
+          setTimeout(() => this.navController.navigateRoot('/home'), 500);
         });
       }
     };
