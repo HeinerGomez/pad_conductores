@@ -34,6 +34,7 @@ export class UnknownPlateModalPage implements OnInit {
   }
 
   public handleTapUnknownPlate(): void {
+    this.utilitiesService.showLoading('Cargando');
     const data = {
       'documentNumber': this.user.documentNumber,
       'driverId': this.user.driverId
@@ -46,6 +47,7 @@ export class UnknownPlateModalPage implements OnInit {
       }
       this.utilitiesService.showSnackbar(mensaje, 'success');
       this.modalController.dismiss();
+      this.utilitiesService.closeLoading();
     });
   }
 
