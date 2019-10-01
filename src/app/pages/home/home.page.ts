@@ -13,6 +13,16 @@ export class HomePage {
 
   }
 
+  ionViewDidEnter() {
+    const _userAndPwd = localStorage.getItem('userAndPwd');
+    console.log("Este es el user en session: ", _userAndPwd);
+    if (_userAndPwd) {
+      const userAndPwd = JSON.parse(_userAndPwd);
+      console.log("Este es el user en session 2: ", userAndPwd);
+      this.handleBtnLogin();
+    }
+  }
+
   /**
    * @description Tiene como objetivo controlar el evento de hacer click o tap en el boton de login
    * @author Heiner Gómez <alejandro.gomez@grupooet.com>

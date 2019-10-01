@@ -7,6 +7,7 @@ import { AuthService } from './services/auth.service';
 import { OneSignal } from '@ionic-native/onesignal/ngx';
 import { environment } from 'src/environments/environment.prod';
 import { UtilitiesService } from './services/utilities.service';
+import { AuthService as _AuthService } from './services/auth/auth.service';
 
 @Component({
   selector: 'app-root',
@@ -20,6 +21,7 @@ export class AppComponent {
     private router: Router,
     private menuController: MenuController,
     private authService: AuthService,
+    private _authService: _AuthService,
     private navController: NavController,
     private oneSignal: OneSignal,
     private utilsService: UtilitiesService
@@ -72,11 +74,12 @@ export class AppComponent {
   public handleTapItemMenu(route: String): void {
     this.menuController.close();
     if (route == '/home') {
-      this.authService.UnAuhenticated().then(() => {
-        this.navController.navigateRoot(`${route}`).then(() => {
-          this.menuController.enable(false);
-        });
-      });
+      // this.authService.UnAuhenticated().then(() => {
+      //   this.navController.navigateRoot(`${route}`).then(() => {
+      //     this.menuController.enable(false);
+      //   });
+      // });
+      this._authService.logout();
     } else {
       this.navController.navigateRoot([`${route}`]);
     }

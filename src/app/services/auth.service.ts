@@ -17,6 +17,7 @@ export class AuthService {
    * @returns Promise<any>
    */
   public Authenticate(user: UserInSession): Promise<any> {
+    console.log("Este es el usuario...: ", user);
     return this.storageDataService.setUserInSession(user);
   }
 

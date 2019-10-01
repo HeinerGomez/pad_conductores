@@ -37,6 +37,11 @@ export class AuthService {
       if (response && response.token) {
         localStorage.setItem('token', response.token);
         localStorage.setItem('user', JSON.stringify(response.data));
+        const userAndPwd = {
+          'user': email,
+          'pwd': password
+        };
+        localStorage.setItem('userAndPwd', JSON.stringify(userAndPwd));
         this.user.next(response.data);
         return response;
       }
@@ -48,6 +53,7 @@ export class AuthService {
   logout = () => {
     localStorage.removeItem('user');
     localStorage.removeItem('token');
+    localStorage.removeItem('userAndPwd');
     this.user.next(null);
     this.router.navigate(['/login']);
   };

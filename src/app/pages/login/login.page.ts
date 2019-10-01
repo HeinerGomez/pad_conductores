@@ -29,6 +29,24 @@ export class LoginPage {
     this.reactiveForm = this.buildReactiveForm();
   }
 
+  ionViewDidEnter() {
+    const _userAndPwd = localStorage.getItem('userAndPwd');
+    console.log("Este es el user en session: ", _userAndPwd);
+    if (_userAndPwd) {
+      const userAndPwd = JSON.parse(_userAndPwd);
+      console.log("Este es el user en session 2: ", userAndPwd);
+      this.fillReactiveFormAndLogin(userAndPwd);
+    }
+  }
+
+  private fillReactiveFormAndLogin(userAndPwd: any) {
+    this.reactiveForm.patchValue({
+      'username': userAndPwd.user,
+      'password': userAndPwd.pwd
+    });
+    this.handleTapButtonLogin();
+  }
+
   /**
    * @description Tiene como objetivo cambiar el tipo de input y el icono al campo de contraseña, según si se quiere o no 
    *              mostrar la información
