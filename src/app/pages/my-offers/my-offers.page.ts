@@ -8,6 +8,8 @@ import { OFFER } from '../../constants/offers.constants';
 import { OffersApiService } from 'src/app/services/api/offers-api.service';
 import { Offer } from 'src/app/models/offer';
 import { DynamicBadgeService } from 'src/app/services/dynamic-badge.service';
+import { User } from 'src/app/models/user';
+import { UserService } from 'src/app/services/api/user.service';
 
 @Component({
   selector: 'app-my-offers',
@@ -23,10 +25,13 @@ export class MyOffersPage implements OnInit {
   public offersApplied: Offer[] = []; 
   public offersConfirmed: Offer[] = [];
   public itemOptions: ItemOfferOptions;
+  private userBackendId: any;
+  public user: User;
 
   constructor(
     private router: Router, private offersAPIService: OffersApiService,
-    private navController: NavController, private dynamicBadgesService: DynamicBadgeService 
+    private navController: NavController, private dynamicBadgesService: DynamicBadgeService,
+    private userService: UserService,
     ) { 
     this.shouldShowOffersApplied = true;
     this.shouldShowOffersConfirmed = false;
@@ -38,13 +43,30 @@ export class MyOffersPage implements OnInit {
     this.segment.value = 'applied';
   }
 
-  ionViewDidEnter() {
-    this.getOffersApplied();
-    this.getOffersConfirmed();
+  async ionViewDidEnter() {
+    this.userBackendId = await this.getIdUserBackendId();
+    this.userService.getUserData(this.userBackendId).subscribe((user: User) => {
+      this.user = user;
+      this.getOffersApplied();
+      this.getOffersConfirmed();
+    });
+  }
+
+   /**
+   * @description Tiene como objetivo obtener el id del usuario del backend pad, en base al
+   * id del usuario creado en el sca
+   * @author Heiner Gómez <alejandro.gomez@grupooet.com>
+   * @param void
+   * @returns id: Number
+   */
+  private async getIdUserBackendId() {
+    const user: any = localStorage.getItem('user');
+    let _user = JSON.parse(user);
+    return await this.userService.getSubscribe(_user.id).toPromise();
   }
 
   private getOffersApplied(): void {
-    const driverId = 1; // temporal
+    const driverId = this.user.driverId; // temporal
     this.offersAPIService.getOffersApplied(driverId).subscribe((offers: Offer[]) => { 
       this.offersApplied = offers
       this.dynamicBadgesService.badgeMyOffers = offers.length;
@@ -52,7 +74,7 @@ export class MyOffersPage implements OnInit {
   }
 
   private getOffersConfirmed(): void {
-    const driverId = 1; // temporal
+    const driverId = this.user.driverId; // temporal
     this.offersAPIService.getOffersConfirmed(driverId).subscribe((offers: Offer[]) => this.offersConfirmed = offers);
   }
 

@@ -7,6 +7,8 @@ import { Router } from '@angular/router';
 import { OffersApiService } from 'src/app/services/api/offers-api.service';
 import { Offer } from 'src/app/models/offer';
 import { NavController } from '@ionic/angular';
+import { User } from 'src/app/models/user';
+import { UserService } from '../../services/api/user.service';
 
 @Component({
   selector: 'app-rating-service-company',
@@ -17,11 +19,14 @@ export class RatingServiceCompanyPage implements OnInit {
 
   public offersPerQualification: Offer[];
   public itemOptions: ItemOfferOptions;
+  private userBackendId: any;
+  private user: User;
 
   constructor(
     private router: Router,
     private navController: NavController,
-    private offersAPIService: OffersApiService
+    private offersAPIService: OffersApiService, 
+    private userService: UserService
   ) {
     this.itemOptions = this.defineItemOptions();
     this.offersPerQualification = [];
@@ -30,12 +35,29 @@ export class RatingServiceCompanyPage implements OnInit {
   ngOnInit() {
   }
 
-  ionViewDidEnter() {
-    this.getOffersPerQualification();
+  async ionViewDidEnter() {
+    this.userBackendId = await this.getIdUserBackendId();
+    this.userService.getUserData(this.userBackendId).subscribe((user: User) => {
+      this.user = user;
+      this.getOffersPerQualification();
+    });
+  }
+
+   /**
+   * @description Tiene como objetivo obtener el id del usuario del backend pad, en base al
+   * id del usuario creado en el sca
+   * @author Heiner Gómez <alejandro.gomez@grupooet.com>
+   * @param void
+   * @returns id: Number
+   */
+  private async getIdUserBackendId() {
+    const user: any = localStorage.getItem('user');
+    let _user = JSON.parse(user);
+    return await this.userService.getSubscribe(_user.id).toPromise();
   }
 
   private getOffersPerQualification() {
-    const driverId = 1; // temporal
+    const driverId = this.user.driverId; // temporal
     this.offersAPIService.getOffersPerQualification(driverId).subscribe((offers: Offer[]) => this.offersPerQualification = offers);
   }
 
