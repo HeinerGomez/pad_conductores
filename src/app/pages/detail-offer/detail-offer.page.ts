@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, AfterViewInit } from '@angular/core';
 import { UtilitiesService } from '../../services/utilities.service';
 import { ParamsOfDetailOffer } from '../../interfaces/own/paramsOfDetailOffer.interface';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -16,7 +16,7 @@ import { GeolocationService } from '../../services/geolocation.service';
   templateUrl: './detail-offer.page.html',
   styleUrls: ['./detail-offer.page.scss'],
 })
-export class DetailOfferPage implements OnDestroy {
+export class DetailOfferPage implements OnDestroy, AfterViewInit {
 
   public shouldShowButtonAcceptOffer: boolean;
   public shouldShowButtonCancelOffer: boolean; 
@@ -41,7 +41,8 @@ export class DetailOfferPage implements OnDestroy {
     this.offer = params.offer;
   }
 
-  ionViewDidLoad() {
+  ngAfterViewInit() {
+    console.warn("Obteniendo posicion ...");
     this.geolocationService.startObserverPosition();
   }
 

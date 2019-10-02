@@ -41,7 +41,10 @@ export class GeolocationService {
   }
 
   public stopObserverPosition() {
-    this.geoSubscription.unsubscribe();
+    if (this.geoSubscription != null) {
+      this.geoSubscription.unsubscribe();
+      this.geoSubscription = null;
+    }
   }
 
   ngOnDestroy() {

@@ -103,8 +103,9 @@ export class Offer {
         this._downloadFree = isDownloadFree;
         this._merchandise = offer.data_offer[0].departure_description;
         this._freight = offer.data_offer[0].freightage_min;
-        this._contactPhone = '?';
-        this._contactName = '???';
+        const headquarter = offer.data_offer[0].transport_headquarter;
+        this._contactPhone = headquarter.phone;
+        this._contactName = headquarter.contact_name;
     }       
 
 }

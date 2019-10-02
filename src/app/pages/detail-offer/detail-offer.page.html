@@ -49,6 +49,32 @@
   </div>
   <div>
     <ion-list>
+      <ion-item *ngIf="shouldShowButtonFulfilled">
+        <ion-icon name="contact" size="large" slot="start" color="success"></ion-icon>
+        <ion-label text-wrap>
+          <ion-text>
+            <h3><b>Contacto</b></h3>
+          </ion-text>
+          <ion-text>
+            <ion-note>
+              {{ offer.contactName }}
+            </ion-note>
+          </ion-text>
+        </ion-label>
+      </ion-item>
+      <ion-item *ngIf="shouldShowButtonFulfilled">
+        <ion-icon name="call" size="large" slot="start" color="success"></ion-icon>
+        <ion-label text-wrap>
+          <ion-text>
+            <h3><b>Teléfono</b></h3>
+          </ion-text>
+          <ion-text>
+            <ion-note>
+              {{ offer.contactPhone }}
+            </ion-note>
+          </ion-text>
+        </ion-label>
+      </ion-item>
       <ion-item>
         <ion-icon src="assets/imgs/right-arrow.svg" size="large" slot="start"></ion-icon>
         <ion-label text-wrap>
