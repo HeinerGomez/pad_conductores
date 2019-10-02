@@ -40,6 +40,10 @@ export class GeolocationService {
     }, error => console.error(error));
   }
 
+  public stopObserverPosition() {
+    this.geoSubscription.unsubscribe();
+  }
+
   ngOnDestroy() {
     if (this.geoSubscription != null) {
       this.geoSubscription.unsubscribe();
