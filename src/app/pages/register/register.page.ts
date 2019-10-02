@@ -46,7 +46,7 @@ export class RegisterPage implements OnInit {
       'fullName': ['', [Validators.required, Validators.pattern(`${FORMREGEX.textWithSpaces}`)]],
       'cellphone': ['', [Validators.required, Validators.pattern(`${FORMREGEX.cellPhone}`)]],
       'whatsapp': ['', [Validators.required, Validators.pattern(`${FORMREGEX.cellPhone}`)]],
-      'email': ['', Validators.pattern(`${FORMREGEX.email}`)],
+      'email': ['', [Validators.required, Validators.pattern(`${FORMREGEX.email}`)]],
       'password': ['', [Validators.required]],
       'repeatPassword': ['', [Validators.required]],
       'securityQuestion': ['', [Validators.required]],

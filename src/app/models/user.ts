@@ -16,6 +16,7 @@ export class User {
     private _configurationId: number;
     private _model: string;
     private _subscriptionId: number;
+    private _quantityService: string;
 
     constructor(user: any = false) {
         if (user) {
@@ -150,6 +151,14 @@ export class User {
     public set subscriptionId(value: number) {
         this._subscriptionId = value;
     }
+
+    public get quantityService(): string {
+        return this._quantityService;
+    }
+
+    public set quantityService(value: string) {
+        this._quantityService = value;
+    }
     
     private build(user: any): void {
         this._cellphone = user.celular;
@@ -168,6 +177,7 @@ export class User {
         this._licensePlate = user.license_plate;
         this._documentNumber = user.document_number;
         this._subscriptionId = user.subscription_id;
+        this._quantityService = user.quality_service;
     }
 
 }

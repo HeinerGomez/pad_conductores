@@ -14,7 +14,7 @@ import { User } from '../../models/user';
 export class ProfilePage {
 
   private userBackendId: any;
-  private user: User;
+  public user: User;
 
   constructor(
     private modalController: ModalController, private userService: UserService

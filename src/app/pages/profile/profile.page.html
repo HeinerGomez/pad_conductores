@@ -20,7 +20,7 @@
           <ion-grid>
             <ion-row>
               <ion-col size="12">
-                Heiner Alejandro Gómez
+                {{ user?.name }}
               </ion-col>              
             </ion-row>
             <ion-row>
@@ -30,24 +30,13 @@
             </ion-row>
             <ion-row>
               <ion-col size="12">
-                <ion-icon name="star" size="large" color="secondary"></ion-icon>
-                <ion-icon name="star" size="large" color="secondary"></ion-icon>
-                <ion-icon name="star" size="large" color="secondary"></ion-icon>
-                <ion-icon name="star" size="large" color="secondary"></ion-icon>
-                <ion-icon name="star-half" size="large" color="secondary"></ion-icon>
-              </ion-col>
-            </ion-row>
-            <ion-row>
-              <ion-col size="12">
-                <ion-badge color="success">Capacidad disponible: </ion-badge>
-              </ion-col>
-            </ion-row>
-            <ion-row>
-              <ion-col size="12">
-                <ion-icon src="assets/imgs/weight.svg" icon-md></ion-icon>
-                <ion-badge color="primary" [ngStyle]="{'margin-left': '20px'}">
-                  0 (Tn)
-                </ion-badge>
+                <div class="cointainer-quantity">
+                  <!-- <span [ngStyle]="{'font-size': '25px', 'color': 'blue'}"> <b> {{ user?.quantityService }} </b> </span> -->
+                  <div class="container-star-badge">
+                    <span [ngStyle]="{'font-size': '22px'}"><b>4</b></span>
+                    <ion-icon name="star" size="small" corner-location color="secondary"></ion-icon>
+                  </div>
+                </div>
               </ion-col>
             </ion-row>
           </ion-grid>
