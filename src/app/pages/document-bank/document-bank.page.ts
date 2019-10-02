@@ -192,4 +192,9 @@ export class DocumentBankPage implements OnInit {
       this.utilitiesService.showInfoAlert('Observaciones', comments);
     }
   }
+
+  public handleFabRefreshButton(): void {
+    this.getDocumentList();
+  }
+
 }
