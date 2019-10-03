@@ -110,7 +110,7 @@ export class VehicleAssociationPage implements OnInit {
       'handle': () => {
         this.modalController.dismiss().then( () => {
           const userAndPwd = {
-            'user': this.registerData.email,
+            'user': this.registerData.cardDocumentId,
             'pwd': this.registerData.password
           };
           localStorage.setItem('userAndPwd', JSON.stringify(userAndPwd));
