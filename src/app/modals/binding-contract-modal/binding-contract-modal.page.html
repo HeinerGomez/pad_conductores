@@ -1,0 +1,61 @@
+<ion-header>
+  <ion-toolbar color="translucent">
+    <ion-buttons slot="end">
+      <ion-button (click)="handleTapCloseButton()">
+        <ion-icon slot="icon-only" name="close" ></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content padding>
+  <ion-slides pager="false" full #mySlider [options]="slideOptions">
+    <ion-slide>
+      <div class="container-contract">
+          <h1>Titulo Contrato</h1>
+          <p>
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Neque consequatur sed natus magni magnam error laboriosam est voluptatum non quibusdam recusandae praesentium nobis, maxime omnis quaerat exercitationem, nemo impedit consectetur.
+          </p>
+          <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Ad repellat iure fugit adipisci? Enim eligendi pariatur quibusdam deserunt facere harum recusandae aliquam omnis quia ex officia consectetur est, ab dolorum.</p>
+          <p>
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Nihil tempore quod, eius dolor beatae corrupti possimus doloribus ipsum eaque soluta ullam voluptate neque quas consectetur laboriosam delectus quis dolorem aperiam.
+            Lorem ipsum, dolor sit amet consectetur adipisicing elit. Voluptates numquam obcaecati doloribus libero, unde eveniet soluta temporibus impedit fugit dolorum illo maxime ullam repudiandae quam eius ratione facere atque itaque.
+            Lorem ipsum dolor sit amet consectetur, adipisicing elit. Consectetur expedita ullam iusto accusantium doloribus, asperiores voluptates hic! Dolores incidunt voluptatem similique, animi tempora culpa, sint dicta quisquam quaerat laborum libero?
+            Lorem ipsum dolor sit, amet consectetur adipisicing elit. Accusantium eius, nemo consectetur laborum eligendi veniam ab ad nostrum earum, aut maxime. Quaerat fuga eos aliquid velit nam mollitia, enim animi?
+            Lorem ipsum, dolor sit amet consectetur adipisicing elit. Nam est et eius tenetur mollitia iusto, nesciunt voluptatum, laudantium perferendis corrupti ad, ipsam ipsa modi voluptate nisi sapiente eos qui laborum!
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Facilis commodi exercitationem, provident sapiente, qui optio laboriosam nesciunt cum accusantium, aliquam expedita facere. Tempore soluta beatae doloremque voluptas aliquam ea facere?
+            Lorem ipsum dolor sit, amet consectetur adipisicing elit. Nostrum mollitia dolore vero voluptates asperiores! Cumque a fugit cupiditate ullam temporibus ipsa pariatur quidem voluptatibus, dicta odio corporis dignissimos, nisi praesentium.
+          </p>
+      </div>
+    </ion-slide>
+    <ion-slide>
+        <div class="container-firm">
+          <h3 [ngStyle]="{'margin-top': '50px'}" text-justify> Firme en el recuadro de abajo y de click en acepto, para aceptar el contrato de vinculación </h3>
+          <div contentSignature content-flex-center [ngStyle]="{'margin-top': '25px'}">
+            <div *ngIf="sides[0]?.pathImage == ''">
+              <signature-pad [options]="signaturePadOptions" (onBeginEvent)="handleStartDraw()" (onEndEvent)="handleDrawComplete()"></signature-pad>
+              <div>
+                <ion-button slot="icon-only" color="danger" (click)="handleTapClearSignature()">
+                  <ion-icon name="trash"></ion-icon>
+                </ion-button>
+              </div>
+            </div>
+            <div *ngIf="sides[0]?.pathImage != ''">
+              <ion-thumbnail>
+                <ion-img [src]="sides[0]?.pathImage"></ion-img>
+              </ion-thumbnail>
+              <div>
+                <ion-button slot="icon-only" color="danger" (click)="handleTapClearImage()">
+                  <ion-icon name="trash"></ion-icon>
+                </ion-button>
+              </div>
+            </div>
+          </div>
+        </div>
+    </ion-slide>
+  </ion-slides>
+</ion-content>
+<ion-footer>
+  <ion-button *ngIf="!shouldDisableNextButton" color="primary" expand="block" (click)="next()">SIGUIENTE</ion-button>
+  <ion-button *ngIf="shouldDisableNextButton" color="secondary" expand="block" (click)="confirm()">ACEPTO</ion-button>
+</ion-footer>

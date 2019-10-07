@@ -13,6 +13,7 @@ import { Document } from 'src/app/models/document';
 import { SideDocument } from 'src/app/models/side-document';
 import { UserService } from 'src/app/services/api/user.service';
 import { User } from '../../models/user';
+import { BindingContractModalPage } from 'src/app/modals/binding-contract-modal/binding-contract-modal.page';
 
 @Component({
   selector: 'app-document-bank',
@@ -114,19 +115,30 @@ export class DocumentBankPage implements OnInit {
    */
   private defineHandleTapDetailsButton(): HandleGenericTabButtonFotCardDocument {
     return (document: Document) => {
-      const behavior: BehaviorSideDocument = {
-        'handleTapCameraButton': this.defineHandleTapButtonCamera(),
-        'handleTapGaleryButton': this.defineHandleTapButtonGalery(),
-        'handleTapCommentButton': this.defineHandleTapButtonComments()
-      };
-      const sidesDocumentModal = this.modalController.create({
-        'component': SidesDocumentModalPage,
-        'componentProps': {
-          'cardDocument': document,
-          'behavior': behavior
-        }
-      });
-      return sidesDocumentModal;
+      if (document.id == 4) {
+        const bindingContractModal = this.modalController.create({
+          'component': BindingContractModalPage,
+          'componentProps': {
+            'cardDocument': document,
+            'behavior': ''
+          }
+        });
+        return bindingContractModal;
+      } else {
+        const behavior: BehaviorSideDocument = {
+          'handleTapCameraButton': this.defineHandleTapButtonCamera(),
+          'handleTapGaleryButton': this.defineHandleTapButtonGalery(),
+          'handleTapCommentButton': this.defineHandleTapButtonComments()
+        };
+        const sidesDocumentModal = this.modalController.create({
+          'component': SidesDocumentModalPage,
+          'componentProps': {
+            'cardDocument': document,
+            'behavior': behavior
+          }
+        });
+        return sidesDocumentModal;
+      }
     }
   }
 

@@ -33,6 +33,8 @@ import { JwtService } from './services/interceptors/jwt.service';
 import { Geolocation } from '@ionic-native/geolocation/ngx';
 import { UnknownPlateModalPage } from './modals/unknown-plate-modal/unknown-plate-modal.page';
 import { UnknownPlateModalPageModule } from './modals/unknown-plate-modal/unknown-plate-modal.module';
+import { BindingContractModalPage } from './modals/binding-contract-modal/binding-contract-modal.page';
+import { BindingContractModalPageModule } from './modals/binding-contract-modal/binding-contract-modal.module';
 
 @NgModule({
   declarations: [
@@ -45,7 +47,8 @@ import { UnknownPlateModalPageModule } from './modals/unknown-plate-modal/unknow
     AboutModalPage,
     ChangePasswordModalPage,
     RatingServiceCompanyModalPage,
-    UnknownPlateModalPage
+    UnknownPlateModalPage,
+    BindingContractModalPage
   ],
   imports: [
     BrowserModule, 
@@ -60,7 +63,8 @@ import { UnknownPlateModalPageModule } from './modals/unknown-plate-modal/unknow
     AboutModalPageModule,
     ChangePasswordModalPageModule,
     RatingServiceCompanyModalPageModule,
-    UnknownPlateModalPageModule
+    UnknownPlateModalPageModule,
+    BindingContractModalPageModule
   ],
   providers: [
     StatusBar,

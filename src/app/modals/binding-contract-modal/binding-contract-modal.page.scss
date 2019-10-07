@@ -1,0 +1,34 @@
+.container-contract {
+    width: 100%;
+    height: 100%;
+    overflow: scroll;
+    p {
+        text-align: justify;
+    }
+}
+
+.container-firm {
+    width: 100%;
+    padding: 10px;
+}
+
+[contentSignature] {
+    border: 1px solid var(--ion-color-medium-tint);
+    border-radius: 10px;
+}
+
+[max-height-slide] {
+    max-height: 70% !important;
+}
+
+ion-thumbnail {
+    --size: 250px;
+    border-radius: 5px;
+}
+
+[content-flex-center] {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+}

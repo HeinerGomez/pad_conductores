@@ -22,7 +22,8 @@ const routes: Routes = [
   { path: 'change-password-modal', loadChildren: './modals/change-password-modal/change-password-modal.module#ChangePasswordModalPageModule' },
   { path: 'fulfilled-offer', loadChildren: './pages/fulfilled-offer/fulfilled-offer.module#FulfilledOfferPageModule', canActivate: [AuthGuardService] },
   { path: 'rating-service-company', loadChildren: './pages/rating-service-company/rating-service-company.module#RatingServiceCompanyPageModule', canActivate: [AuthGuardService] },
-  { path: 'rating-service-company-modal', loadChildren: './modals/rating-service-company-modal/rating-service-company-modal.module#RatingServiceCompanyModalPageModule', canActivate: [AuthGuardService] },  { path: 'unknown-plate-modal', loadChildren: './modals/unknown-plate-modal/unknown-plate-modal.module#UnknownPlateModalPageModule' }
+  { path: 'rating-service-company-modal', loadChildren: './modals/rating-service-company-modal/rating-service-company-modal.module#RatingServiceCompanyModalPageModule', canActivate: [AuthGuardService] },  { path: 'unknown-plate-modal', loadChildren: './modals/unknown-plate-modal/unknown-plate-modal.module#UnknownPlateModalPageModule' },
+  { path: 'binding-contract-modal', loadChildren: './modals/binding-contract-modal/binding-contract-modal.module#BindingContractModalPageModule' }
 
 ];
 
