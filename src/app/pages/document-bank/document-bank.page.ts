@@ -120,7 +120,8 @@ export class DocumentBankPage implements OnInit {
           'component': BindingContractModalPage,
           'componentProps': {
             'cardDocument': document,
-            'behavior': ''
+            'behavior': '',
+            'user': this.user
           }
         });
         return bindingContractModal;

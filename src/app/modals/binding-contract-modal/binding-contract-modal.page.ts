@@ -4,6 +4,7 @@ import { SignaturePad } from 'angular2-signaturepad/signature-pad';
 import { SideDocument } from 'src/app/models/side-document';
 import { Document } from '../../models/document';
 import { UtilitiesService } from '../../services/utilities.service';
+import { User } from '../../models/user';
 
 @Component({
   selector: 'app-binding-contract-modal',
@@ -27,6 +28,7 @@ export class BindingContractModalPage implements OnInit, AfterViewInit {
   public cardDocument: Document;
   public sides: SideDocument[];
   public imagePlaceholder: string;
+  public user: User
 
   constructor(
     private modalController: ModalController, private menuController: MenuController,
@@ -39,6 +41,7 @@ export class BindingContractModalPage implements OnInit, AfterViewInit {
       'autoHeight': true
     };
     this.cardDocument = this.navParams.get('cardDocument');
+    this.user = this.navParams.get('user');
     this.sides = this.cardDocument.sides;
     this.imagePlaceholder = '';
     console.log("Estos son los sides: .... ", this.sides);
@@ -82,6 +85,7 @@ export class BindingContractModalPage implements OnInit, AfterViewInit {
   }
 
   public handleTapCloseButton(): void {
+    this.menuController.enable(true);
     this.modalController.dismiss();
   }
 
