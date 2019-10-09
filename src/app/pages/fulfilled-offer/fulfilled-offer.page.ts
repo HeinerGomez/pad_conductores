@@ -23,7 +23,7 @@ export class FulfilledOfferPage implements OnInit, AfterViewInit {
     'canvasWidth': 400,
     'canvasHeight': 250
   };
-  public imagePlaceholder: String;
+  public imagePlaceholder: string;
   private offer: Offer;
 
   constructor(

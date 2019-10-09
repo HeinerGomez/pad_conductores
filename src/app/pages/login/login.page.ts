@@ -4,9 +4,10 @@ import { UserInSession } from '../../interfaces/own/userInSession.interf';
 import { AuthService } from '../../services/auth.service';
 import { AuthService as AuthSca } from '../../services/auth/auth.service';
 import { UtilitiesService } from '../../services/utilities.service';
-import { NavController } from '@ionic/angular';
+import { NavController, ModalController } from '@ionic/angular';
 import { first } from 'rxjs/operators';
 import { UserService } from 'src/app/services/api/user.service';
+import { ChangePasswordModalPage } from '../../modals/change-password-modal/change-password-modal.page';
 
 @Component({
   selector: 'app-login',
@@ -22,7 +23,8 @@ export class LoginPage {
   constructor(
     private formBuilder: FormBuilder, private navController: NavController,
     private authService: AuthService, private utilitiesService: UtilitiesService,
-    private _authService: AuthSca, private userService: UserService
+    private _authService: AuthSca, private userService: UserService, 
+    private modalController: ModalController
   ) {
     this.inputTypePassword = 'password';
     this.iconTypePassword = 'eye';
@@ -106,4 +108,17 @@ export class LoginPage {
       this.utilitiesService.closeLoading();
     }, error => this.utilitiesService.closeLoading());
   }
+
+  public async handleForgotPassword() {
+    const modal = await this.modalController.create({
+      'component': ChangePasswordModalPage,
+      'componentProps': {
+        'user': null,
+        'userBackendId': null, 
+        'forgotPwd': true
+      }
+    });
+    modal.present();
+  }
+
 }

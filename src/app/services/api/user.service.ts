@@ -51,6 +51,12 @@ export class UserService {
     const dataForAPI = userOutput.convertUserForChangePassword();
     return this.http.put(`${environment.URL_API}/users/update/${userBackendId}`, dataForAPI);
   }
+
+  public forgotPassword(data: any): Observable<any> {
+    const userOutput = new UserOutput(data, null);
+    const dataForAPI = userOutput.convertDataForForgotPassword();
+    return this.http.put(`${environment.URL_API}/users/updateForgetPasswordNotLoginApp/`, dataForAPI);
+  }
   
   public getQuestions(): Observable<Question[] | Question> {
     const resourceId = 2;

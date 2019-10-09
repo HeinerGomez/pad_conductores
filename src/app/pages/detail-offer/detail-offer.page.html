@@ -19,7 +19,7 @@
       </ion-row>
       <ion-row m-top-20>
         <ion-col size-sm="6" size-xs="12">
-          <ion-chip color="tertiary" >
+          <ion-chip color="tertiary">
             <ion-label [ngStyle]="{'margin-right': '5px'}"><b>Servicio: </b></ion-label>
             <ion-icon name="star" color="secondary"></ion-icon>
             <ion-icon name="star" color="secondary"></ion-icon>
@@ -75,6 +75,32 @@
           </ion-text>
         </ion-label>
       </ion-item>
+      <ion-item *ngIf="shouldShowButtonFulfilled">
+        <ion-icon name="cube" size="large" slot="start" color="success"></ion-icon>
+        <ion-label text-wrap>
+          <ion-text>
+            <h3><b>Sitio de cargue</b></h3>
+          </ion-text>
+          <ion-text>
+            <ion-note>
+              {{ offer.chargeSite }}
+            </ion-note>
+          </ion-text>
+        </ion-label>
+      </ion-item>
+      <ion-item *ngIf="shouldShowButtonFulfilled">
+        <ion-icon name="list-box" size="large" slot="start" color="success"></ion-icon>
+        <ion-label text-wrap>
+          <ion-text>
+            <h3><b>Dirección de cargue</b></h3>
+          </ion-text>
+          <ion-text>
+            <ion-note>
+              {{ offer.address }}
+            </ion-note>
+          </ion-text>
+        </ion-label>
+      </ion-item>
       <ion-item>
         <ion-icon src="assets/imgs/right-arrow.svg" size="large" slot="start"></ion-icon>
         <ion-label text-wrap>
@@ -89,20 +115,22 @@
         </ion-label>
       </ion-item>
       <ion-item>
-        <ion-icon [name]="offer.loadFree ? 'checkbox-outline' : 'square-outline'" size="large" color="tertiary" slot="start"></ion-icon>
+        <ion-icon [name]="offer.loadFree ? 'checkbox-outline' : 'square-outline'" size="large" color="tertiary"
+          slot="start"></ion-icon>
         <ion-label text-wrap>
           <ion-text>
             <h3><b>LIBRE DE CARGUE</b></h3>
           </ion-text>
           <ion-text>
             <ion-note>
-             {{ offer.loadFree == true ? 'SI' : 'NO' }} 
+              {{ offer.loadFree == true ? 'SI' : 'NO' }}
             </ion-note>
           </ion-text>
         </ion-label>
       </ion-item>
       <ion-item>
-        <ion-icon [name]="offer.downloadFree ? 'checkbox-outline' : 'square-outline'" size="large" color="tertiary" slot="start"></ion-icon>
+        <ion-icon [name]="offer.downloadFree ? 'checkbox-outline' : 'square-outline'" size="large" color="tertiary"
+          slot="start"></ion-icon>
         <ion-label text-wrap>
           <ion-text>
             <h3><b>LIBRE DE DESCARGUE</b></h3>
@@ -128,7 +156,7 @@
         </ion-label>
       </ion-item>
       <ion-item>
-        <ion-icon src="assets/imgs/weight.svg" size="large"  slot="start"></ion-icon>
+        <ion-icon src="assets/imgs/weight.svg" size="large" slot="start"></ion-icon>
         <ion-label text-wrap>
           <ion-text>
             <h3><b>PESO MERCANCIA</b></h3>
@@ -141,7 +169,7 @@
         </ion-label>
       </ion-item>
       <ion-item>
-        <ion-icon src="assets/imgs/schedule.svg" size="large"  slot="start"></ion-icon>
+        <ion-icon src="assets/imgs/schedule.svg" size="large" slot="start"></ion-icon>
         <ion-label text-wrap>
           <ion-text>
             <h3><b>FECHA Y HORA DE CARGUE<small> ( APROXIMADAMENTE ) </small></b></h3>
@@ -154,7 +182,7 @@
         </ion-label>
       </ion-item>
       <ion-item>
-        <ion-icon src="assets/imgs/notes.svg" size="large"  slot="start"></ion-icon>
+        <ion-icon src="assets/imgs/notes.svg" size="large" slot="start"></ion-icon>
         <ion-label text-wrap>
           <ion-text>
             <h3><b>FLETE</b></h3>

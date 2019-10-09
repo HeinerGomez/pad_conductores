@@ -45,7 +45,7 @@
   </ion-grid>
 </ion-content>
 <ion-footer>
-  <ion-button color="success" expand="block" [disabled]="reactiveForm.invalid" (click)="handleTapButtonFulfilled()">
+  <ion-button color="success" expand="block" [disabled]="reactiveForm.invalid || imagePlaceholder == 'assets/imgs/img_placeholder_110_110.png'" (click)="handleTapButtonFulfilled()">
     CUMPLIR
   </ion-button>
 </ion-footer>

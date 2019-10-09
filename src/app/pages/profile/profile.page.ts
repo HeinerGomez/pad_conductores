@@ -89,7 +89,8 @@ export class ProfilePage {
       'component': ChangePasswordModalPage,
       'componentProps': {
         'user': this.user,
-        'userBackendId': this.userBackendId
+        'userBackendId': this.userBackendId, 
+        'forgotPwd': false
       }
     });
     modal.present();

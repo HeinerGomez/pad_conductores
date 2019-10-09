@@ -14,6 +14,8 @@ export class Offer {
     private _freight: number;
     private _contactPhone: string;
     private _contactName: string;
+    private _address: string;
+    private _chargeSite: string;
 
     constructor(offer: any = false) {
         if (offer) {
@@ -77,6 +79,14 @@ export class Offer {
         return this._contactName;
     }
 
+    public get address(): string {
+        return this._address;
+    }
+
+    public get chargeSite(): string {
+        return this._chargeSite;
+    }
+
 
     private build(offer: any) {
         this._id = offer.offer_id;
@@ -106,6 +116,8 @@ export class Offer {
         const headquarter = offer.data_offer[0].transport_headquarter;
         this._contactPhone = headquarter.phone;
         this._contactName = headquarter.contact_name;
+        this._chargeSite = offer.data_offer[0].charge_site;
+        this._address = offer.data_offer[0].charge_address;
     }       
 
 }

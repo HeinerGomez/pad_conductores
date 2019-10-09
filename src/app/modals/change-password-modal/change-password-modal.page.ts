@@ -18,6 +18,8 @@ export class ChangePasswordModalPage implements OnInit {
   public user: User;
   private userBackendId: any;
   public questions: Question[];
+  public forgotPwd: boolean;
+  public question: any;
 
   constructor(
     private modalController: ModalController, private formBuilder: FormBuilder,
@@ -32,6 +34,8 @@ export class ChangePasswordModalPage implements OnInit {
     }
     this.user = this.navParams.get('user');
     this.userBackendId = this.navParams.get('userBackendId');
+    this.forgotPwd = this.navParams.get('forgotPwd');
+    this.question = this.user == null ? 0 : this.user.question;
     console.log("Esta es el usuario en mención: ", this.user, this.userBackendId);
   }
 
@@ -70,10 +74,10 @@ export class ChangePasswordModalPage implements OnInit {
    */
   private buildReactiveForm(): FormGroup {
     const reactiveForm = this.formBuilder.group({
-      'username': [this.user.documentNumber, Validators.required],
-      'newPassword': ['', Validators.required],
-      'newPasswordRepeat': '',
-      'securityQuestion': [this.user.question, Validators.required],
+      'username': ['', Validators.required],
+      'newPassword': ['', [Validators.required, Validators.minLength(6)]],
+      'newPasswordRepeat': ['', [Validators.required, Validators.minLength(6)]],
+      'securityQuestion': ['', Validators.required],
       'answerQuestion': ['', Validators.required]
     });
     reactiveForm.get('newPasswordRepeat').setValidators([
@@ -122,11 +126,19 @@ export class ChangePasswordModalPage implements OnInit {
    */
   public handleClickChangePassword(): void {
     const data = this.reactiveForm.value;
-    this.userService.updateChangePassword(data, this.user, this.userBackendId).subscribe((response: any) => {
-      // si llega hasta este punto, se asume que se actualizo exitosamente
-      this.utilsService.showSnackbar('La información se ha actualizado exitosamente', 'success');
-      this.modalController.dismiss();
-    }, error => console.error(error));
+    if (!this.forgotPwd) {
+      this.userService.updateChangePassword(data, this.user, this.userBackendId).subscribe((response: any) => {
+        // si llega hasta este punto, se asume que se actualizo exitosamente
+        this.utilsService.showSnackbar('La información se ha actualizado exitosamente', 'success');
+        this.modalController.dismiss();
+      }, error => console.error(error));
+    } else {
+      this.userService.forgotPassword(data).subscribe((response: any) => {
+        // si llega hasta este punto, se asume que se actualizo exitosamente
+        this.utilsService.showSnackbar('La información se ha actualizado exitosamente', 'success');
+        this.modalController.dismiss();
+      }, error => console.error(error));
+    }
   }
 
 }

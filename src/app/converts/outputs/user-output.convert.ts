@@ -37,4 +37,18 @@ export class UserOutput {
         return dataForAPI;
     }
 
+    public convertDataForForgotPassword(): any {
+        let dataForAPI = {
+            "users": {
+                "password": this.data.newPassword,
+                "password_confirmation": this.data.newPasswordRepeat,
+                "question_id": this.data.securityQuestion,
+                "answer": this.data.answerQuestion,
+                "document_number": this.data.username
+            }
+        };
+        console.log("This is the data has been send: ", dataForAPI);
+        return dataForAPI;
+    }
+
 }
