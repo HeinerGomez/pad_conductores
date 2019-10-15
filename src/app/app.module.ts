@@ -35,6 +35,8 @@ import { UnknownPlateModalPage } from './modals/unknown-plate-modal/unknown-plat
 import { UnknownPlateModalPageModule } from './modals/unknown-plate-modal/unknown-plate-modal.module';
 import { BindingContractModalPage } from './modals/binding-contract-modal/binding-contract-modal.page';
 import { BindingContractModalPageModule } from './modals/binding-contract-modal/binding-contract-modal.module';
+import { PayModalPage } from './modals/pay-modal/pay-modal.page';
+import { PayModalPageModule } from './modals/pay-modal/pay-modal.module';
 
 @NgModule({
   declarations: [
@@ -48,7 +50,8 @@ import { BindingContractModalPageModule } from './modals/binding-contract-modal/
     ChangePasswordModalPage,
     RatingServiceCompanyModalPage,
     UnknownPlateModalPage,
-    BindingContractModalPage
+    BindingContractModalPage,
+    PayModalPage
   ],
   imports: [
     BrowserModule, 
@@ -64,7 +67,8 @@ import { BindingContractModalPageModule } from './modals/binding-contract-modal/
     ChangePasswordModalPageModule,
     RatingServiceCompanyModalPageModule,
     UnknownPlateModalPageModule,
-    BindingContractModalPageModule
+    BindingContractModalPageModule,
+    PayModalPageModule
   ],
   providers: [
     StatusBar,

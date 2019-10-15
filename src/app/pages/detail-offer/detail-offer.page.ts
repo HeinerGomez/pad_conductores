@@ -3,13 +3,14 @@ import { UtilitiesService } from '../../services/utilities.service';
 import { ParamsOfDetailOffer } from '../../interfaces/own/paramsOfDetailOffer.interface';
 import { ActivatedRoute, Router } from '@angular/router';
 import { OFFER } from '../../constants/offers.constants';
-import { ModalController, NavController } from '@ionic/angular';
+import { ModalController, NavController, ActionSheetController } from '@ionic/angular';
 import { RatingServiceCompanyModalPage } from '../../modals/rating-service-company-modal/rating-service-company-modal.page';
 import { Offer } from 'src/app/models/offer';
 import { OffersApiService } from 'src/app/services/api/offers-api.service';
 import { UserService } from '../../services/api/user.service';
 import { User } from 'src/app/models/user';
 import { GeolocationService } from '../../services/geolocation.service';
+import { PayModalPage } from '../../modals/pay-modal/pay-modal.page';
 
 @Component({
   selector: 'app-detail-offer',
@@ -30,7 +31,8 @@ export class DetailOfferPage implements OnDestroy, AfterViewInit {
     private utilitiesService: UtilitiesService, private activatedRoute: ActivatedRoute, 
     private router: Router, private modalController: ModalController,
     private offerAPIService: OffersApiService, private navController: NavController,
-    private userService: UserService, private geolocationService: GeolocationService
+    private userService: UserService, private geolocationService: GeolocationService,
+    private actionSheetController: ActionSheetController, private utilsService: UtilitiesService
   ) {
     const params = this.offerAPIService.getData();
     console.log("Los params: ", params);
@@ -160,6 +162,48 @@ export class DetailOfferPage implements OnDestroy, AfterViewInit {
   // para validar si puede aceptar/rechazar/cumplir/calificar una oferta
   private canContinue() {
     return this.user.subscriptionStatus;
+  }
+
+  public async handleClickFabActionSheet() {
+    const actionSheet = await this.actionSheetController.create({
+      header: 'Opciones',
+      keyboardClose: false,
+      buttons: [{
+        text: 'Realizar Pago',
+        icon: 'card',
+        handler: async () => {
+          if (this.offer.hasPay) {
+            this.utilsService.showSnackbar('Ya hay un pago asociado', 'primary');
+          } else {
+            const modal = await this.modalController.create({
+              'component': PayModalPage,
+              'componentProps': {
+                'offerId': this.offer.id
+              }
+            });
+            modal.present();
+          }
+        }
+      },{
+        text: 'Descargar Certificado',
+        icon: 'ribbon',
+        handler: () => {
+          if (this.offer.hasPay) {
+            this.utilsService.showSnackbar('Commin soon', 'primary');
+          } else {
+            this.utilsService.showSnackbar('No se ha realizado el pago', 'primary');
+          }
+        }
+      }, {
+        text: 'Cancelar',
+        icon: 'close',
+        role: 'cancel',
+        handler: () => {
+          console.log('Cancel clicked');
+        }
+      }]
+    });
+    await actionSheet.present();
   }
 
   ngOnDestroy() {

@@ -16,6 +16,8 @@ export class Offer {
     private _contactName: string;
     private _address: string;
     private _chargeSite: string;
+    private _hasPay: boolean;
+    private _detailPay: any;
 
     constructor(offer: any = false) {
         if (offer) {
@@ -87,6 +89,22 @@ export class Offer {
         return this._chargeSite;
     }
 
+    public get hasPay(): boolean {
+        return this._hasPay;
+    }
+
+    public set hasPay(value: boolean) {
+        this._hasPay = value;
+    }
+
+    public get detailPay(): any {
+        return this._detailPay;
+    }
+
+    public set detailPay(value: any) {
+        this._detailPay = value;
+    }
+
 
     private build(offer: any) {
         this._id = offer.offer_id;
@@ -118,6 +136,8 @@ export class Offer {
         this._contactName = headquarter.contact_name;
         this._chargeSite = offer.data_offer[0].charge_site;
         this._address = offer.data_offer[0].charge_address;
+        this._hasPay = false; // temporal
+        this._detailPay = {}; // temporal
     }       
 
 }
