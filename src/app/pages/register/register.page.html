@@ -7,8 +7,8 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
-  <div container-full container-center-content container-padding-2-full-p>
+<ion-content padding>
+  <div>
     <ion-grid>
       <ion-row>
         <ion-col size="12">
@@ -18,7 +18,7 @@
         </ion-col>
       </ion-row>
       <form [formGroup]="reactiveForm">
-        <ion-row>
+        <ion-row [ngStyle]="{'margin-top': '10px'}">
           <ion-col size="12">
             <ion-item>
               <ion-label position="floating">Nº de identificación</ion-label>
