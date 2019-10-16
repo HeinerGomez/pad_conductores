@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { ModalController } from '@ionic/angular';
+import { ModalController, NavParams } from '@ionic/angular';
+import { Offer } from '../../models/offer';
 
 @Component({
   selector: 'app-pay-modal',
@@ -8,9 +9,11 @@ import { ModalController } from '@ionic/angular';
 })
 export class PayModalPage implements OnInit {
 
-  
+  public offer: Offer;
 
-  constructor(private modalController: ModalController) { }
+  constructor(private modalController: ModalController, private navParams: NavParams) {
+    this.offer = this.navParams.get('offer');
+  }
 
   ngOnInit() {
   }

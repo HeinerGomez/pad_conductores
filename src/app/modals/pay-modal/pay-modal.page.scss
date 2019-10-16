@@ -5,8 +5,8 @@
     border: none;
     border-radius: 15px;
     box-shadow: 0px 3px 6px rgba(0, 0, 0, .78);
-    background-color: #1B1B1B;
-    color: #C4B761;
+    background-color: rgb(238, 238, 238);
+    // color: #C4B761;
 }
 
 .header-divider {
@@ -18,7 +18,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    border-bottom: 1px solid #C4B761;
+    border-bottom: 1px solid rgb(206, 206, 206);
     color: inherit;
     span {
         font-size: 15px;

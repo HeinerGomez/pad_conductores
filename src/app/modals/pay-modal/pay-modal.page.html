@@ -21,7 +21,7 @@
             <span bold>Origen: </span>
           </ion-col>
           <ion-col size="8">
-            <span>BOGOTÁ D.C</span>
+            <span>{{ offer.nameOriginCity }}</span>
           </ion-col>
         </ion-row>
         <ion-row>
@@ -29,7 +29,7 @@
             <span bold>Destino: </span>
           </ion-col>
           <ion-col size="8">
-            <span>MEDELLIN</span>
+            <span>{{ offer.nameDestinationCity }}</span>
           </ion-col>
         </ion-row>
         <ion-row>
@@ -37,15 +37,54 @@
             <span bold>Valor Cobro: </span>
           </ion-col>
           <ion-col size="8">
-            <span>{{ '20000' | currency:'$' }}</span>
+            <span>{{ offer.freight | currency:'$' }}</span>
           </ion-col>
         </ion-row>
         <ion-row>
           <ion-col size="12">
-            <ion-icon name="alert" color="secondary"></ion-icon> <i>El valor del cobro corresponde al valor del servicio.</i>
+            <i>* El valor del cobro corresponde al valor del servicio.</i>
           </ion-col>
         </ion-row>
       </ion-grid>
     </div>
   </div>
+  <div [ngStyle]="{'margin-top': '10px'}">
+    <ion-grid>
+      <ion-row>
+        <ion-col size="12">
+          <ion-item>
+            <ion-label position="floating">Titular</ion-label>
+            <ion-input name="holder" type="text"></ion-input>
+          </ion-item>
+        </ion-col>
+        <ion-col size="12">
+          <ion-item>
+            <ion-label position="floating">Número Tarjeta</ion-label>
+            <ion-input name="cardNumber" type="number"></ion-input>
+          </ion-item>
+        </ion-col>
+        <ion-col size="6">
+          <ion-item>
+            <ion-label position="floating">Mes (MM)</ion-label>
+            <ion-input name="month" type="number"></ion-input>
+          </ion-item>
+        </ion-col>
+        <ion-col size="6">
+          <ion-item>
+            <ion-label position="floating">Año (AA)</ion-label>
+            <ion-input name="year" type="number"></ion-input>
+          </ion-item>
+        </ion-col>
+        <ion-col size="6">
+          <ion-item>
+            <ion-label position="floating">CCV</ion-label>
+            <ion-input name="ccv" type="number"></ion-input>
+          </ion-item>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </div>
 </ion-content>
+<ion-footer>
+  <ion-button expand="block" color="success">PAGAR</ion-button>
+</ion-footer>
