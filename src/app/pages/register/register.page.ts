@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { FormGroup, FormBuilder, Validators, FormControl } from '@angular/forms';
 import { FORMREGEX } from '../../regex/formRegex';
 import { NavController } from '@ionic/angular';
 import { RegisterApiService } from 'src/app/services/api/register-api.service';
@@ -41,7 +41,7 @@ export class RegisterPage implements OnInit {
    * @returns FormGroup
    */
   private buildReactiveForm(): FormGroup {
-    return this.formBuilder.group({
+    const reactiveForm = this.formBuilder.group({
       'cardDocumentId': ['', [Validators.required, Validators.pattern(`${FORMREGEX.idCardCC}`)]],
       'fullName': ['', [Validators.required, Validators.pattern(`${FORMREGEX.textWithSpaces}`)]],
       'cellphone': ['', [Validators.required, Validators.pattern(`${FORMREGEX.cellPhone}`)]],
@@ -53,6 +53,25 @@ export class RegisterPage implements OnInit {
       'answerSecurityQuestion': ['', [Validators.required]],
       'referralCode': ''
     });
+    reactiveForm.get('repeatPassword').setValidators([
+      this.validatePasswordMatch.bind(this)
+    ]);
+    return reactiveForm;
+  }
+  
+  /**
+   * @description Tiene como objetivo validar si las contraseñas coinciden
+   * @param FormControl
+   * @returns { [s: string]: boolean }
+   */
+  private validatePasswordMatch(control: FormControl): { [s: string]: boolean } {
+    if (control.value != this.reactiveForm.get('password').value) {
+      return {
+        'noPasswordMach': true
+      };
+    } else {
+      return null;
+    }
   }
 
   /**
