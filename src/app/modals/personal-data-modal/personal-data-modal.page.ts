@@ -43,7 +43,7 @@ export class PersonalDataModalPage implements OnInit {
       'names': [this.user.name, [Validators.required, Validators.pattern(`${FORMREGEX.textWithSpaces}`)]],
       'cellphone': [this.user.cellphone, [Validators.required, Validators.pattern(`${FORMREGEX.cellPhone}`)]],
       'whatsapp': [this.user.whatsapp, [Validators.required, Validators.pattern(`${FORMREGEX.cellPhone}`)]],
-      'email': [this.user.email, Validators.pattern(`${FORMREGEX.email}`)]
+      'email': [{value: this.user.email, disabled: true}, Validators.pattern(`${FORMREGEX.email}`)]
     });
   }
 
