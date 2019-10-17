@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
-import { NavController } from '@ionic/angular';
+import { NavController, MenuController } from '@ionic/angular';
 
 @Component({
   selector: 'app-home',
@@ -9,8 +9,11 @@ import { NavController } from '@ionic/angular';
 })
 export class HomePage {
 
-  constructor(private router: Router, private navController: NavController) {
-
+  constructor(
+    private router: Router, private navController: NavController,
+    private menuController: MenuController
+  ) {
+    this.menuController.enable(false);
   }
 
   ionViewDidEnter() {

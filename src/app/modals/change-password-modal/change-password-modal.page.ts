@@ -83,6 +83,13 @@ export class ChangePasswordModalPage implements OnInit {
     reactiveForm.get('newPasswordRepeat').setValidators([
       this.validatePasswordMatch.bind(this)
     ]);
+    if (!this.forgotPwd) {
+      reactiveForm.get('username').patchValue(this.user.documentNumber);
+      reactiveForm.get('username').disable();
+    }
+    if (this.question != 0) {
+      reactiveForm.get('securityQuestion').patchValue(this.question);
+    } 
     return reactiveForm;
   }
 
