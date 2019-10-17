@@ -47,8 +47,8 @@ export class RegisterPage implements OnInit {
       'cellphone': ['', [Validators.required, Validators.pattern(`${FORMREGEX.cellPhone}`)]],
       'whatsapp': ['', [Validators.required, Validators.pattern(`${FORMREGEX.cellPhone}`)]],
       'email': ['', [Validators.required, Validators.pattern(`${FORMREGEX.email}`)]],
-      'password': ['', [Validators.required]],
-      'repeatPassword': ['', [Validators.required]],
+      'password': ['', [Validators.required, Validators.minLength(6)]],
+      'repeatPassword': ['', [Validators.required, Validators.minLength(6)]],
       'securityQuestion': ['', [Validators.required]],
       'answerSecurityQuestion': ['', [Validators.required]],
       'referralCode': ''
