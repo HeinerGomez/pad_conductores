@@ -136,8 +136,9 @@ export class Offer {
         this._contactName = headquarter.contact_name;
         this._chargeSite = offer.data_offer[0].charge_site;
         this._address = offer.data_offer[0].charge_address;
-        this._hasPay = false; // temporal
-        this._detailPay = {}; // temporal
+        const payment = offer.data_offer[0].payment;
+        this._hasPay = payment ? true : false;
+        this._detailPay = this._hasPay ? payment : {};
     }       
 
 }

@@ -88,6 +88,7 @@ export class MyOffersPage implements OnInit {
    */
   public handleSegmentChanges(event): void {
     const segmentValue = event.detail.value;
+    console.warn("SegmentValue: ", segmentValue);
     if (segmentValue == 'applied') {
       this.shouldShowOffersApplied = true;
       this.shouldShowOffersConfirmed = false;
@@ -122,6 +123,7 @@ export class MyOffersPage implements OnInit {
    * @returns void
    */
   private defineItemOptions(): ItemOfferOptions {
+    console.warn('Should Offers Applied: ', this.shouldShowOffersApplied)
     const params: ParamsOfDetailOffer = {
       'origin': this.shouldShowOffersApplied === true ? OFFER.ORIGIN_APPLIED : OFFER.ORIGIN_FULFILLED,
       'buttonArchive': false,

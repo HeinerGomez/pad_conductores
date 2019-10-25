@@ -48,49 +48,92 @@
       </ion-grid>
     </div>
   </div>
-  <div [ngStyle]="{'margin-top': '10px'}">
+  <div [ngStyle]="{'margin-top': '10px'}" [formGroup]="reactiveForm">
     <ion-grid>
       <ion-row>
         <ion-col size="12">
           <ion-item>
             <ion-label position="floating">Titular</ion-label>
-            <ion-input name="holder" type="text"></ion-input>
+            <ion-input name="holder" formControlName="nameHolder" type="text"></ion-input>
             <ion-button slot="end" fill="clear" color="medium">
               <ion-icon slot="icon-only" name="person"></ion-icon>
             </ion-button>
           </ion-item>
+          <ion-text color="danger" *ngIf="reactiveForm.get('nameHolder').invalid && reactiveForm.get('nameHolder').touched">
+            <small> * el nombre del titular es necesario </small>
+          </ion-text>
         </ion-col>
         <ion-col size="12">
           <ion-item>
             <ion-label position="floating">Número Tarjeta</ion-label>
-            <ion-input name="cardNumber" type="number"></ion-input>
+            <ion-input name="cardNumber" formControlName="cardNumber" type="number"></ion-input>
             <ion-button slot="end" fill="clear" color="medium">
               <ion-icon slot="icon-only" name="card"></ion-icon>
             </ion-button>
           </ion-item>
+          <ion-text color="danger" *ngIf="reactiveForm.get('cardNumber').invalid && 
+                                          reactiveForm.get('cardNumber').touched &&
+                                          reactiveForm.get('cardNumber').hasError('required')">
+            <small> * el número de la tarjeta es necesario </small>
+          </ion-text>
+          <ion-text color="danger" *ngIf="reactiveForm.get('cardNumber').invalid && 
+                                          reactiveForm.get('cardNumber').touched &&
+                                          reactiveForm.get('cardNumber').hasError('pattern')">
+            <small> * el número de la tarjeta es invalido </small>
+          </ion-text>
         </ion-col>
         <ion-col size="6">
           <ion-item>
             <ion-label position="floating">Mes (MM)</ion-label>
-            <ion-input name="month" type="number"></ion-input>
+            <ion-input name="month" formControlName="month" type="number"></ion-input>
           </ion-item>
+          <ion-text color="danger" *ngIf="reactiveForm.get('month').invalid && 
+                                          reactiveForm.get('month').touched &&
+                                          reactiveForm.get('cardNumber').hasError('required')">
+            <small> * el mes de la tarjeta es necesario </small>
+          </ion-text>
+          <ion-text color="danger" *ngIf="reactiveForm.get('month').invalid && 
+                                          reactiveForm.get('month').touched &&
+                                          reactiveForm.get('month').hasError('pattern')">
+            <small> * mes de la tarjeta invalido</small>
+          </ion-text>
         </ion-col>
         <ion-col size="6">
           <ion-item>
             <ion-label position="floating">Año (AA)</ion-label>
-            <ion-input name="year" type="number"></ion-input>
+            <ion-input name="year" formControlName="year" type="number"></ion-input>
           </ion-item>
+          <ion-text color="danger" *ngIf="reactiveForm.get('year').invalid && 
+                                          reactiveForm.get('year').touched &&
+                                          reactiveForm.get('cardNumber').hasError('required')">
+            <small> * el año de la tarjeta es necesario </small>
+          </ion-text>
+          <ion-text color="danger" *ngIf="reactiveForm.get('year').invalid && 
+                                          reactiveForm.get('year').touched &&
+                                          reactiveForm.get('year').hasError('pattern')">
+            <small> * año de la tarjeta invalido</small>
+          </ion-text>
         </ion-col>
         <ion-col size="6">
           <ion-item>
             <ion-label position="floating">CCV</ion-label>
-            <ion-input name="ccv" type="number"></ion-input>
+            <ion-input name="ccv" formControlName="ccv" type="number"></ion-input>
           </ion-item>
+          <ion-text color="danger" *ngIf="reactiveForm.get('ccv').invalid && 
+                                          reactiveForm.get('ccv').touched &&
+                                          reactiveForm.get('ccv').hasError('required')">
+            <small> * el ccv de la tarjeta es necesario </small>
+          </ion-text>
+          <ion-text color="danger" *ngIf="reactiveForm.get('ccv').invalid && 
+                                          reactiveForm.get('ccv').touched &&
+                                          reactiveForm.get('ccv').hasError('pattern')">
+            <small> * ccv de la tarjeta invalido</small>
+          </ion-text>
         </ion-col>
       </ion-row>
     </ion-grid>
   </div>
 </ion-content>
 <ion-footer>
-  <ion-button expand="block" color="success">PAGAR</ion-button>
+  <ion-button expand="block"  [disabled]="reactiveForm.invalid" (click)="handleClickPay()" color="success">PAGAR</ion-button>
 </ion-footer>

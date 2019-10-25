@@ -30,7 +30,6 @@ export class DynamicBadgeService {
   }
 
   public set badgeMyOffers(value: number) {
-    console.log("____este es el value: ", value);
     this._badgeMyOffers = value;
     this.dataDependencyObservable.set(true);
   }

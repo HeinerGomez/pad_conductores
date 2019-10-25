@@ -197,7 +197,7 @@
     </ion-list>
   </div>
   <!-- Floating Action Buttom Apps -->
-  <ion-fab vertical="bottom" horizontal="end" edge slot="fixed">
+  <ion-fab vertical="bottom" horizontal="end" edge slot="fixed" *ngIf="offer.hasPay == false && shouldShowButtonFulfilled">
     <ion-fab-button color="secondary" (click)="handleClickFabActionSheet()">
       <ion-icon name="apps"></ion-icon>
     </ion-fab-button>
@@ -210,7 +210,7 @@
   <ion-button *ngIf="shouldShowButtonCancelOffer" color="danger" (click)="handleTapCancelOffer()" expand="block">
     CANCELAR OFERTA
   </ion-button>
-  <ion-button *ngIf="shouldShowButtonFulfilled" [disabled]="!offer.hasPay" color="success" (click)="handleTapFulfilledOffer()" expand="block">
+  <ion-button *ngIf="shouldShowButtonFulfilled" [disabled]="offer.hasPay == false" color="success" (click)="handleTapFulfilledOffer()" expand="block">
     REALIZAR CUMPLIDO
   </ion-button>
   <ion-button *ngIf="shouldShowButtonServiceRating" color="success" (click)="handleTapServiceRating()" expand="block">
