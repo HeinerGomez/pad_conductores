@@ -17,6 +17,11 @@
     "lib": [
       "es2018",
       "dom"
-    ]
+    ],
+    "paths": {
+		  "@security/*": [
+				"src/app/security/core/crypto/class/*"
+      ],
+    }
   }
 }
