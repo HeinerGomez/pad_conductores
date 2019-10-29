@@ -14,6 +14,7 @@ export const environment = {
   ANDROID_ID: '1:387410221556:android:776431ba54a9b13c9e81a1',
   SCA_URL: 'https://logitech.intrared.net/ap/sca/v1/backend/api/v1',
   // SCA_URL: 'https://dev.intrared.net:9443/sca_backend/api/v1',
+  KEY_VIGENERE: 'D8IFQUsbmfVZW5oCsDHPrZRaar8AhfJRYrNbXHN7'
 };
 
 /*

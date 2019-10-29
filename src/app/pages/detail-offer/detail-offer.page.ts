@@ -178,7 +178,8 @@ export class DetailOfferPage implements OnDestroy, AfterViewInit {
             const modal = await this.modalController.create({
               'component': PayModalPage,
               'componentProps': {
-                'offer': this.offer
+                'offer': this.offer,
+                'driverId': this.user.driverId
               }
             });
             modal.present();
