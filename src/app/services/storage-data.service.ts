@@ -128,13 +128,14 @@ export class StorageDataService {
     offers.push(offer);
     if (!initialOffer) {
       this.getOffers().then((_offers: Offer[]) => {
-        offers.push(... _offers);
+        for (let _offer of _offers) {
+          offers.push(_offer);
+        }
         return this.localStorage.setItem('offers', offers);
       });
     } else {
       return this.localStorage.setItem('offers', offers);
     }
-    
   }
 
   /**
