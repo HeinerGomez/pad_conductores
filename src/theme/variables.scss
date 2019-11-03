@@ -1,6 +1,6 @@
 // Ionic Variables and Theming. For more info, please see:
 // http://ionicframework.com/docs/theming/
-@import url('https://fonts.googleapis.com/css?family=Montserrat:400,500,600,700');
+// @import url('https://fonts.googleapis.com/css?family=Montserrat:400,500');
 
 /** Ionic CSS Variables **/
 :root {
@@ -80,7 +80,7 @@
   --ion-toolbar-color: var(--ion-color-primary-contrast);
 
   /** Fonts **/
-  --ion-font-family: 'Montserrat';
+ 
 
   /** Alert Style **/
   .alert-wrapper {
