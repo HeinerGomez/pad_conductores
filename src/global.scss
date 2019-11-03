@@ -10,6 +10,19 @@
 @import '~@ionic/angular/css/text-transformation.css';
 @import '~@ionic/angular/css/flex-utils.css';
 
+/* fuentes */
+@font-face {
+    font-family: 'Montserrat';
+    src: url('assets/fonts/Montserrat-Medium.ttf');
+    src: url('assets/fonts/Montserrat-Bold.ttf');
+    src: url('assets/fonts/Montserrat-SemiBold.ttf');
+    src: url('assets/fonts/Montserrat-Regular.ttf');
+}
+
+* {
+    font-family: 'Montserrat';
+}
+
 /* Margenes */
 [m-top-20] {
     margin-top: 20px;
