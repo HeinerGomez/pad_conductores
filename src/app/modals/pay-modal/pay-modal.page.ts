@@ -1,10 +1,12 @@
 import { Component, OnInit } from '@angular/core';
-import { ModalController, NavParams } from '@ionic/angular';
+import { ModalController, NavParams, NavController } from '@ionic/angular';
 import { Offer } from '../../models/offer';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { FORMREGEX } from 'src/app/regex/formRegex';
 import { PayOfferOutput } from '../../converts/outputs/pay-offer-output.convert';
 import { CryptoVigenereService } from '../../services/crypto-vigenere.service';
+import { OffersApiService } from '../../services/api/offers-api.service';
+import { UtilitiesService } from '../../services/utilities.service';
 
 @Component({
   selector: 'app-pay-modal',
@@ -19,7 +21,9 @@ export class PayModalPage implements OnInit {
 
   constructor(
     private modalController: ModalController, private navParams: NavParams,
-    private formBuilder: FormBuilder, private cryptoVigenereService: CryptoVigenereService
+    private formBuilder: FormBuilder, private cryptoVigenereService: CryptoVigenereService,
+    private offersApiService: OffersApiService, private utilitiesService: UtilitiesService,
+    private navController: NavController
   ) {
     this.offer = this.navParams.get('offer');
     this.driverId = this.navParams.get('driverId');
@@ -34,8 +38,8 @@ export class PayModalPage implements OnInit {
       'nameHolder': ['', [Validators.required]],
       'cardNumber': ['', [Validators.required, Validators.pattern(`${FORMREGEX.cardNumber}`)]],
       'documentNumber': ['1032481733', [Validators.required]],
-      'month': ['', [Validators.required, Validators.pattern(`${FORMREGEX.twoNumbers}`)]],
-      'year': ['', [Validators.required, Validators.pattern(`${FORMREGEX.twoNumbers}`)]],
+      'month': ['', [Validators.required]],
+      'year': ['', [Validators.required]],
       'ccv': ['', [Validators.required, Validators.pattern(`${FORMREGEX.threeNumbers}`)]]
     });
   }
@@ -48,10 +52,16 @@ export class PayModalPage implements OnInit {
     const formData = this.reactiveForm.value;
     const data = {
       ... formData,
-      'driverId': this.driverId
+      'driverId': this.driverId,
+      'offerId': this.offer.id
     };
     const payOfferOuput = new PayOfferOutput(this.cryptoVigenereService);
-    payOfferOuput.convertPayOfferForRequestAPI(data);
+    const dataForRequest = payOfferOuput.convertPayOfferForRequestAPI(data);
+    this.offersApiService.sendPay(dataForRequest).subscribe(response => {
+      this.utilitiesService.showSnackbar('Pago realizado con exito', 'success');
+      this.modalController.dismiss().then(() => {
+        this.navController.navigateBack('tab-offers/tabs/my-offers');
+      });
+    });
   }
-
 }

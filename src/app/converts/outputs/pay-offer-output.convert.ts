@@ -13,10 +13,10 @@ export class PayOfferOutput {
         const keyCCV = this.cryptoVigenereService.encodeTerm(`${environment.KEY_VIGENERE}`, "card[cvc]");
         const objRequest = {
             "tokenCard": {
-                [keyCardNumber]: data.cardNumber,
-                [keyYear]: data.year,                                                                                                                                                                                                                                                                                     
-                [keyMonth]: data.month,
-                [keyCCV]: data.ccv
+                [keyCardNumber]: this.cryptoVigenereService.encodeTerm(`${environment.KEY_VIGENERE}`, `${data.cardNumber}`),
+                [keyYear]: this.cryptoVigenereService.encodeTerm(`${environment.KEY_VIGENERE}`, `${data.year}`),                                                                                                                                                                                                                                                                                     
+                [keyMonth]: this.cryptoVigenereService.encodeTerm(`${environment.KEY_VIGENERE}`, `${data.month}`),
+                [keyCCV]: this.cryptoVigenereService.encodeTerm(`${environment.KEY_VIGENERE}`, `${data.ccv}`)
             },
             "driverId": data.driverId,
             "offerId": data.offerId,
@@ -24,7 +24,7 @@ export class PayOfferOutput {
             "name": data.nameHolder.split(" ")[0],
             "last_name": data.nameHolder.split(" ")[1]
         };
-        console.log("Obj Request: ", objRequest);
+        return objRequest;
     }
 
 }

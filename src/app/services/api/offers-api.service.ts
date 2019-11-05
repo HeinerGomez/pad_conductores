@@ -86,4 +86,8 @@ export class OffersApiService {
     );
   }
 
+  public sendPay(data: any): Observable<any> {
+    return this.http.post(`${environment.URL_API}/offers/paymentOffer`, data);
+  } 
+
 }

@@ -7,6 +7,6 @@ export const FORMREGEX = {
     licensePlate: '^[a-zA-Z]{3}\\d{3}$',
     year: '^[0-9]{4}$',
     cardNumber: '^[0-9]{16,18}$',
-    twoNumbers: '^[0-9]{2}',
-    threeNumbers: '^[0-9]{3}'
+    twoNumbers: '^[0-9]{2}$',
+    threeNumbers: '^[0-9]{3}$'
 };

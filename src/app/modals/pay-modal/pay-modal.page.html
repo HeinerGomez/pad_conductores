@@ -85,7 +85,7 @@
         <ion-col size="6">
           <ion-item>
             <ion-label position="floating">Mes (MM)</ion-label>
-            <ion-input name="month" formControlName="month" type="number"></ion-input>
+            <ion-input name="month" formControlName="month" type="text" maxLength="2"></ion-input>
           </ion-item>
           <ion-text color="danger" *ngIf="reactiveForm.get('month').invalid && 
                                           reactiveForm.get('month').touched &&
@@ -101,7 +101,7 @@
         <ion-col size="6">
           <ion-item>
             <ion-label position="floating">Año (AA)</ion-label>
-            <ion-input name="year" formControlName="year" type="number"></ion-input>
+            <ion-input name="year" formControlName="year" type="text"></ion-input>
           </ion-item>
           <ion-text color="danger" *ngIf="reactiveForm.get('year').invalid && 
                                           reactiveForm.get('year').touched &&
